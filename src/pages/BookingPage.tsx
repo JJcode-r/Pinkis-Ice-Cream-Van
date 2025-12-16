@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState, useRef } from "react"; // <-- Added necessary imports
+import { lazy, Suspense, useEffect } from "react"; 
 import { useSEO } from "../hooks/useSEO";
 
 const BookingHero = lazy(() => import("../components/bookingHero"));
