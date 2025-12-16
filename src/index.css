@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&display=swap');
+
+body{
+  overflow-x: hidden;
+}
+/* Animation for CTA button at the nav  */
+@keyframes subtle-pulse-cta {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(106, 0, 244, 0.4);
+  }
+  50% {
+    transform: scale(1.02); 
+    box-shadow: 0 0 0 8px rgba(106, 0, 244, 0); 
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(106, 0, 244, 0.4);
+  }
+}
+
+.animate-pulse-cta {
+   animation: subtle-pulse-cta 3s infinite cubic-bezier(0.4, 0, 0.6, 1); 
+}
