@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 // --- Utility Icons ---
 const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -54,8 +54,7 @@ const NavItem = React.memo(({ item, openDropdown, setOpenDropdown, activePath, h
   );
 });
 
-// --- Main Navbar ---
-export default function App() {
+export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollEffect, setScrollEffect] = useState(false);
