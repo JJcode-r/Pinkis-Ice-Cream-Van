@@ -3,24 +3,44 @@ import { useSEO } from "../hooks/useSEO";
 
 const MenuHero = lazy(() => import("../components/menuHero"));
 const MenuPreviewSection = lazy(() => import("../components/menuPreview"));
-const InquiryFloatingWidget = lazy(() => import("../components/inquiry"));
 const FinalCtaStrip = lazy(() => import("../components/HomeCTA"));
-const Footer = lazy(() => import("../components/footer"));
 
 export default function MenuPage() {
-    useSEO({
-        title: "Ice Cream Menu | Classic & Premium Treats | Pinki’s Ice Cream Van",
-        description:
-          "Explore Pinki’s Ice Cream Van menu featuring classic favorites and premium frozen treats. Perfect for parties, events, and celebrations of all sizes.",
-        // This 'keywords' property is now valid because we updated SEOProps in useSEO.ts
-        keywords: [
-          "ice cream menu",
-          "ice cream van menu",
-          "party ice cream options",
-          "event ice cream treats",
-          "kids party ice cream",
-        ],
-    });
+   useSEO({
+    title: "Ice Cream Menu & Packages | Pinki’s Ice Cream Van Australia",
+    description: "Browse our delicious menu! From classic soft serve to premium gluten-free and vegan options. Perfect catering packages for schools, sports clubs, and parties.",
+    keywords: [
+        "ice cream van menu Australia",
+        "dairy-free event ice cream",
+        "gluten-free ice cream van",
+        "soft serve catering packages",
+        "vegan frozen treats",
+        "fundraising menu options"
+    ],
+    schema: {
+        "@context": "https://schema.org",
+        "@type": "Menu",
+        "name": "Pinki’s Ice Cream Event Menu",
+        "description": "A wide range of classic and premium ice cream treats suitable for large-scale events and private parties.",
+        "hasMenuItem": [
+            {
+                "@type": "MenuItem",
+                "name": "Classic Soft Serve",
+                "description": "Creamy classic vanilla soft serve with a variety of toppings."
+            },
+            {
+                "@type": "MenuItem",
+                "name": "Premium Frozen Treats",
+                "description": "Hand-picked premium bars and specialty cones."
+            },
+            {
+                "@type": "MenuItem",
+                "name": "Dietary Friendly Options",
+                "description": "Vegan, Dairy-Free, and Gluten-Free options available for all events."
+            }
+        ]
+    }
+});
 
     // --- ENHANCED ANCHOR SCROLLING LOGIC ---
     useEffect(() => {
@@ -85,16 +105,9 @@ export default function MenuPage() {
             </Suspense>
 
             <Suspense fallback={null}>
-                <InquiryFloatingWidget />
-            </Suspense>
-
-            <Suspense fallback={null}>
                 <FinalCtaStrip />
             </Suspense>
 
-            <Suspense fallback={null}>
-                <Footer />
-            </Suspense>
         </div>
     );
 }

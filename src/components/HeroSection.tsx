@@ -162,7 +162,7 @@ export default function HeroSection() {
                         className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6"
                     >
                         <motion.a
-                            href="/bookings"
+                            href="/booking"
                             role="button"
                             className="px-10 py-3 text-lg rounded-full bg-pink-600 text-white font-extrabold shadow-xl shadow-pink-500/50 hover:bg-pink-700 transition duration-300"
                             whileHover={{ scale: 1.05 }}

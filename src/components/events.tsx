@@ -51,21 +51,21 @@ const SERVICES: ServicePackage[] = [
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo7.jpg", 
         price: "Fundraising Program",
         capacity: "No Pre-Payment Required",
-        description: "We support school P&C by donating back a percentage of total sales! We offer balanced, responsible dessert choices and use eco-friendly packaging. Count on friendly, efficient service for large crowds." 
+        description: "We support school P&C with fundraising opportunities by donating back a percentage of total sales without having to make a pre-payment to book our services! At Pinki’s Ice Cream, we believe desserts can be both delicious and responsible. That’s why we offer balanced dessert choices — treats that kids love and parents feel confident serving. We use high-quality ingredients and carefully measured portions, so indulgence stays fun without overdoing it. We care about the planet as much as the party — our commitment to sustainability means we use eco-friendly packaging and utensils, reducing waste and environmental impact every time we serve. Planning a school event? Pinki’s team makes it easy. Our staff are trained to be friendly, efficient and professional, and we’re experienced at serving large, mixed-age crowds quickly so lines keep moving and the event keeps flowing. Whether it’s a school fete, sports day, fundraising event or end-of-term celebration, we aim to deliver not just ice cream, but memorable moments — happy children, relaxed parents and a smooth-running event. We bring passion, care and a sweet smile to every swirl." 
     },
     { 
         title: "Sports Events & Clubs", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo8.jpg", 
         price: "Custom Fundraising Plan",
         capacity: "A Winning Combination!",
-        description: "Nothing says celebration like a refreshing ice cream treat after an intense game or competition. We add excitement and can work with your club to create a creative and profitable fundraising plan." 
+        description: "Sports and Ice Cream: A Winning Combination! Sports and ice cream have one thing in common—they bring people together! When it comes to organizing a memorable sporting club event, an ice cream truck is the perfect addition. Whether it’s a weekend match, swimming carnival, a fundraising event, or an end-of-season celebration, an ice cream truck is sure to score big points with your attendees. Nothing says celebration like a refreshing ice cream treat after an intense game or competition. Having an ice cream truck on-site adds an element of excitement and anticipation for players, athletes, and spectators alike. As the match heats up, everyone will look forward to the sweet reward waiting for them after the final whistle blows.Planning a fundraising event for your club? An ice cream truck can be a creative and profitable addition. Pinki’s can work with your club to create a customised fundraising plan, allowing you to generate revenue while treating your supporters to something truly sweet." 
     },
     { 
         title: "Workplace Staff Events", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo9.jpg", 
         price: "Affordable & Tailored",
         capacity: "Tailored Capacity",
-        description: "Affordable, fully tailored ice cream van hire. We provide flexible packages, transparent pricing, and cover everything from setup to cleanup, so you can relax and enjoy your event." 
+        description: "Worried about staying within budget? At Pinki’s, we believe everyone should be able to add a special touch to their event—which is why we offer affordable, fully tailored ice cream van hire. Whether you’re organising a workplace gathering or a large community celebration, we provide flexible packages and transparent pricing to suit your needs. If you’re wondering how much it costs to book a visiting treats van, simply view our corporate pricing schedule. You’ll receive clear, competitive quotes with no hidden fees. Our service covers everything from setup and serving to cleanup, so you can relax and enjoy your event." 
     },
     { 
         title: "Private Parties & Celebrations", 

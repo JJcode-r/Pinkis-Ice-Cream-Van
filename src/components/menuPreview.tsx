@@ -1,19 +1,18 @@
 "use client";
 
 import React, { useState, useEffect, type SyntheticEvent } from 'react';
-// Import necessary types from framer-motion
-import { motion, type Variants, type Transition } from 'framer-motion';
-import { Star, Milk, CupSoda, Nut, Package, Ruler, Droplets, type LucideIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Star, Milk, CupSoda, Nut, Package, Droplets, type LucideIcon } from 'lucide-react';
 
 // -----------------------------------------------------------------------------
-// TYPES (No change needed)
+// TYPES & DATA
 // -----------------------------------------------------------------------------
 
 interface Product {
     id: number;
     category: 'Twin Cone' | 'Regular Cone' | 'Custom Cone';
     name: string;
-    color: string; // Tailwind class for the BG color, now used on hover
+    color: string; 
     accent: string;
     image: string;
 }
@@ -36,24 +35,21 @@ interface MilkshakesSundaesConfig {
     ADD_ONS: AddOnOption[];
 }
 
-// -----------------------------------------------------------------------------
-// CONFIGURATION DATA (No change needed)
-// -----------------------------------------------------------------------------
-
 const PRODUCTS: Product[] = [
-    { id: 0, category: "Twin Cone", name: "Twin Choc Dip", color: "bg-amber-800/15", accent: "text-amber-900", image: "/images/ice-cream-cone-About.png" },
-    { id: 1, category: "Twin Cone", name: "Twin Nut", color: "bg-yellow-100", accent: "text-yellow-700", image: "/images/ice-cream-cone-About.png" },
-    { id: 2, category: "Twin Cone", name: "Twin Plain", color: "bg-pink-100", accent: "text-pink-600", image: "/images/ice-cream-cone-About.png" },
-    { id: 3, category: "Twin Cone", name: "Twin Sprinkle", color: "bg-fuchsia-100", accent: "text-fuchsia-700", image: "/images/ice-cream-cone-About.png" },
-    { id: 4, category: "Twin Cone", name: "Twin Sherbert", color: "bg-purple-100", accent: "text-purple-600", image: "/images/ice-cream-cone-About.png" },
+    { id: 0, category: "Twin Cone", name: "Twin Choc Dip", color: "bg-amber-800/15", accent: "text-amber-900", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice1.png" },
+    { id: 1, category: "Twin Cone", name: "Twin Nut", color: "bg-yellow-100", accent: "text-yellow-700", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice2.png" },
+    { id: 2, category: "Twin Cone", name: "Twin Plain", color: "bg-pink-100", accent: "text-pink-600", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice3.png" },
+    { id: 3, category: "Twin Cone", name: "Twin Sprinkle", color: "bg-fuchsia-100", accent: "text-fuchsia-700", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice4.png" },
+    { id: 4, category: "Twin Cone", name: "Twin Sherbert", color: "bg-purple-100", accent: "text-purple-600", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice5.png" },
     { id: 5, category: "Regular Cone", name: "Plain Cone", color: "bg-white", accent: "text-pink-600", image: "/images/ice-cream-cone-About.png" },
-    { id: 6, category: "Regular Cone", name: "Choc Dip Cone", color: "bg-amber-900/20", accent: "text-amber-900", image: "/images/ice-cream-cone-About.png" },
-    { id: 7, category: "Regular Cone", name: "Sprinkle Cone", color: "bg-fuchsia-100", accent: "text-fuchsia-700", image: "/images/ice-cream-cone-About.png" },
-    { id: 8, category: "Regular Cone", name: "Nut Cone", color: "bg-yellow-200", accent: "text-yellow-800", image: "/images/ice-cream-cone-About.png" },
-    { id: 9, category: "Regular Cone", name: "Sherbert Cone", color: "bg-purple-100", accent: "text-purple-600", image: "/images/ice-cream-cone-About.png" },
-    { id: 10, category: "Custom Cone", name: "Choc Dip w/ Kit Kat", color: "bg-amber-800/15", accent: "text-amber-900", image: "/images/ice-cream-cone-About.png" },
-    { id: 11, category: "Custom Cone", name: "Choc Dip w/ Nuts", color: "bg-amber-800/15", accent: "text-amber-900", image: "/images/ice-cream-cone-About.png" },
-    { id: 12, category: "Custom Cone", name: "Kit‑Kat Cone", color: "bg-white", accent: "text-pink-600", image: "/images/ice-cream-cone-About.png" },
+    { id: 6, category: "Regular Cone", name: "Choc Dip Cone", color: "bg-amber-900/20", accent: "text-amber-900", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice6.png" },
+    { id: 7, category: "Regular Cone", name: "Sprinkle Cone", color: "bg-fuchsia-100", accent: "text-fuchsia-700", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice8.png" },
+    { id: 8, category: "Regular Cone", name: "Nut Cone", color: "bg-yellow-200", accent: "text-yellow-800", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice11.png" },
+    { id: 9, category: "Regular Cone", name: "Sherbert Cone", color: "bg-purple-100", accent: "text-purple-600", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice10.png" },
+    { id: 10, category: "Custom Cone", name: "Choc Dip w/ Kit Kat", color: "bg-amber-800/15", accent: "text-amber-900", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice7.png" },
+    { id: 11, category: "Custom Cone", name: "Choc Dip w/ Nuts", color: "bg-amber-800/15", accent: "text-amber-900", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice11.png" },
+    { id: 12, category: "Custom Cone", name: "Kit‑Kat Cone", color: "bg-white", accent: "text-pink-600", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice9.png" },
+    { id: 13, category: "Custom Cone", name: "Add KitKat", color: "bg-red-50", accent: "text-red-700", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream-images/ice14.png" },
 ];
 
 const MILKSHAKES_SUNDAES: MilkshakesSundaesConfig = {
@@ -78,112 +74,64 @@ const SORT_OPTIONS = {
 };
 
 // -----------------------------------------------------------------------------
-// SUB‑COMPONENTS 
+// SUB-COMPONENTS
 // -----------------------------------------------------------------------------
 
-interface IceCreamConeHeaderImageProps {
-    variants: Variants;
-}
-
-const IceCreamConeHeaderImage: React.FC<IceCreamConeHeaderImageProps> = ({ variants }) => (
-    <motion.img
-        src="/images/ice-cream-cone-About.png"
-        alt="Ice cream cone"
-        variants={variants}
-        className="w-14 sm:w-20 mx-3 object-contain"
-        loading="lazy"
-        decoding="async"
-        width={80}
-        height={80}
-    />
-);
-
-interface IceCreamConeImageProps {
-    product: Product;
-}
-
-const IceCreamConeImage: React.FC<IceCreamConeImageProps> = ({ product }) => (
-    <motion.img
-        src={product.image}
-        alt={product.name}
-        // Use initial/animate/transition for the hover effects on the card,
-        // but keep the image responsive and positioned absolutely.
-        className="w-28 h-36 object-contain drop-shadow-2xl"
-        loading="lazy"
-        decoding="async"
-        width={112}
-        height={144}
-        // Correctly typed onError handler
-        onError={(e: SyntheticEvent<HTMLImageElement, Event>) => (e.currentTarget.src = '/images/menu/cones/fallback.webp')}
-    />
-);
-
-interface ProductCardProps {
-    product: Product;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-    
-    // State to manage hover, crucial for controlling the image and background animations
-    const [isHovered, setIsHovered] = useState(false);
-
-    // Variants for the background color element
-    const bgVariants: Variants = {
-        hidden: { opacity: 0, scale: 0.8 },
-        visible: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 200, damping: 20 } as Transition },
-    };
-
-    // Variants for the image float effect
-    const imageVariants: Variants = {
-        rest: { scale: 1, rotate: 0, y: 0 },
-        hover: { scale: 1.15, rotate: 6, y: -10, transition: { type: 'spring', stiffness: 300, damping: 12 } as Transition },
-    };
-    
+const OptimizedIceCreamImage: React.FC<{ product: Product, index: number }> = ({ product, index }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
     return (
-        <motion.div layout>
-            {/* Use motion.div as the main wrapper for hover state control and layout transition. 
-              The initial/whileInView setup is kept here for entrance animation.
-            */}
+        <div className="relative w-full h-52 flex items-end justify-center">
+            <motion.img
+                src={product.image}
+                alt={product.name}
+                loading={index < 3 ? "eager" : "lazy"}
+                decoding="async"
+                onLoad={() => setIsLoaded(true)}
+                className={`max-h-full w-auto object-contain object-bottom drop-shadow-2xl transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                width={300}
+                height={400}
+                onError={(e: SyntheticEvent<HTMLImageElement, Event>) => {
+                    e.currentTarget.src = '/images/menu/cones/fallback.webp';
+                }}
+            />
+        </div>
+    );
+};
+
+const ProductCard: React.FC<{ product: Product, index: number }> = ({ product, index }) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const isKitKatAddon = product.name === "Add KitKat";
+    const archStyle = { borderTopLeftRadius: 130, borderTopRightRadius: 130, borderBottomLeftRadius: 40, borderBottomRightRadius: 40 };
+
+    return (
+        <motion.div layout className="relative">
             <motion.div
-                initial={{ opacity: 0, y: 60 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "0px 0px -50px 0px" }}
                 onHoverStart={() => setIsHovered(true)}
                 onHoverEnd={() => setIsHovered(false)}
-                className={`relative p-6 pt-28 pb-10 rounded-3xl shadow-xl border border-pink-200 min-h-[350px] bg-white`} // **CRITICAL: Set background to white/transparent**
-                style={{ borderTopLeftRadius: 120, borderTopRightRadius: 120 }}
-                transition={{ type: 'spring', stiffness: 100, damping: 10 } as Transition}
+                className={`relative p-8 pt-32 pb-10 shadow-xl border min-h-[390px] bg-white flex flex-col items-center text-center transition-all duration-300 ${isKitKatAddon ? 'border-red-100' : 'border-pink-100'}`}
+                style={archStyle}
             >
-                {/* 1. HOVER BACKGROUND ELEMENT (Sits behind everything, controlled by hover state) */}
-                <motion.div
-                    initial="hidden"
-                    animate={isHovered ? "visible" : "hidden"}
-                    variants={bgVariants}
-                    className={`absolute inset-0 rounded-3xl z-0 ${product.color} shadow-inner-xl`} // Z-0 is lowest layer
-                    style={{ borderTopLeftRadius: 120, borderTopRightRadius: 120 }}
-                />
-
-                {/* 2. ICE CREAM IMAGE (Sits behind text/content, Z-index 10) */}
-                <motion.div
-                    className="absolute -top-14 left-1/2 -translate-x-1/2 z-10" // **Z-10: Behind text, in front of BG**
-                    variants={imageVariants}
-                    animate={isHovered ? "hover" : "rest"}
-                >
-                    <IceCreamConeImage product={product} />
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: isHovered ? 1 : 0 }} className={`absolute inset-0 z-0 ${product.color}`} style={archStyle} />
+                <motion.div className="absolute -top-20 left-0 right-0 z-10" animate={isHovered ? { y: -12, scale: 1.05, rotate: 3 } : { y: 0, scale: 1, rotate: 0 }} transition={{ type: 'spring', stiffness: 300, damping: 15 }}>
+                    <OptimizedIceCreamImage product={product} index={index} />
                 </motion.div>
-
-                {/* 3. CARD CONTENT (Sits in front of everything, Z-index 20) */}
-                <div className="relative z-20"> {/* **Z-20: Highest layer for text/buttons** */}
-                    <span className="absolute top-[-100px] left-0 bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold"> {/* Adjusted position due to new z-index context */}
+                <div className="relative z-20 mt-4 flex flex-col items-center flex-grow">
+                    <span className={`mb-4 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm ${isKitKatAddon ? 'bg-red-600' : 'bg-pink-500'}`}>
                         {product.category}
                     </span>
-
-                    <div className="text-center mt-6">
-                        <h3 className={`font-fredoka text-2xl font-bold ${product.accent}`}>{product.name}</h3>
-                        <p className="mt-4 flex justify-center items-center text-gray-800 font-extrabold">
-                            <Star className="h-4 w-4 text-pink-500 mr-1" fill="currentColor" />
-                            Ask for today’s price
-                        </p>
+                    <h3 className={`font-fredoka text-2xl font-bold leading-tight ${product.accent}`}>{product.name}</h3>
+                    <div className="mt-auto pt-6 flex items-center justify-center gap-2 font-extrabold text-xs">
+                        {isKitKatAddon ? (
+                            <div className="bg-red-100 text-red-700 px-4 py-2 rounded-xl flex items-center gap-2 border border-red-200">
+                                <Package className="h-4 w-4" />
+                                <span>Add for $1 Dollar</span>
+                            </div>
+                        ) : (
+                            <><Star className="h-4 w-4 text-pink-500" fill="currentColor" /><span className="text-gray-800">Daily Specials</span></>
+                        )}
                     </div>
                 </div>
             </motion.div>
@@ -191,59 +139,35 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     );
 };
 
-// ... (MilkshakesAndSundaes component remains UNCHANGED) ...
 const MilkshakesAndSundaes: React.FC = () => (
-    <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mt-28 bg-pink-100 p-8 md:p-12 rounded-[40px] shadow-2xl border-4 border-pink-300"
-    >
-        <h3 id='milkshake' className="text-4xl font-fredoka font-extrabold text-pink-800 mb-10 flex items-center">
-            <Milk className="h-8 w-8 mr-3 text-pink-600" />
-            Milkshakes & Sundaes
+    <motion.div initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-40 bg-pink-50 p-8 md:p-12 rounded-[60px] shadow-2xl border-4 border-pink-100">
+        <h3 id='milkshake' className="text-4xl font-fredoka font-extrabold text-pink-800 mb-10 flex items-center justify-center lg:justify-start">
+            <Milk className="h-10 w-10 mr-4 text-pink-600" /> Milkshakes & Sundaes
         </h3>
-
         <div className="grid lg:grid-cols-2 gap-10">
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-pink-200">
-                <h4 className="text-2xl font-bold mb-4 flex items-center">
-                    <CupSoda className="h-6 w-6 mr-2 text-pink-500" /> Milkshakes
-                </h4>
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-pink-100">
+                <h4 className="text-2xl font-bold mb-6 flex items-center text-gray-800"><CupSoda className="h-6 w-6 mr-3 text-pink-500" /> Thick Milkshakes</h4>
                 <div className="grid sm:grid-cols-2 gap-4">
-                    {MILKSHAKES_SUNDAES.MILKSHAKES.map((s, i) => (
-                        <motion.div
-                            key={s.name}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 } as Transition} // Explicitly cast transition
-                            className={`p-4 rounded-xl ${s.bg} border border-pink-100 flex items-center gap-3`}
-                        >
-                            {/* s.icon is a LucideIcon type, correctly rendered */}
-                            <s.icon className={`h-5 w-5 ${s.color}`} />
-                            <span className="font-semibold">{s.name}</span>
+                    {MILKSHAKES_SUNDAES.MILKSHAKES.map((s) => (
+                        <motion.div key={s.name} whileHover={{ scale: 1.05 }} className={`p-4 rounded-2xl ${s.bg} border border-white flex items-center gap-4 shadow-sm hover:shadow-md transition-all cursor-default`}>
+                            <div className={`p-2 rounded-full bg-white ${s.color}`}><s.icon className="h-5 w-5" /></div>
+                            <span className="font-bold text-gray-700">{s.name}</span>
                         </motion.div>
                     ))}
                 </div>
             </div>
-
-            <div className="space-y-6">
-                <div className="bg-white rounded-3xl p-6 shadow-xl border border-pink-200">
-                    <h4 className="text-2xl font-bold mb-4">Sundae Sizes</h4>
-                    <div className="flex items-center justify-between bg-pink-50 p-4 rounded-xl">
-                        <Ruler className="h-6 w-6 text-pink-500" />
-                        <span className="text-xl font-extrabold text-pink-600">{MILKSHAKES_SUNDAES.SUNDAES.join(' / ')}</span>
-                    </div>
+            <div className="grid gap-8">
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-pink-100 flex flex-wrap items-center justify-between gap-4">
+                    <div><h4 className="text-2xl font-bold text-gray-800">Sundae Sizes</h4><p className="text-gray-500 text-sm font-medium">Classic Soft Serve Sundaes</p></div>
+                    <div className="flex items-center bg-pink-500 px-8 py-3 rounded-2xl shadow-inner"><span className="text-xl font-black text-white tracking-widest">{MILKSHAKES_SUNDAES.SUNDAES.join(' / ')}</span></div>
                 </div>
-
-                <div className="bg-white rounded-3xl p-6 shadow-xl border border-pink-200">
-                    <h4 className="text-2xl font-bold mb-4">Add‑ons</h4>
-                    <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-pink-100">
+                    <h4 className="text-2xl font-bold mb-6 text-gray-800">Extra Toppings</h4>
+                    <div className="grid grid-cols-2 gap-6">
                         {MILKSHAKES_SUNDAES.ADD_ONS.map((a) => (
-                            <div key={a.name} className="p-4 bg-yellow-50 rounded-xl text-center border border-yellow-200">
-                                {/* a.icon is a LucideIcon type, correctly rendered */}
-                                <a.icon className="h-6 w-6 mx-auto mb-1 text-amber-700" />
-                                <p className="font-bold">{a.name}</p>
+                            <div key={a.name} className="p-4 bg-yellow-50 rounded-2xl text-center border-2 border-dashed border-yellow-200 group transition-all hover:bg-yellow-100">
+                                <a.icon className="h-8 w-8 mx-auto mb-2 text-amber-600 group-hover:scale-110 transition-transform" />
+                                <p className="font-black text-amber-900 uppercase text-xs tracking-tighter">{a.name}</p>
                             </div>
                         ))}
                     </div>
@@ -254,11 +178,10 @@ const MilkshakesAndSundaes: React.FC = () => (
 );
 
 // -----------------------------------------------------------------------------
-// MAIN SECTION (Only ProductCard usage changes)
+// MAIN SECTION
 // -----------------------------------------------------------------------------
 
 export default function MenuPreviewSection() {
-    // Explicitly typed useState
     const [sortType, setSortType] = useState<keyof typeof SORT_OPTIONS>('DEFAULT');
     const [sorted, setSorted] = useState<Product[]>(PRODUCTS);
 
@@ -274,70 +197,25 @@ export default function MenuPreviewSection() {
     }, [sortType]);
 
     return (
-        <section id="menu" className="py-20 bg-white">
+        <section id="menu" className="py-24 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    // Inline variants are structurally correct
-                    variants={{
-                        hidden: {},
-                        visible: { transition: { staggerChildren: 0.18 } },
-                    }}
-                    className="flex flex-col items-center mb-14"
-                >
-                    <motion.h2
-                        // Inline variants are structurally correct and Transitions are cast
-                        variants={{
-                            hidden: { opacity: 0, y: 40, scale: 0.95 },
-                            visible: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 70, damping: 14 } as Transition },
-                        }}
-                        className="flex justify-center items-center font-fredoka font-extrabold text-pink-600 text-4xl sm:text-6xl"
-                    >
-                        <motion.span variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } }}>
-                            Our Full
-                        </motion.span>
-
-                        <IceCreamConeHeaderImage
-                            variants={{
-                                hidden: { opacity: 0, scale: 0.3, rotate: -180 },
-                                visible: { opacity: 1, scale: 1, rotate: 360, transition: { type: 'spring', stiffness: 80, damping: 12 } as Transition },
-                            }}
-                        />
-
-                        <motion.span variants={{ hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } }}>
-                            Menu
-                        </motion.span>
+                <div className="flex flex-col items-center mb-24 text-center">
+                    <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-wrap justify-center items-center font-fredoka font-extrabold text-pink-600 text-4xl sm:text-7xl">
+                        <span>Our Full</span>
+                        <motion.img src="/images/ice-cream-cone-About.png" alt="Ice cream" className="w-14 sm:w-20 mx-3 object-contain" initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ type: 'spring' }} />
+                        <span>Menu</span>
                     </motion.h2>
+                    <p className="mt-6 text-gray-500 max-w-2xl text-lg font-medium">From crunchy toppings to classic scoops, customize your treat exactly how you like it.</p>
+                </div>
 
-                    <motion.p
-                        // Inline variants are structurally correct and Transitions are cast
-                        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } as Transition } }}
-                        className="mt-4 max-w-3xl text-center text-lg text-gray-600"
-                    >
-                        From classic soft-serve cones to rich milkshakes and indulgent sundaes, every treat is freshly made,
-                        joyfully served, and crafted to turn simple moments into unforgettable smiles.
-                    </motion.p>
-                </motion.div>
-
-                <div className="flex justify-end mb-14">
-                    <select
-                        value={sortType}
-                        // Correctly typed onChange handler
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSortType(e.target.value as keyof typeof SORT_OPTIONS)}
-                        className="rounded-full border border-pink-300 px-4 py-2 text-pink-600 shadow"
-                    >
-                        {/* k is typed as keyof typeof SORT_OPTIONS */}
-                        {Object.entries(SORT_OPTIONS).map(([k, v]) => (
-                            <option key={k} value={k}>{v}</option>
-                        ))}
+                <div className="flex justify-end mb-20">
+                    <select value={sortType} onChange={(e) => setSortType(e.target.value as keyof typeof SORT_OPTIONS)} className="appearance-none rounded-full border-2 border-pink-100 bg-white px-10 py-3 pr-14 text-pink-600 font-black shadow-sm focus:border-pink-300 outline-none cursor-pointer transition-all hover:shadow-md">
+                        {Object.entries(SORT_OPTIONS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                     </select>
                 </div>
 
-                <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-24">
-                    {/* p is strongly typed as Product */}
-                    {sorted.map((p) => <ProductCard key={p.id} product={p} />)}
+                <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-36">
+                    {sorted.map((p, idx) => <ProductCard key={p.id} product={p} index={idx} />)}
                 </motion.div>
 
                 <MilkshakesAndSundaes />

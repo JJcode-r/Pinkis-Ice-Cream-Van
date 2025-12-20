@@ -2,40 +2,43 @@ import { lazy, Suspense, useEffect } from "react";
 import { useSEO } from "../hooks/useSEO";
 
 const AboutHero = lazy(() => import("../components/aboutHero"));
-const InquiryFloatingWidget = lazy(() => import("../components/inquiry"));
 const AboutPageContent = lazy(() => import("../components/ourStory"));
 const TeamSection = lazy(() => import("../components/team"));
 const CommunitySection = lazy(() => import("../components/communityPhotos"));
 const FinalCtaStrip = lazy(() => import("../components/HomeCTA"));
-const Footer = lazy(() => import("../components/footer"));
 
 export default function AboutPage() {
     // ... (useSEO code remains the same)
-    useSEO({
-        title:
-          "About Pinki’s Ice Cream Van | A Family-Run Ice Cream Van Business",
-        description:
-          "Learn about Pinki’s Ice Cream Van — a family-run ice cream business bringing joy to schools, communities, and events across Australia.",
-        canonical: "https://www.pinkisicecreamvan.com.au/about",
-        schema: {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Pinki’s Ice Cream Van",
-            "url": "https://www.pinkisicecreamvan.com.au/",
-            "description":
-              "A family-run ice cream van business serving school events, fundraisers, private parties and community celebrations across Australia.",
-            "foundingLocation": {
-              "@type": "Country",
-              "name": "Australia"
-            },
-            "knowsAbout": [
-              "Ice cream van hire",
-              "School fundraising events",
-              "Community celebrations",
-              "Corporate and workplace events"
-            ]
+ useSEO({
+    title: "Our Story | Pinki’s Ice Cream Van - Australia’s Community Partner",
+    description: "Discover the heart behind Pinki’s Ice Cream Van. A family-run business dedicated to supporting Australian schools and charities through hassle-free event catering.",
+    canonical: "https://www.pinkisicecreamvan.com.au/about",
+    schema: {
+        "@context": "https://schema.org",
+        "@type": "Organization", // "Organization" is perfect for the About page
+        "name": "Pinki’s Ice Cream Van",
+        "url": "https://www.pinkisicecreamvan.com.au/",
+        "logo": "https://www.pinkisicecreamvan.com.au/images/logo1.webp",
+        "description": "Australia's premier family-run ice cream van service specializing in community fundraising and school carnivals.",
+        "foundingLocation": {
+            "@type": "Country",
+            "name": "Australia"
+        },
+        // "knowsAbout" tells Google your niche expertise
+        "knowsAbout": [
+            "School Fundraising Strategies",
+            "Community Event Catering",
+            "Hassle-Free Event Planning",
+            "Non-Profit Support"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "areaServed": "AU",
+          "availableLanguage": "English"
         }
-    });
+    }
+});
 
     // --- ENHANCED ANCHOR SCROLLING LOGIC ---
     useEffect(() => {
@@ -85,7 +88,6 @@ export default function AboutPage() {
             };
         }
     }, []); 
-    // --- END ENHANCED ANCHOR SCROLLING LOGIC ---
 
     return (
         <div>
@@ -94,20 +96,14 @@ export default function AboutPage() {
             </Suspense>
 
             <Suspense fallback={null}>
-                <InquiryFloatingWidget />
-            </Suspense>
-
-            <Suspense fallback={null}>
                 <AboutPageContent />
             </Suspense>
 
             <Suspense fallback={null}>
-                {/* Ensure this component's root has id="team" if you link to #team */}
-                <TeamSection />
+                 <TeamSection />
             </Suspense>
 
             <Suspense fallback={null}>
-                {/* Ensure this component's root has id="community" if you link to #community */}
                 <CommunitySection />
             </Suspense>
 
@@ -115,9 +111,7 @@ export default function AboutPage() {
                 <FinalCtaStrip />
             </Suspense>
 
-            <Suspense fallback={null}>
-                <Footer />
-            </Suspense>
+           
         </div>
     );
 }

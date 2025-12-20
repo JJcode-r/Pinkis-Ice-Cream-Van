@@ -3,44 +3,43 @@ import { useSEO } from "../hooks/useSEO";
 
 import HeroSection from "../components/HeroSection";
 import WhyChooseUsSection from "../components/whyChooseUs";
-import PackagesPreviewSection from "../components/events";
+import ServicesPreview from "../components/services";
 import AboutSection from "../components/aboutUs";
 import FAQSection from "../components/moreQuestions";
 
-const InquiryFloatingWidget = lazy(() => import("../components/inquiry"));
+// const InquiryFloatingWidget = lazy(() => import("../components/inquiry"));
 const GallerySection = lazy(() => import("../components/gallery"));
 const TestimonialsSection = lazy(() => import("../components/testimonials"));
 const FinalCtaStrip = lazy(() => import("../components/HomeCTA"));
-const Footer = lazy(() => import("../components/footer"));
+// const Footer = lazy(() => import("../components/footer"));
 
 export default function HomePage() {
-    useSEO({
-        // ... (useSEO contents remain the same)
-        title:
-          "Pinki’s Ice Cream Van | Ice Cream Van Hire for Parties & Events in Australia",
-        description:
-          "Hire Pinki’s Ice Cream Van for school events, fundraisers, private parties, corporate functions, sports clubs and celebrations across Australia. Hassle-free, fun and unforgettable.",
-        canonical: "https://www.pinkisicecreamvan.com.au/",
-        schema: {
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Pinki’s Ice Cream Van",
-          "description":
-            "Ice cream van hire for school events, fundraising, private parties, corporate events and celebrations across Australia.",
-          "areaServed": {
+   useSEO({
+    title: "Pinki’s Ice Cream Van | Australia's Leading School & Event Catering",
+    description: "Book Pinki’s Ice Cream Van for school fundraisers (donations back!), sports clubs, and corporate events across Australia. Hassle-free, zero-setup, and 100% fun.",
+    canonical: "https://www.pinkisicecreamvan.com.au/",
+    schema: {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Pinki’s Ice Cream Van",
+        "priceRange": "$$", // Indicates affordable but professional
+        "description": "Specialist ice cream van hire for community fundraising and corporate celebrations.",
+        "image": "https://www.pinkisicecreamvan.com.au/images/logo1.webp",
+        "areaServed": {
             "@type": "Country",
             "name": "Australia"
-          },
-          "serviceType": [
-            "School Events & Fundraising",
-            "Sports Events & Clubs",
-            "Workplace Staff Events",
-            "Private Parties & Celebrations",
-            "Corporate Functions"
-          ],
-          "url": "https://www.pinkisicecreamvan.com.au/"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Ice Cream Catering Services",
+            "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "School Fundraising Programs" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corporate Staff Appreciation" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sports Club Carnivals" }}
+            ]
         }
-    });
+    }
+});
 
     // --- ANCHOR SCROLLING LOGIC ADDED HERE ---
     useEffect(() => {
@@ -48,7 +47,7 @@ export default function HomePage() {
         const hash = window.location.hash; 
 
         if (hash) {
-            const id = hash.substring(1); // Remove the '#'
+            const id = hash.substring(1); 
             
             // 2. Define a scrolling function
             const scrollToElement = () => {
@@ -57,45 +56,36 @@ export default function HomePage() {
                     // Smoothly scroll to the target element
                     element.scrollIntoView({ 
                         behavior: 'smooth', 
-                        block: 'start' // Scrolls the element to the top of the viewport
-                    });
-
-                    // Optional: Clear the hash from the URL after scrolling if you don't 
-                    // want it to persist, but generally it's better to leave it.
-                    // history.pushState(null, '', window.location.pathname);
+                        block: 'start'  });
+     
                 }
             };
 
-            // 3. Use a slight delay for lazy-loaded components or navigation delays.
-            //    A 100ms timeout is a safe bet to ensure the DOM is fully ready.
             const timeoutId = setTimeout(scrollToElement, 100);
 
-            // Cleanup function
             return () => clearTimeout(timeoutId);
         }
     }, []); 
-    // --- END ANCHOR SCROLLING LOGIC ---
 
     return (
         <>
             <main id="main-content">
                 <HeroSection />
                 <WhyChooseUsSection />
-                <PackagesPreviewSection />
+                <ServicesPreview />
                 <AboutSection />
                 <FAQSection />
 
                 <Suspense fallback={null}>
-                    {/* These are lazy-loaded, so the 100ms timeout is essential for them */}
-                    <TestimonialsSection /> 
+                     <TestimonialsSection /> 
                     <GallerySection />
                     <FinalCtaStrip />
                 </Suspense>
             </main>
 
             <Suspense fallback={null}>
-                <InquiryFloatingWidget />
-                <Footer />
+                {/* <InquiryFloatingWidget /> */}
+                {/* <Footer /> */}
             </Suspense>
         </>
     );

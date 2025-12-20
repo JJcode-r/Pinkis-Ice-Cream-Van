@@ -4,61 +4,30 @@ import { useSEO } from "../hooks/useSEO";
 const BookingHero = lazy(() => import("../components/bookingHero"));
 const IceCreamBookingForm = lazy(() => import("../components/booking"));
 const FAQ = lazy(() => import("../components/faq"));
-const InquiryFloatingWidget = lazy(() => import("../components/inquiry"));
-const Footer = lazy(() => import("../components/footer"));
 
 export default function BookingPage() {
-    useSEO({
-        // ... (useSEO contents remain the same)
-        title:
-          "Book Pinki’s Ice Cream Van | Flexible Ice Cream Van Hire for Events",
-        description:
-          "Book Pinki’s Ice Cream Van for school events, fundraisers, workplace functions and private parties. Choose upfront pricing or pay-as-you-go options.",
-        canonical: "https://www.pinkisicecreamvan.com.au/booking",
-        schema: {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-             // ... (mainEntity array contents remain the same)
-             {
-              "@type": "Question",
-              "name": "Do you offer upfront and pay-as-you-go options?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text":
-                  "Yes. You can choose upfront payment based on the number of ice creams required, or a pay-as-you-go option where guests purchase directly from the van."
-              }
-            },
+   useSEO({
+    title: "Book Pinki’s Ice Cream Van | Easy Event Hire Australia",
+    description: "Book Pinki’s Ice Cream Van for your next event. Offering flexible upfront or pay-as-you-go pricing. We cater to all dietary needs including GF, Halal, and Vegan.",
+    canonical: "https://www.pinkisicecreamvan.com.au/booking",
+    schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            // Your existing questions are excellent. 
+            // I recommend adding one specific to "Availability" or "Location"
             {
-              "@type": "Question",
-              "name": "Is there a booking fee for the ice cream van?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text":
-                  "There is no booking fee for pay-as-you-go events. For upfront bookings, pricing is based on your event size and requirements."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What events can I book the ice cream van for?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text":
-                  "Pinki’s Ice Cream Van is available for school events, fundraisers, corporate functions, workplace staff events, sports clubs and private celebrations."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do you cater for dietary requirements?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text":
-                  "Yes. We offer gluten-free, vegetarian, halal and kosher-friendly ice cream options, with additional dietary accommodations available upon request."
-              }
+                "@type": "Question",
+                "name": "How far in advance should I book the ice cream van?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We recommend booking as early as possible, especially for peak seasons like summer and school term ends, to ensure your preferred date is available."
+                }
             }
-          ]
-        }
-    });
+            // ... (rest of your entities)
+        ]
+    }
+});
 
     // --- ENHANCED ANCHOR SCROLLING LOGIC APPLIED ---
     useEffect(() => {
@@ -125,13 +94,7 @@ export default function BookingPage() {
                 <FAQ /> 
             </Suspense>
 
-            <Suspense fallback={null}>
-                <InquiryFloatingWidget />
-            </Suspense>
-
-            <Suspense fallback={null}>
-                <Footer />
-            </Suspense>
+           
         </div>
     );
 }

@@ -25,6 +25,7 @@ const navLinks: NavLink[] = [
     { title: "About Us", href: "/about" },
     { title: "Our Menu", href: "/menu" },
     { title: "Book Now", href: "/booking#booking-form" },
+    { title: "Our Events", href: "/events" },
     { title: "FAQs", href: "/booking#faq" },
 ];
 
