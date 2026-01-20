@@ -1,4 +1,45 @@
-import React, { useState, useEffect, useLayoutEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
+import { motion } from "framer-motion";
+
+// --- MELT BUTTON COMPONENT ---
+const MeltButton = () => {
+  const buttonPulseTransition = {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut" as const // Fixed: Added 'as const'
+  };
+
+  return (
+    <div className="group relative flex flex-col items-center">
+      <motion.a
+        href="/booking#booking-form"
+        role="button"
+        className="relative z-10 px-9 py-3 text-base sm:text-lg rounded-full bg-pink-600 text-white font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300 whitespace-nowrap"
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
+        animate={{
+          scale: [1, 1.02, 1],
+          transition: buttonPulseTransition,
+        }}
+      >
+        Book Your Date
+      </motion.a>
+
+      <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] overflow-hidden pointer-events-none z-0">
+        <div className="melt-panel w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
+             style={{
+               WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               WebkitMaskSize: '100% 60px',
+               maskSize: '100% 60px',
+               WebkitMaskRepeat: 'no-repeat',
+               maskRepeat: 'no-repeat'
+             }} 
+        />
+      </div>
+    </div>
+  );
+};
 
 // --- ICONS ---
 const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -26,7 +67,14 @@ const navItemsLeft = navConfig.slice(0, 2);
 const navItemsRight = navConfig.slice(2);
 
 // --- SUB-COMPONENTS ---
-function Dropdown({ items, handleNavLinkClick, parentPath, activeSection }: { items: Anchor[], handleNavLinkClick: any, parentPath: string, activeSection: string }) {
+interface DropdownProps {
+  items: Anchor[];
+  handleNavLinkClick: (e: React.MouseEvent, item: any, parentPath?: string) => void;
+  parentPath: string;
+  activeSection: string;
+}
+
+function Dropdown({ items, handleNavLinkClick, parentPath, activeSection }: DropdownProps) {
   return (
     <div className="absolute top-full left-1/2 -translate-x-1/2 w-52 bg-white rounded-xl shadow-2xl ring-2 ring-pink-100 z-50 p-1 flex flex-col">
       {items.map((item) => (
@@ -47,10 +95,21 @@ function Dropdown({ items, handleNavLinkClick, parentPath, activeSection }: { it
   );
 }
 
-const NavItem = React.memo(({ item, openDropdown, setOpenDropdown, activePath, handleNavLinkClick, delayIndex, primaryTextColor, activeSection }: any) => {
+interface NavItemProps {
+  item: NavItemData;
+  openDropdown: string | null;
+  setOpenDropdown: (id: string | null) => void;
+  activePath: string;
+  handleNavLinkClick: (e: React.MouseEvent, item: any, parentPath?: string) => void;
+  delayIndex: number;
+  primaryTextColor: string;
+  activeSection: string;
+}
+
+const NavItem = memo(({ item, openDropdown, setOpenDropdown, activePath, handleNavLinkClick, delayIndex, primaryTextColor, activeSection }: NavItemProps) => {
   const isActive = activePath === item.path;
   const isDropdownOpen = openDropdown === item.id;
-  const hasActiveAnchor = item.anchors.some((a: any) => a.href === activeSection);
+  const hasActiveAnchor = item.anchors.some((a: Anchor) => a.href === activeSection);
   const hoverColor = primaryTextColor.includes("white") ? "hover:text-pink-300" : "hover:text-pink-600";
   
   return (
@@ -77,7 +136,7 @@ export default function Navbar() {
     const element = document.getElementById(targetId || "");
     if (element) {
       const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
     }
   };
@@ -105,7 +164,7 @@ export default function Navbar() {
     }
   }, [activeSection]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setActivePath(window.location.pathname);
     handleScrollUpdate();
     document.documentElement.style.overflowX = 'hidden';
@@ -160,7 +219,6 @@ export default function Navbar() {
 
       <header className={`w-full fixed top-0 z-50 transition-all duration-500 ease-in-out ${mobileOpen || scrollEffect ? "bg-white/95 shadow-lg" : "bg-transparent"}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 h-20 flex items-center justify-between relative">
-          {/* Left Nav */}
           <div className="flex items-center space-x-8 flex-1">
             <div className="lg:hidden">{renderLogo(false)}</div>
             <div className="hidden lg:flex gap-4">
@@ -170,12 +228,10 @@ export default function Navbar() {
             </div>
           </div>
           
-          {/* Centered Logo */}
           <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             {renderLogo(true)}
           </div>
           
-          {/* Right Nav */}
           <div className="flex items-center space-x-2 sm:space-x-4 flex-1 justify-end pr-2">
             <div className="hidden lg:flex gap-4">
               {navItemsRight.map((item, i) => (
@@ -183,8 +239,9 @@ export default function Navbar() {
               ))}
             </div>
             
-            {/* CTA Button - Hidden only on smallest screens to make room for hamburger */}
-            <a href="/booking#booking-form" className="hidden sm:inline-flex px-4 sm:px-6 py-2 sm:py-3 bg-pink-600 text-white rounded-full text-sm sm:text-base font-extrabold shadow-lg hover:bg-pink-700 transition-all active:scale-95 whitespace-nowrap">Book Now!</a>
+            <div className="hidden sm:block ml-4">
+               <MeltButton />
+            </div>
             
             <button onClick={() => setMobileOpen(!mobileOpen)} className={`lg:hidden p-2 rounded-xl transition-colors ${primaryTextColor.includes("white") ? "bg-white/20 text-white" : "bg-pink-100 text-pink-600"}`}>
               {mobileOpen ? <XIcon /> : <MenuIcon />}
@@ -193,7 +250,6 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
       <div className={`fixed inset-0 z-[60] transition-opacity duration-300 ${mobileOpen ? "opacity-100 bg-black/50 pointer-events-auto" : "opacity-0 pointer-events-none"}`} onClick={() => setMobileOpen(false)}>
         <div className={`fixed right-0 top-0 h-full w-[280px] bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out ${mobileOpen ? "translate-x-0" : "translate-x-full"}`} onClick={e => e.stopPropagation()}>
           <div className="pt-24 flex-1 overflow-y-auto p-6">
@@ -217,7 +273,6 @@ export default function Navbar() {
             ))}
           </div>
           
-          {/* Added CTA for Mobile Drawer */}
           <div className="p-6 border-t border-gray-100 bg-pink-50">
              <a href="/booking#booking-form" onClick={() => setMobileOpen(false)} className="block w-full text-center px-6 py-4 bg-pink-600 text-white rounded-2xl font-extrabold shadow-lg hover:bg-pink-700 transition-all">Book Us Now!</a>
           </div>

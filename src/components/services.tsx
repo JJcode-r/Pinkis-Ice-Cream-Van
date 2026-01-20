@@ -1,12 +1,58 @@
 import { useState, useEffect, type SyntheticEvent, type FC } from 'react';
 import { motion, type Variants, type Transition } from 'framer-motion';
 
+// --- STYLING ---
 const GlobalStyles = `
     @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
     .font-fredoka { font-family: 'Fredoka', sans-serif; }
+    .bg-cream { background-color: #F7F7FF; }
 `;
 
 const WORKPLACE_LOGO_URL = "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/logo2.webp";
+
+// Added Interface to fix "implicitly has an 'any' type" error
+interface MeltButtonProps {
+  text?: string;
+  href?: string;
+}
+
+const MeltButton = ({ text = "Book Your Date", href = "/booking" }: MeltButtonProps) => {
+  const buttonPulseTransition = {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut" as const // Added 'as const' to fix Easing type error
+  };
+
+  return (
+    <div className="group relative flex flex-col items-center">
+      <motion.a
+        href={href}
+        className="relative z-10 px-12 py-4 text-xl rounded-full bg-pink-600 text-white font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300 text-center"
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
+        animate={{
+          scale: [1, 1.02, 1],
+          transition: buttonPulseTransition,
+        }}
+      >
+        {text}
+      </motion.a>
+
+      <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] overflow-hidden pointer-events-none z-0">
+        <div className="melt-panel w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
+             style={{
+               WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               WebkitMaskSize: '100% 60px',
+               maskSize: '100% 60px',
+               WebkitMaskRepeat: 'no-repeat',
+               maskRepeat: 'no-repeat'
+             }} 
+        />
+      </div>
+    </div>
+  );
+};
 
 const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>, fallbackSrc: string) => {
     const target = e.currentTarget as HTMLImageElement;
@@ -14,7 +60,7 @@ const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>, fallbackSr
     target.src = fallbackSrc;
 };
 
-// --- SUMMARY DATA: Curated snippets linking to dedicated sections ---
+// --- DATA ---
 const SERVICES = [
     { 
         id: "workplace",
@@ -23,7 +69,6 @@ const SERVICES = [
         price: "Vetted Supplier",
         description: "Boost morale with affordable, fully tailored hire. With transparent pricing and zero hidden fees, we handle everything from setup to cleanup so you can simply relax and enjoy your event with your team." 
     },
-
     { 
         id: "schools",
         title: "School Events & Fundraising", 
@@ -38,7 +83,6 @@ const SERVICES = [
         price: "Custom Profit Plan",
         description: "Sports and ice cream are a winning combination! Whether it’s a match or a carnival, our truck adds excitement for players and spectators alike. We work with your club to generate revenue while treating your supporters." 
     }
-    
 ];
 
 const PackageCard: FC<{ pkg: typeof SERVICES[0] }> = ({ pkg }) => {
@@ -81,7 +125,7 @@ const PackageCard: FC<{ pkg: typeof SERVICES[0] }> = ({ pkg }) => {
     );
 };
 
-export default function ServicesPreview() {
+export default function App() {
     const [isDesktop, setIsDesktop] = useState(false);
     useEffect(() => {
         const check = () => setIsDesktop(window.innerWidth >= 1024);
@@ -107,16 +151,15 @@ export default function ServicesPreview() {
     };
 
     return (
-        <section id="services" className="relative py-20 lg:py-32 bg-[#F7F7FF] overflow-hidden">
+        <section id="services" className="relative py-20 lg:py-32 bg-cream overflow-hidden">
             <style>{GlobalStyles}</style>
             
             <div className="mx-auto max-w-7xl px-6 relative z-10">
                 
-                {/* HEADING SECTION: EXACT FONT SIZES & ONCE:TRUE ANIMATION */}
                 <div className="text-center max-w-4xl mx-auto mb-16 md:mb-20">
                     <motion.h2
                         initial="hidden" whileInView="visible"
-                        viewport={{ once: true, amount: 0.5 }} // FIX: Animates only once
+                        viewport={{ once: true, amount: 0.5 }}
                         transition={{ staggerChildren: 0.1 } as Transition} 
                         className="flex flex-wrap justify-center items-center font-fredoka font-extrabold text-[#E83E8C] mb-8"
                     >
@@ -137,11 +180,10 @@ export default function ServicesPreview() {
                         Book Pinki’s: Professional Service, Sweet Fun
                     </p>
                     <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                       Our service covers everything from setup and serving to cleanup, so you can relax and enjoy your event.
+                       Our service covers everything from setup and serving to cleanup, so you can relax and enjoy your event.
                     </p>
                 </div>
 
-                {/* 3-COLUMN GRID */}
                 <motion.div 
                     initial="hidden" whileInView="visible" viewport={{ once: true }}
                     transition={{ staggerChildren: 0.15 }}
@@ -150,14 +192,19 @@ export default function ServicesPreview() {
                     {SERVICES.map((s, i) => <PackageCard key={i} pkg={s} />)}
                 </motion.div>
                 
-                {/* DUAL CTAs */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                    <motion.a href="/booking" whileHover={{ scale: 1.05 }} className="w-full sm:w-auto bg-[#E83E8C] text-white font-fredoka font-bold py-5 px-12 rounded-full text-2xl shadow-xl shadow-pink-200 text-center">
-                        Book Your Event Now! 🍦
-                    </motion.a>
-                    <motion.a href="/events" whileHover={{ scale: 1.05 }} className="w-full sm:w-auto bg-white text-[#E83E8C] border-2 border-[#E83E8C] font-fredoka font-bold py-5 px-12 rounded-full text-2xl hover:bg-pink-50 transition-all text-center">
-                        View Events
-                    </motion.a>
+                {/* UPDATED DUAL CTAs WITH MELT BUTTON EFFECT */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-12 lg:gap-24">
+                    <MeltButton text="Book Your Event Now! 🍦" href="/booking" />
+                    
+                    <div className="group relative">
+                         <motion.a 
+                            href="/events" 
+                            whileHover={{ scale: 1.05 }} 
+                            className="w-full sm:w-auto bg-white text-[#E83E8C] border-2 border-[#E83E8C] font-fredoka font-bold py-4 px-12 rounded-full text-xl hover:bg-pink-50 transition-all text-center block relative z-10 shadow-lg"
+                        >
+                            View Events
+                        </motion.a>
+                    </div>
                 </div>
 
             </div>

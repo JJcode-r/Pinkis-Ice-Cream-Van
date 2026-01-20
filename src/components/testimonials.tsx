@@ -4,6 +4,47 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, type Variants, type Transition } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
+// -----------------------------------------------------------------------------
+// SUB-COMPONENT: MELT BUTTON
+// -----------------------------------------------------------------------------
+const MeltButton = ({ text = "Book Us", onClick }: { text: string; onClick: () => void }) => {
+  const buttonPulseTransition = {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut" as const // Fix: cast as const for TS
+  };
+
+  return (
+    <div className="group relative flex flex-col items-center">
+      <motion.button
+        onClick={onClick}
+        className="relative z-10 px-14 py-5 text-2xl rounded-full bg-pink-600 text-white font-fredoka font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300 text-center border-none outline-none cursor-pointer"
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
+        animate={{
+          scale: [1, 1.02, 1],
+          transition: buttonPulseTransition,
+        }}
+      >
+        {text}
+      </motion.button>
+
+      <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] overflow-hidden pointer-events-none z-0">
+        <div className="melt-panel w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
+             style={{
+               WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               WebkitMaskSize: '100% 60px',
+               maskSize: '100% 60px',
+               WebkitMaskRepeat: 'no-repeat',
+               maskRepeat: 'no-repeat'
+             }} 
+        />
+      </div>
+    </div>
+  );
+};
+
 const TESTIMONIALS = [
     {
         id: 1,
@@ -31,7 +72,7 @@ const TESTIMONIALS = [
     },
 ];
 
-export default function TestimonialsSection() {
+export default function Testimonials() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
@@ -60,7 +101,6 @@ export default function TestimonialsSection() {
         return () => clearInterval(timer);
     }, [isPaused, nextSlide]);
 
-    // HEADING ANIMATION VARIANTS
     const splitTextVariants: Variants = {
         hidden: { opacity: 0, x: 0 },
         visible: (dir: 'left' | 'right') => ({ 
@@ -80,7 +120,6 @@ export default function TestimonialsSection() {
         },
     };
 
-    // CAROUSEL SLIDE VARIANTS
     const slideVariants = {
         enter: (dir: number) => ({
             x: dir > 0 ? 500 : -500,
@@ -104,6 +143,7 @@ export default function TestimonialsSection() {
     return (
         <section id="testimonials" className="relative pt-16 lg:pt-32 pb-24 bg-white overflow-hidden flex flex-col items-center">
             <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
                 .font-fredoka { font-family: 'Fredoka', sans-serif; }
                 .shadow-3xl { box-shadow: 0 30px 60px -12px rgba(219, 39, 119, 0.25); }
                 .truck-mask {
@@ -112,13 +152,13 @@ export default function TestimonialsSection() {
                 }
             `}</style>
             
-            {/* BG TRUCK - Positioned to sit behind cards */}
+            {/* BACKGROUND TRUCK ILLUSTRATION */}
             <motion.div
                 className="absolute bottom-16 -right-10 w-full lg:w-2/3 flex justify-center lg:justify-end items-end z-0 pointer-events-none opacity-25 lg:opacity-60 truck-mask"
                 initial={{ opacity: 0, x: 100, y: 50 }}
                 whileInView={{ opacity: 0.6, x: 0, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1.8, ease: "easeOut" }}
+                transition={{ duration: 1.8, ease: "easeOut" } as Transition}
             >
                 <img 
                     src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png" 
@@ -127,7 +167,7 @@ export default function TestimonialsSection() {
                 />
             </motion.div>
 
-            {/* ENTRANCE ANIMATED HEADING */}
+            {/* HEADER AREA */}
             <div className="mx-auto max-w-7xl px-4 relative z-10 w-full mb-8 text-center">
                 <motion.h2
                     initial="hidden"
@@ -159,12 +199,12 @@ export default function TestimonialsSection() {
                         Communities
                     </motion.span>
                 </motion.h2>
-                <p className="text-lg sm:text-xl text-gray-500 font-medium">Professional service for professional organizations.</p>
+                <p className="text-lg sm:text-xl text-gray-500 font-medium font-fredoka">Professional service for professional organizations.</p>
             </div>
 
-            {/* SLIDING CAROUSEL */}
+            {/* MAIN TESTIMONIAL CAROUSEL */}
             <div className="relative w-full max-w-5xl px-4 flex items-center group z-10">
-                <button onClick={prevSlide} className="hidden md:flex absolute left-0 z-30 p-4 rounded-full border-2 border-pink-100 text-pink-600 bg-white/95 shadow-lg hover:bg-pink-600 hover:text-white transition-all">
+                <button onClick={prevSlide} className="hidden md:flex absolute -left-4 lg:-left-12 z-30 p-4 rounded-full border-2 border-pink-100 text-pink-600 bg-white/95 shadow-lg hover:bg-pink-600 hover:text-white transition-all cursor-pointer">
                     <ChevronLeft size={32} />
                 </button>
 
@@ -189,7 +229,7 @@ export default function TestimonialsSection() {
                                 if (info.offset.x > 80) prevSlide();
                                 else if (info.offset.x < -80) nextSlide();
                             }}
-                            className={`absolute w-full max-w-3xl p-8 sm:p-12 rounded-[3rem] shadow-3xl border-4 backdrop-blur-md cursor-grab active:cursor-grabbing ${TESTIMONIALS[currentIndex].border} ${TESTIMONIALS[currentIndex].color} text-center`}
+                            className={`absolute w-full max-w-3xl p-8 sm:p-12 rounded-[3rem] shadow-3xl border-4 backdrop-blur-md cursor-grab active:cursor-grabbing ${TESTIMONIALS[currentIndex].border} ${TESTIMONIALS[currentIndex].color} text-center font-fredoka`}
                         >
                             <span className="text-6xl text-pink-300 opacity-40 font-serif leading-none block mb-4">“</span>
                             <p className="text-lg sm:text-xl md:text-2xl font-medium text-slate-800 italic leading-relaxed mb-8">
@@ -203,34 +243,35 @@ export default function TestimonialsSection() {
                     </AnimatePresence>
                 </div>
 
-                <button onClick={nextSlide} className="hidden md:flex absolute right-0 z-30 p-4 rounded-full border-2 border-pink-100 text-pink-600 bg-white/95 shadow-lg hover:bg-pink-600 hover:text-white transition-all">
+                <button onClick={nextSlide} className="hidden md:flex absolute -right-4 lg:-right-12 z-30 p-4 rounded-full border-2 border-pink-100 text-pink-600 bg-white/95 shadow-lg hover:bg-pink-600 hover:text-white transition-all cursor-pointer">
                     <ChevronRight size={32} />
                 </button>
             </div>
 
-            {/* DOTS & PLAY/PAUSE */}
+            {/* CONTROLS */}
             <div className="flex items-center justify-center gap-6 mt-8 z-10">
                 <div className="flex gap-2">
                     {TESTIMONIALS.map((_, index) => (
-                        <button key={index} onClick={() => { setDirection(index > currentIndex ? 1 : -1); setCurrentIndex(index); }}
-                            className={`h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-pink-600 w-10" : "bg-pink-200 w-3 hover:bg-pink-300"}`} />
+                        <button 
+                            key={index} 
+                            onClick={() => { setDirection(index > currentIndex ? 1 : -1); setCurrentIndex(index); }}
+                            className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${index === currentIndex ? "bg-pink-600 w-10" : "bg-pink-200 w-3 hover:bg-pink-300"}`} 
+                        />
                     ))}
                 </div>
-                <button onClick={() => setIsPaused(!isPaused)} className="p-2 text-gray-400 hover:text-pink-600 transition-colors">
+                <button onClick={() => setIsPaused(!isPaused)} className="p-2 text-gray-400 hover:text-pink-600 transition-colors cursor-pointer">
                     {isPaused ? <Play size={20} fill="currentColor" /> : <Pause size={20} fill="currentColor" />}
                 </button>
             </div>
 
-            {/* CTA BUTTON */}
-            <div className="mt-12 text-center relative z-20">
-                <motion.button 
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="px-14 py-5 bg-pink-600 text-white font-fredoka font-bold text-2xl rounded-full shadow-2xl hover:bg-pink-700 transition-all ring-8 ring-pink-50"
-                >
-                    Book Us 
-                </motion.button>
+            <div className="mt-16 text-center relative z-20">
+                <MeltButton 
+                  text="Book Your Date" 
+                  onClick={() => {
+                    const el = document.getElementById('booking-form');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                />
             </div>
         </section>
     );

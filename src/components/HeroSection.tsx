@@ -1,205 +1,212 @@
 import { motion, type Variants, type Transition } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
 
-// Fallback Image URL (Unchanged)
-const FALLBACK_IMAGE_URL = 'https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photok1.jpg'; 
+const FALLBACK_IMAGE_URL =
+  "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photok1.jpg";
 
-// --- Framer Motion Transition Definitions ---
-
-// Explicitly define the spring transition to satisfy TypeScript
-const springTransition: Transition = { 
-    type: "spring", 
-    stiffness: 100, 
-    damping: 12 
+// --- Animation Configs ---
+const springTransition: Transition = {
+  type: "spring",
+  stiffness: 100,
+  damping: 12,
 };
 
-// Explicitly define the button pulse animation transition
 const buttonPulseTransition: Transition = {
-    duration: 2,
-    repeat: Infinity,
-    ease: "easeInOut", // 'easeInOut' is a valid string for Transition
-    repeatType: "reverse"
+  duration: 2,
+  repeat: Infinity,
+  ease: "easeInOut" as const, // Added 'as const' to fix Easing type error
+  repeatType: "reverse",
 };
 
-const truckEntranceTransition: Transition = { 
-    type: "spring", 
-    stiffness: 60, 
-    damping: 15, 
-    delay: 0.8 
+const truckEntranceTransition: Transition = {
+  type: "spring",
+  stiffness: 60,
+  damping: 15,
+  delay: 0.8,
 };
-
-// --- Framer Motion Variants (Now correctly typed using 'Variants') ---
 
 const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            delayChildren: 0.3,
-            staggerChildren: 0.2
-        }
-    }
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: springTransition // Use the typed object
-    }
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: springTransition,
+  },
 };
 
-// Drip SVG Separator Component (Unchanged)
+// --- Sub-components ---
+
+// Added Interface to fix "implicitly has an 'any' type" error
+interface MeltButtonProps {
+  pulseTransition: Transition;
+}
+
+const MeltButton = ({ pulseTransition }: MeltButtonProps) => {
+  return (
+    <div className="group relative flex flex-col items-center w-full sm:w-auto">
+      <motion.a
+        href="/booking#booking-form"
+        role="button"
+        className="relative z-20 w-full sm:w-auto px-9 py-4 text-center text-base sm:text-lg rounded-full bg-pink-600 text-white font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300"
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
+        animate={{
+          scale: [1, 1.02, 1],
+          transition: pulseTransition,
+        }}
+      >
+        Book Your Date
+      </motion.a>
+
+      {/* Melt Panel SVG */}
+      <div className="absolute top-[75%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] pointer-events-none z-10 overflow-hidden hidden sm:block">
+        <div 
+          className="w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
+          style={{
+            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+            WebkitMaskSize: '100% 60px',
+            maskSize: '100% 60px',
+            WebkitMaskRepeat: 'no-repeat',
+            maskRepeat: 'no-repeat'
+          }} 
+        />
+      </div>
+    </div>
+  );
+};
+
 const DripBottom = () => (
-    <svg
-        className="absolute bottom-0 left-0 w-full text-white z-10"
-        viewBox="0 0 1440 100"
-        preserveAspectRatio="none"
-        fill="currentColor"
-    >
-        <path d="M0,50 C240,10 480,90 720,50 C960,10 1200,90 1440,50 L1440,100 L0,100 Z" />
-    </svg>
+  <svg
+    className="absolute bottom-0 left-0 w-full text-white z-10"
+    viewBox="0 0 1440 100"
+    preserveAspectRatio="none"
+    fill="currentColor"
+  >
+    <path d="M0,50 C240,10 480,90 720,50 C960,10 1200,90 1440,50 L1440,100 L0,100 Z" />
+  </svg>
 );
 
-export default function HeroSection() {
-    // Lazy-load the floating ice cream cone (Unchanged)
-    const [coneLoaded, setConeLoaded] = useState(false);
-    // Explicitly type the useRef hook for an HTMLImageElement
-    const coneRef = useRef<HTMLImageElement>(null); 
+export default function App() {
+  return (
+    <section className="relative w-full min-h-[100dvh] lg:min-h-screen flex flex-col items-center justify-start overflow-hidden bg-[#0f172a]">
+      {/* Background Layer */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${FALLBACK_IMAGE_URL})` }}
+      />
+      
+      {/* Video Content */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute w-full h-full object-cover transition-opacity duration-1000"
+      >
+        <source
+          src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/HeroVideo.mp4"
+          type="video/mp4"
+        />
+      </video>
 
-    useEffect(() => {
-        const img = coneRef.current;
-        if (!img) return;
+      {/* Cinematic Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/80 via-transparent to-[#0f172a]/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/60 via-transparent to-[#0f172a]/60" />
+      <div className="absolute inset-0 bg-black/20" /> {/* Subtle Grain/Depth */}
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setConeLoaded(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.1 }
-        );
+      {/* Hero Content */}
+      <motion.div
+        className="relative z-30 w-full max-w-5xl px-6 pb-20 pt-24 md:pt-32 text-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1, duration: 1 }}
+      >
+        <motion.div variants={containerVariants} initial="hidden" animate="visible">
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight drop-shadow-2xl"
+          >
+            Premium Ice Cream Van for
+            <span className="block text-pink-300 mt-2 tracking-normal">
+              Workplaces, Schools & Sports Events
+            </span>
+          </motion.h1>
 
-        observer.observe(img);
-        return () => observer.disconnect();
-    }, []);
+          <motion.p
+            variants={itemVariants}
+            className="text-lg md:text-xl lg:text-2xl mt-6 mb-10 text-white max-w-2xl mx-auto drop-shadow-md font-medium px-4 leading-relaxed opacity-90"
+          >
+            We serve staff events, school fundraisers, and sports clubs with reliable service, crowd-pleasing treats, and a seamless setup.
+          </motion.p>
 
+          {/* CTA Buttons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-md mx-auto sm:max-w-none"
+          >
+            <MeltButton pulseTransition={buttonPulseTransition} />
 
-    return (
-        <section className="relative w-full min-h-[100dvh] lg:h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-white">
-
-            {/* 1. FALLBACK IMAGE CONTAINER */}
-            <div 
-                className="absolute inset-0 bg-cover bg-center bg-black" 
-                style={{ backgroundImage: `url(${FALLBACK_IMAGE_URL})` }}
-            />
-
-            {/* 2. Background Video */}
-            <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className="absolute w-full h-full object-cover opacity-70 transition-opacity duration-1000"
+            <motion.a
+              href="/menu"
+              className="w-full sm:w-auto px-10 py-4 text-center text-lg rounded-full border-2 border-pink-600 bg-white text-pink-600 font-extrabold shadow-lg hover:bg-pink-50 transition duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-                <source src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/HeroVideo.mp4" type="video/mp4" />
-            </video>
+              🍦 View the Menu
+            </motion.a>
+          </motion.div>
 
-            {/* 3. Dark Overlay */}
-            <div className="absolute inset-0 bg-black/40" />
+          {/* Trust Section - Original Text with Professional Styling */}
+          <motion.div
+            variants={itemVariants}
+            className="relative mt-12 md:mt-16 inline-flex items-center justify-center w-full px-4"
+          >
+            <div className="absolute inset-x-8 inset-y-0 rounded-full blur-3xl bg-pink-500/20" />
 
-            {/* Floating Ice Cream Cone */}
-            {coneLoaded && (
-                <motion.img
-                    ref={coneRef}
-                    src="/images/ice-cream-cone.webp"
-                    alt="Floating Ice Cream Cone"
-                    initial={{ y: -50, rotate: 10 }}
-                    animate={{ y: 0, rotate: -5 }}
-                    transition={{
-                        repeat: Infinity,
-                        duration: 8,
-                        ease: "easeInOut",
-                        repeatType: "reverse"
-                    }}
-                    className="absolute top-1/4 left-5 md:left-1/4 w-24 h-24 object-contain z-25 opacity-90 hidden lg:block"
-                />
-            )}
+            <div className="relative flex flex-col md:flex-row items-center gap-3 md:gap-5 px-6 py-4 md:px-8 md:py-3.5 rounded-2xl md:rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl">
+              <div className="flex items-center gap-2.5">
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-pink-500 text-white text-[10px] shadow-sm font-bold">
+                  ✓
+                </div>
+                <span className="text-pink-300 font-black tracking-widest uppercase text-[10px] md:text-[11px] whitespace-nowrap">
+                  Trusted
+                </span>
+              </div>
+              
+              <div className="hidden md:block w-px h-5 bg-white/30" />
 
-            {/* Content */}
-            <motion.div
-                className="relative z-30 w-[95%] max-w-5xl px-4 py-8 pt-28 md:pt-36 lg:pt-24 md:p-16 text-center"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 1 }}
-            >
-                <motion.div variants={containerVariants} initial="hidden" animate="visible">
+              <span className="text-sm md:text-base text-white font-semibold text-center">
+                by schools, companies & sports clubs across Australia
+              </span>
+            </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
 
-                    <motion.h1
-                        variants={itemVariants}
-                        className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] drop-shadow-lg"
-                    >
-                        Bring the Viral Joy:
-                        <span className="block text-pink-300 -mt-1">
-                            Book Pinki&apos;s Classic Ice Cream Van.
-                        </span>
-                    </motion.h1>
+      {/* Ice Cream Van Image */}
+      <div className="absolute bottom-[-30px] md:bottom-[-40px] right-[-60px] md:right-[-90px] z-20 pointer-events-none">
+        <motion.img
+          src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png"
+          alt="Ice Cream Van"
+          initial={{ x: 600, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={truckEntranceTransition}
+          className="w-[280px] sm:w-[480px] md:w-[550px] lg:w-[700px] drop-shadow-[0_25px_60px_rgba(0,0,0,0.6)]"
+        />
+      </div>
 
-                    <motion.p
-                        variants={itemVariants}
-                        className="text-lg md:text-xl mt-5 mb-8 text-gray-100 max-w-3xl mx-auto drop-shadow-md"
-                    >
-                        We deliver the iconic charm, gourmet small-batch treats, and our
-                        Always On-Time Sweet Guarantee directly to your party or corporate
-                        event.
-                    </motion.p>
-
-                    <motion.div
-                        variants={itemVariants}
-                        className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6"
-                    >
-                        <motion.a
-                            href="/booking"
-                            role="button"
-                            className="px-10 py-3 text-lg rounded-full bg-pink-600 text-white font-extrabold shadow-xl shadow-pink-500/50 hover:bg-pink-700 transition duration-300"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            animate={{
-                                scale: [1, 1.02, 1],
-                                transition: buttonPulseTransition, // Used the typed object
-                            }}
-                        >
-                            Book Us for Your Event 🍦
-                        </motion.a>
-
-                        <motion.a
-                            href="/menu"
-                            role="button"
-                            className="px-10 py-3 text-lg rounded-full border-2 border-pink-600 bg-white text-pink-600 font-extrabold shadow-lg hover:bg-pink-50 transition duration-300"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            🍦 Explore our Menu
-                        </motion.a>
-                    </motion.div>
-                </motion.div>
-            </motion.div>
-
-            {/* Ice Cream Truck */}
-            <motion.img
-                src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png"
-                alt="Ice Cream Van"
-                loading="lazy"
-                initial={{ x: 500, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={truckEntranceTransition} // Used the typed object
-                className="absolute bottom-[-50px] right-[-100px] w-[300px] sm:w-[450px] md:w-[500px] lg:w-[650px] z-20 drop-shadow-2xl"
-            />
-
-            <DripBottom />
-        </section>
-    );
+      <DripBottom />
+    </section>
+  );
 }

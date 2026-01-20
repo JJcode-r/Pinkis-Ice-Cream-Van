@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, type FC, type SyntheticEvent, type RefObject } from 'react';
-import { motion, type Variants, type Transition, type TargetAndTransition } from 'framer-motion';
+import { useState, useEffect, useRef, type RefObject } from 'react';
+import { motion, type Variants, type Transition } from 'framer-motion';
 
 // -----------------------------------------------------------------------------
 // TYPES
@@ -24,9 +24,53 @@ interface HighlightRowProps {
 }
 
 // -----------------------------------------------------------------------------
+// SUB-COMPONENT: MELT BUTTON (Same as Navbar)
+// -----------------------------------------------------------------------------
+const MeltButton = () => {
+  const buttonPulseTransition = {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut" as const // FIX: Added as const
+  };
+
+  return (
+    <div className="group relative flex flex-col items-center">
+      {/* CTA Button */}
+      <motion.a
+        href="/booking"
+        role="button"
+        className="relative z-10 px-12 py-4 text-xl rounded-full bg-pink-600 text-white font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300"
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
+        animate={{
+          scale: [1, 1.02, 1],
+          transition: buttonPulseTransition,
+        }}
+      >
+        Book Your Date
+      </motion.a>
+
+      {/* Melt Panel - Positioned to blend into the button base */}
+      <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] overflow-hidden pointer-events-none z-0">
+        <div className="melt-panel w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
+             style={{
+               WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               WebkitMaskSize: '100% 60px',
+               maskSize: '100% 60px',
+               WebkitMaskRepeat: 'no-repeat',
+               maskRepeat: 'no-repeat'
+             }} 
+        />
+      </div>
+    </div>
+  );
+};
+
+// -----------------------------------------------------------------------------
 // FEATURE CONTENT ARRAY
 // -----------------------------------------------------------------------------
-const FEATURES: Feature[] = [ // Added explicit type
+const FEATURES: Feature[] = [
     { 
         title: "Gourmet, Small-Batch Quality", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo1.jpg", 
@@ -54,25 +98,17 @@ const FEATURES: Feature[] = [ // Added explicit type
     },
     { 
         title: "The Unforgettable Moment", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo5.jpg", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_kids.jpg", 
         description: "We specialize in creating those perfect, unexpected moments of pure delight—the giggles and happy dances that your guests will talk about long after the party ends." 
     },
 ];
 
-// -----------------------------------------------------------------------------
-// COMPONENTS
-// -----------------------------------------------------------------------------
-
-// TS7006 Fix: Added types for props, ref, and event handler
-const LazyImage: FC<LazyImageProps> = ({ src, alt, className, fallback }) => {
+const LazyImage = ({ src, alt, className, fallback }: LazyImageProps) => {
     const [isVisible, setIsVisible] = useState(false);
-    // Ref type: Use RefObject<HTMLImageElement>
     const imgRef = useRef<HTMLImageElement>(null); 
 
     useEffect(() => {
-        // Check if the ref has a current value before observing
         if (!imgRef.current) return;
-
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -82,17 +118,11 @@ const LazyImage: FC<LazyImageProps> = ({ src, alt, className, fallback }) => {
             },
             { threshold: 0.1 }
         );
-
         observer.observe(imgRef.current);
-
-        return () => {
-            // Check if observer exists before disconnecting
-            if (observer) observer.disconnect();
-        };
+        return () => { if (observer) observer.disconnect(); };
     }, []);
 
-    // TS2339 Fix: Explicitly type the event and target
-    const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
         const target = e.target as HTMLImageElement;
         target.onerror = null; 
         target.src = fallback || "";
@@ -100,7 +130,7 @@ const LazyImage: FC<LazyImageProps> = ({ src, alt, className, fallback }) => {
 
     return (
         <img
-            ref={imgRef as RefObject<HTMLImageElement>} // Cast ref for use in component
+            ref={imgRef as RefObject<HTMLImageElement>}
             src={isVisible ? src : (fallback || "")}
             alt={alt}
             className={className}
@@ -109,19 +139,17 @@ const LazyImage: FC<LazyImageProps> = ({ src, alt, className, fallback }) => {
     );
 };
 
-// TS2322 Fix: Cast transition to Transition
 const itemVariants: Variants = {
     hidden: { opacity: 0, y: 50, scale: 0.9 },
     visible: { 
         opacity: 1, 
         y: 0, 
         scale: 1,
-        transition: { type: "spring", stiffness: 80, damping: 12 } as Transition // Cast to Transition
+        transition: { type: "spring", stiffness: 80, damping: 12 } as Transition
     },
 };
 
-// TS7006 Fix: Added explicit types for props
-const HighlightRow: FC<HighlightRowProps> = ({ feature, index }) => {
+const HighlightRow = ({ feature, index }: HighlightRowProps) => {
     const isImageRight = index % 2 === 0;
 
     const content = (
@@ -149,7 +177,7 @@ const HighlightRow: FC<HighlightRowProps> = ({ feature, index }) => {
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
                 fallback="https://placehold.co/800x600/d1d5db/374151?text=Visual+Placeholder"
             />
-            <div className="absolute inset-0 bg-raspberry-glaze/10 mix-blend-multiply pointer-events-none rounded-3xl" />
+            <div className="absolute inset-0 bg-pink-500/10 mix-blend-multiply pointer-events-none rounded-3xl" />
         </motion.div>
     );
 
@@ -170,7 +198,7 @@ const HighlightRow: FC<HighlightRowProps> = ({ feature, index }) => {
     );
 };
 
-export default function PinkisPromiseSection() {
+export default function App() {
     const [isDesktop, setIsDesktop] = useState(false);
 
     useEffect(() => {
@@ -195,24 +223,22 @@ export default function PinkisPromiseSection() {
       .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
     `;
 
-    // TS2322 & TS7006 Fix: Explicitly type custom parameter 'direction' and cast transition
     const splitTextVariants: Variants = {
         hidden: { opacity: 0, x: 0 },
-        visible: (direction: 'left' | 'right') => ({ // Fix 1: Type custom parameter
+        visible: (direction: 'left' | 'right') => ({
             opacity: 1, 
             x: isDesktop ? (direction === 'left' ? -70 : 70) : 0, 
-            transition: { type: "spring", stiffness: 50, damping: 15 } as Transition // Fix 2: Cast transition
+            transition: { type: "spring", stiffness: 50, damping: 15 } as Transition
         }),
     };
 
-    // TS2322 Fix: Cast transition to Transition
     const coneVariants: Variants = {
         hidden: { opacity: 0, scale: 0.5, rotateY: 0 },
         visible: { 
             opacity: 1, 
             scale: 1, 
             rotateY: 360, 
-            transition: { type: "spring", stiffness: 50, damping: 10 } as Transition // Cast to Transition
+            transition: { type: "spring", stiffness: 50, damping: 10 } as Transition
         },
     };
 
@@ -227,7 +253,7 @@ export default function PinkisPromiseSection() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
-                        transition={{ staggerChildren: 0.1 } as Transition} // Cast transition
+                        transition={{ staggerChildren: 0.1 } as Transition}
                         className="flex flex-wrap justify-center items-center font-fredoka font-extrabold text-raspberry-glaze mb-6"
                     >
                         <motion.span variants={splitTextVariants} custom="left" className="text-4xl md:text-5xl lg:text-6xl text-center md:text-right">
@@ -243,7 +269,6 @@ export default function PinkisPromiseSection() {
                         </motion.span>
                     </motion.h2>
 
-                    {/* Text content & guarantee list remain unchanged */}
                     <p className="text-2xl md:text-3xl font-fredoka font-semibold text-deep-indigo">
                         The Sweet Advantage: Why Choose Pinki's?
                     </p>
@@ -276,20 +301,12 @@ export default function PinkisPromiseSection() {
                     ))}
                 </div>
 
-                {/* CTA */}
+                {/* CTA - NOW USING MELTBUTTON ATTRIBUTES AND TEXT */}
                 <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.2, duration: 0.6 } as Transition} className="text-center my-16 lg:my-20">
-                    <h3 className="text-2xl font-fredoka font-bold text-deep-indigo mb-6">
+                    <h3 className="text-2xl font-fredoka font-bold text-deep-indigo mb-8">
                         Ready to make your event unforgettable?
                     </h3>
-                    <motion.a 
-                        href="/booking" 
-                        role="button" 
-                        className="inline-flex items-center justify-center px-12 py-4 text-xl rounded-full bg-raspberry-glaze text-white font-extrabold shadow-xl shadow-pink-500/50 hover:opacity-90 transition duration-300 transform hover:scale-[1.03] active:scale-95" 
-                        whileHover={{ scale: 1.05 } as TargetAndTransition} 
-                        whileTap={{ scale: 0.95 } as TargetAndTransition}
-                    >
-                        Book us Now!
-                    </motion.a>
+                    <MeltButton />
                 </motion.div>
 
                 {/* Sweet Guarantee */}
