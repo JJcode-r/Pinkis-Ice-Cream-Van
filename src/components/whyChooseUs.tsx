@@ -83,12 +83,12 @@ const FEATURES: Feature[] = [
     },
     { 
         title: "The Iconic Pinki Van Aesthetic", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/van.webp", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_1.jpg", 
         description: "Our beautifully restored, picture-perfect van creates an instant photo opportunity and floods your event with feel-good, classic nostalgia." 
     },
     { 
         title: "Zero Wait Time, Max Happiness", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo3.jpg", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/1000373256.jpg", 
         description: "High-capacity service designed for speed and efficiency. We can effortlessly serve 100+ guests per hour without the long lines or hassle." 
     },
     { 

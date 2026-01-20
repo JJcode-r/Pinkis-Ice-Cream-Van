@@ -36,6 +36,46 @@ const handleImageError = (e: SyntheticEvent<HTMLImageElement>) => {
   target.src = getPlaceholderUrl();
 };
 
+// --- SUB-COMPONENT: MELT BUTTON ---
+const MeltButton = ({ text = "Book Your Date", href = "/booking#booking-form" }: { text: string; href?: string }) => {
+  const buttonPulseTransition = {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut" as const
+  };
+
+  return (
+    <div className="group relative flex flex-col items-center inline-block">
+      <motion.a
+        href={href}
+        className="relative z-10 px-12 py-4 text-xl rounded-full bg-pink-600 text-white font-fredoka font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300 text-center inline-block border-none outline-none"
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
+        animate={{
+          scale: [1, 1.02, 1],
+          transition: buttonPulseTransition,
+        }}
+      >
+        {text}
+      </motion.a>
+
+      {/* The Melting/Drip Effect */}
+      <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] overflow-hidden pointer-events-none z-0">
+        <div className="melt-panel w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
+             style={{
+               WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M0 0h200v15c0 8-8 25-25 25s-20-15-25-25-10-15-25-15-15 15-25 25-15 35-35 35-15-20-25-35S25 0 0 0z'/%3E%3C/svg%3E")`,
+               WebkitMaskSize: '100% 60px',
+               maskSize: '100% 60px',
+               WebkitMaskRepeat: 'no-repeat',
+               maskRepeat: 'no-repeat'
+             }} 
+        />
+      </div>
+    </div>
+  );
+};
+
 // --- VARIANTS ---
 const headerVariants: Variants = {
   hidden: { opacity: 0, y: -20 },
@@ -151,18 +191,9 @@ export default function GallerySection() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA with Melt Effect */}
         <div className="text-center mt-20">
-          <motion.a
-            whileHover={{ scale: 1.05 } as TargetAndTransition}
-            whileTap={{ scale: 0.95 } as TargetAndTransition}
-            href="/booking"
-            className="inline-flex items-center px-12 py-4 text-lg font-bold rounded-full
-                       text-white bg-pink-600 shadow-xl shadow-pink-200
-                       hover:bg-pink-700 transition-colors"
-          >
-            Book Your Event
-          </motion.a>
+          <MeltButton text="Book Your Date" href="/booking#booking-form" />
         </div>
       </div>
     </section>

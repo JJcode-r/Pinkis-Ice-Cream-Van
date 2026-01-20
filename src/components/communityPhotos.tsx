@@ -19,10 +19,10 @@ interface ConeIconProps {
 // DATA: Mock Photo Album Entries
 // -----------------------------------------------------------------------------
 const photoAlbum: PhotoItem[] = [
-    { location: "Town Square Park", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo8.jpg" },
+    { location: "Town Square Park", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_kids.jpg" },
     { location: "Central High Field", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/elderly_ice_cream1.jpg" },
-    { location: "Tech Startup HQ", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo9.jpg" },
-    { location: "Local Farmer's Market", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo3.jpg" },
+    { location: "Tech Startup HQ", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/1000373256.jpg" },
+    { location: "Local Farmer's Market", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomers.jpg" },
     { location: "Oakwood Neighborhood Block Party", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/couple_ice3.webp" },
     { location: "Blue Heron Lakefront", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo5.jpg" },
 ];
