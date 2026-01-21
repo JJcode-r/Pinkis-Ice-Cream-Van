@@ -157,7 +157,7 @@ const Footer: React.FC = () => {
                         whileHover={{ scale: 1.05, textShadow: "0px 0px 8px rgb(255,255,255)" }}
                         className="text-xs sm:text-sm font-medium text-white transition-all duration-300 inline-block"
                     >
-                        Made by <span className="font-bold underline decoration-pink-400 underline-offset-4">Globe</span>
+                        Made by <span className="font-bold underline decoration-pink-400 underline-offset-4">Globe The Dev</span>
                     </motion.a>
                 </div>
             </div>
