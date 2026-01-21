@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,7 +18,6 @@ const FORMSPREE_URL: string = 'https://formspree.io/f/mykgkjjq';
 
 // --- InquiryModal Component ---
 const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose }) => {
-    // UPDATED: Categories aligned with ice cream truck vision
     const INQUIRY_CATEGORIES: string[] = [
         'How can we help you?',
         'Book the Truck (Events)',
@@ -76,7 +77,6 @@ const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose }) => {
             exit={{ opacity: 0, scale: 0.9 }}
             className="p-10 text-center"
         >
-            {/* Animated Ice Cream Icon */}
             <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -100,13 +100,13 @@ const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose }) => {
                 <a 
                     href="/booking" 
                     onClick={onClose}
-                    className="block w-full px-4 py-4 bg-teal-500 text-white font-bold rounded-full text-lg hover:bg-teal-600 transition-all shadow-lg shadow-teal-200"
+                    className="block w-full px-4 py-4 bg-teal-500 text-white font-bold rounded-full text-lg hover:bg-teal-600 transition-all shadow-lg shadow-teal-200 text-center"
                 >
                     View Pricing & Packages
                 </a>
                 <button 
                     onClick={onClose}
-                    className="text-pink-600 font-bold hover:underline"
+                    className="w-full text-pink-600 font-bold hover:underline"
                 >
                     Back to Browsing
                 </button>
@@ -151,7 +151,7 @@ const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose }) => {
                 </div>
                 <div>
                     <label className="block text-gray-700 font-bold font-fredoka mb-2">Message</label>
-                    <textarea rows={4} name="message" placeholder="Tell us more about your event or question..." required className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-pink-500 focus:border-pink-500 outline-none transition-all" />
+                    <textarea rows={4} name="message" placeholder="Tell us more about your event..." required className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-pink-500 focus:border-pink-500 outline-none transition-all" />
                 </div>
                 
                 {error && (
@@ -187,7 +187,6 @@ const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose }) => {
                         exit={{ y: 50, opacity: 0 }}
                         onClick={(e) => e.stopPropagation()} 
                     >
-                        {/* Header Area */}
                         <div className="bg-pink-600 p-6 flex justify-between items-center text-white">
                             <h3 className="text-2xl font-fredoka font-bold">
                                 {isSubmitted ? "Sweet Success!" : "Get in Touch"}
@@ -219,11 +218,21 @@ const StickyInquiryButton: React.FC<StickyButtonProps> = ({ onOpen, isVisible })
                 <motion.button
                     className="fixed bottom-6 right-6 z-50 px-6 py-4 rounded-full shadow-2xl 
                                bg-pink-600 text-white font-bold text-lg font-fredoka 
-                               hover:bg-pink-700 transition-all transform hover:scale-105 flex items-center gap-2"
+                               hover:bg-pink-700 transition-all flex items-center gap-2"
                     onClick={onOpen}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0, opacity: 0 }}
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ 
+                        y: 0, 
+                        opacity: 1,
+                        scale: [1, 1.05, 1], // Subtle breathing pulse
+                    }}
+                    exit={{ y: 100, opacity: 0 }}
+                    transition={{
+                        animate: { scale: { duration: 3, repeat: Infinity, ease: "easeInOut" } },
+                        default: { duration: 0.4 }
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                 >
                     <span>Ask a Question</span>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -240,11 +249,23 @@ const InquiryFloatingWidget: React.FC = () => {
     const [isButtonVisible, setIsButtonVisible] = useState<boolean>(false);
     
     const handleScroll = useCallback((): void => {
-        setIsButtonVisible(window.scrollY > window.innerHeight * 0.5);
+        const scrollPosition = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const fullHeight = document.documentElement.scrollHeight;
+        
+        // 1. Show button after 50% of the first screen
+        const hasScrolledEnough = scrollPosition > windowHeight * 0.5;
+        
+        // 2. Hide button when approaching footer (about 300px from bottom)
+        const isNearBottom = (scrollPosition + windowHeight) > (fullHeight - 300);
+
+        setIsButtonVisible(hasScrolledEnough && !isNearBottom);
     }, []);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
+        // Initial check in case they refresh at the bottom
+        handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, [handleScroll]);
 
