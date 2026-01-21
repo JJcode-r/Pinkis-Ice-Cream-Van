@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, type Transition, type TargetAndTransition } from 'framer-motion';
 import { Mail, Phone, Facebook, Instagram, Twitter, type LucideIcon } from 'lucide-react';
 import React from 'react';
@@ -57,25 +59,14 @@ const Footer: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8 } as Transition}
-                
-                className="
-                    mx-auto max-w-7xl 
-                    grid 
-                    grid-cols-1 
-                    sm:grid-cols-2 
-                    lg:grid-cols-4 
-                    gap-12
-                "
+                className="mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12"
             >
-                {/* Column 1: Branding (Logo, Name, and Mission) */}
+                {/* Column 1: Branding */}
                 <div className="lg:col-span-2">
-                    
-                    {/* Logo and Company Name - Prominent and Aligned */}
                     <a href="/" aria-label="Pinki's Ice Cream Home" className="inline-flex items-center mb-6">
                         <img
                             src="/images/logo1.webp" 
                             alt="Pinki's Ice Cream Official Logo"
-                            // Increased size for prominence
                             className="h-14 sm:h-16 w-auto object-contain mr-4" 
                             loading="lazy"
                         />
@@ -147,14 +138,28 @@ const Footer: React.FC = () => {
                 </div>
             </motion.div>
 
-            {/* Copyright Strip */}
+            {/* Copyright Strip & Dev Credit */}
             <div className="mt-16 pt-8 border-t border-pink-300/30 text-center">
                 <p className="text-xs sm:text-sm text-pink-300/70">
                     &copy; {new Date().getFullYear()} Pinki's Ice Cream. All rights reserved.
                 </p>
-                <p className="text-[10px] sm:text-xs mt-1 text-pink-300/50">
+                
+                <p className="text-[10px] sm:text-xs text-pink-300/50 mt-2">
                     Made with joy and a little bit of sugar.
                 </p>
+
+                {/* Developer Credit Line */}
+                <div className="mt-6">
+                    <motion.a 
+                        href="https://globethedev.netlify.app/" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05, textShadow: "0px 0px 8px rgb(255,255,255)" }}
+                        className="text-xs sm:text-sm font-medium text-white transition-all duration-300 inline-block"
+                    >
+                        Made by <span className="font-bold underline decoration-pink-400 underline-offset-4">Globe</span>
+                    </motion.a>
+                </div>
             </div>
         </footer>
     );
