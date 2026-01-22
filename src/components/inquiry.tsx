@@ -228,7 +228,7 @@ const StickyInquiryButton: React.FC<StickyButtonProps> = ({ onOpen, isVisible })
                     }}
                     exit={{ y: 100, opacity: 0 }}
                     transition={{
-                        animate: { scale: { duration: 3, repeat: Infinity, ease: "easeInOut" } },
+                        scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
                         default: { duration: 0.4 }
                     }}
                     whileHover={{ scale: 1.1 }}
@@ -253,10 +253,7 @@ const InquiryFloatingWidget: React.FC = () => {
         const windowHeight = window.innerHeight;
         const fullHeight = document.documentElement.scrollHeight;
         
-        // 1. Show button after 50% of the first screen
         const hasScrolledEnough = scrollPosition > windowHeight * 0.5;
-        
-        // 2. Hide button when approaching footer (about 300px from bottom)
         const isNearBottom = (scrollPosition + windowHeight) > (fullHeight - 300);
 
         setIsButtonVisible(hasScrolledEnough && !isNearBottom);
@@ -264,7 +261,6 @@ const InquiryFloatingWidget: React.FC = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-        // Initial check in case they refresh at the bottom
         handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, [handleScroll]);
