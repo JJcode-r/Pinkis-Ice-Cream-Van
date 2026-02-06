@@ -72,14 +72,14 @@ const SERVICES = [
     { 
         id: "schools",
         title: "School Events & Fundraising", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo7.jpg", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/school1.webp", 
         price: "Fundraising Program",
         description: "We support school P&C with fundraising by donating back a percentage of sales—no pre-payment required! We offer balanced choices that kids love and parents feel confident serving, using eco-friendly packaging to care for the planet." 
     },
     { 
         id: "sports",
         title: "Sports Events & Clubs", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo8.jpg", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sportVan.webp", 
         price: "Custom Profit Plan",
         description: "Sports and ice cream are a winning combination! Whether it’s a match or a carnival, our truck adds excitement for players and spectators alike. We work with your club to generate revenue while treating your supporters." 
     }

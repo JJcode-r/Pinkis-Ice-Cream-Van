@@ -3,7 +3,7 @@ import { useSEO } from "../hooks/useSEO";
 
 const AboutHero = lazy(() => import("../components/aboutHero"));
 const AboutPageContent = lazy(() => import("../components/ourStory"));
-const TeamSection = lazy(() => import("../components/team"));
+// const TeamSection = lazy(() => import("../components/team"));
 const CommunitySection = lazy(() => import("../components/communityPhotos"));
 const FinalCtaStrip = lazy(() => import("../components/HomeCTA"));
 
@@ -99,9 +99,9 @@ export default function AboutPage() {
                 <AboutPageContent />
             </Suspense>
 
-            <Suspense fallback={null}>
+            {/* <Suspense fallback={null}>
                  <TeamSection />
-            </Suspense>
+            </Suspense> */}
 
             <Suspense fallback={null}>
                 <CommunitySection />

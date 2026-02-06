@@ -122,7 +122,7 @@ export default function BookingHero() {
                     <motion.div className="absolute right-0 top-10 w-3/4 h-3/4 rounded-[3rem] bg-brand-accent shadow-xl rotate-6" initial={{ scale: 0.8, rotate: 0 }} animate={{ scale: 1, rotate: 6 }} transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }} />
 
                     <motion.img
-                        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo9.jpg"
+                        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/1000373256.jpg"
                         alt="Pinki's Ice Cream Van at a Party"
                         className="relative z-10 w-[85%] max-w-md lg:max-w-lg rounded-[2.5rem] shadow-2xl-strong border-8 border-white object-cover aspect-[4/5]"
                         loading="lazy"

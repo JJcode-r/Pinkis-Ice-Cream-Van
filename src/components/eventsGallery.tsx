@@ -5,11 +5,9 @@ const CONE_ICON_URL = "/images/ice-cream-cone-About.png";
 
 const GALLERY_IMAGES = [
     { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomers.jpg", alt: "Pinki's Ice Cream Van Event 1" },
-    { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo8.jpg", alt: "Pinki's Ice Cream Van Event 2" },
-    { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo9.jpg", alt: "Pinki's Ice Cream Van Event 3" },
-    // { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo7.jpg", alt: "Pinki's Ice Cream Van Event 4" },
-    // { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo7.jpg", alt: "Pinki's Ice Cream Van Event 5" },
-    // { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo7.jpg", alt: "Pinki's Ice Cream Van Event 6" },
+    { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/school1.webp", alt: "Pinki's Ice Cream Van Event 2" },
+    { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sportVan.webp", alt: "Pinki's Ice Cream Van Event 3" },
+    // Add more images here - they will automatically align in the grid
 ];
 
 const GallerySection : FC = () => {
@@ -74,8 +72,8 @@ const GallerySection : FC = () => {
                     </motion.p>
                 </header>
 
-                {/* --- MASONRY GRID --- */}
-                <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+                {/* --- UNIFORM GRID (Fixed Height) --- */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {GALLERY_IMAGES.map((image, index) => (
                         <motion.div
                             key={index}
@@ -83,23 +81,19 @@ const GallerySection : FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "50px" }}
                             transition={{ duration: 0.6 }}
-                            className="break-inside-avoid"
+                            className="w-full"
                         >
-                            {/* THE 'group' CLASS HERE IS KEY FOR HOVER DETECTION */}
-                            <div className="group relative overflow-hidden rounded-[2.5rem] bg-slate-200 border-4 border-white shadow-lg transition-all duration-500 hover:shadow-2xl">
+                            <div className="group relative overflow-hidden rounded-[2.5rem] bg-slate-200 border-4 border-white shadow-lg transition-all duration-500 hover:shadow-2xl aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
                                 
-                                {/* 1. The Image: Zooms on group hover */}
                                 <img
                                     src={image.url}
                                     alt={image.alt}
                                     loading="lazy" 
-                                    className="w-full h-auto object-cover transition-transform duration-[3000ms] ease-in-out group-hover:scale-110"
+                                    className="w-full h-full object-cover transition-transform duration-[3000ms] ease-in-out group-hover:scale-110"
                                 />
 
-                                {/* 2. The Black Overlay: Darkens on group hover */}
                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-700 ease-in-out pointer-events-none" />
                                 
-                                {/* Optional: Subtle border light effect on hover */}
                                 <div className="absolute inset-0 border-[0px] group-hover:border-[12px] border-white/10 transition-all duration-500 rounded-[2.5rem] pointer-events-none" />
                             </div>
                         </motion.div>
@@ -110,4 +104,4 @@ const GallerySection : FC = () => {
     );
 };
 
-export default GallerySection ;
+export default GallerySection;

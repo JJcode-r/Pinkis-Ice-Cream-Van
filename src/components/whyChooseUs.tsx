@@ -78,12 +78,12 @@ const FEATURES: Feature[] = [
     },
     { 
         title: "Joyful, Professional Staff", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo2.jpg", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/staff.webp", 
         description: "Our dedicated, friendly team ensures every guest leaves smiling. Experience stress-free service that is always professional and delights children and adults alike." 
     },
     { 
         title: "The Iconic Pinki Van Aesthetic", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_1.jpg", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/pinkisVan.webp", 
         description: "Our beautifully restored, picture-perfect van creates an instant photo opportunity and floods your event with feel-good, classic nostalgia." 
     },
     { 

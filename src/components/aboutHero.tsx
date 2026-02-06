@@ -58,7 +58,7 @@ export default function AboutHero() {
                     transition={{ duration: 0.8 }}
                 >
                     <motion.img
-                        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo2.jpg"
+                        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomer.jpg"
                         alt="Pinki's ice cream joy"
                         loading="lazy"
                         decoding="async"

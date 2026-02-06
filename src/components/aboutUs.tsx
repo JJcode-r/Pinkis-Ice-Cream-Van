@@ -11,10 +11,10 @@ const GlobalStyles = `
 `;
 
 const MOCK_IMAGES = [
-    { id: 1, text: "Pinki's Van on a Sunny Day", url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png" },
-    { id: 2, text: "The Owners / Family Portrait", url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo6.jpg" },
-    { id: 3, text: "Close-up of a Perfect Cone", url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo1.jpg" },
-    { id: 4, text: "A Catering Event Setup", url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/elderly_ice_cream2.jpg" },
+    { id: 1, text: "Pinki's Van on a Sunny Day", url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/pinkisVan.webp" },
+    { id: 2, text: "The Owners / Family Portrait", url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/1000373256.jpg" },
+    { id: 3, text: "Close-up of a Perfect Cone", url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/aboutImage3.webp" },
+    { id: 4, text: "A Catering Event Setup", url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/aboutImage5.webp" },
 ];
 
 // --- COMPONENTS ---
