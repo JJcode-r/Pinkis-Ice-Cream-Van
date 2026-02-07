@@ -59,7 +59,6 @@ const MeltButton = ({ text = "Book Your Date", href = "/booking#booking-form" }:
         {text}
       </motion.a>
 
-      {/* The Melting/Drip Effect */}
       <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] overflow-hidden pointer-events-none z-0">
         <div className="melt-panel w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
              style={{
@@ -118,14 +117,13 @@ const GalleryItem: FC<GalleryItemProps> = ({ image, priority = false }) => {
         loading={priority ? "eager" : "lazy"}
         onLoad={() => setIsLoaded(true)}
         onError={handleImageError}
-        className={`absolute inset-0 w-full h-full object-cover
+        /* FIX: Added object-top to prevent cutting off the top of heads/trucks */
+        className={`absolute inset-0 w-full h-full object-cover object-top
           transition-all duration-700 group-hover:scale-110
           ${isLoaded ? "opacity-100 blur-0" : "opacity-0 blur-lg"}`}
       />
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent
-                      opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* GRADIENT OVERLAY AND TEXT REMOVED TO KEEP IMAGE CLEAR ON HOVER */}
     </motion.div>
   );
 };

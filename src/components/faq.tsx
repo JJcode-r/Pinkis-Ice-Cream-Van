@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef, type FC } from 'react';
 import { motion, type Transition } from 'framer-motion';
 
-// -----------------------------------------------------------------------------
-// TYPES
-// -----------------------------------------------------------------------------
-
 type Color = 'pink' | 'cyan';
 
 interface FAQItem {
@@ -18,9 +14,6 @@ interface ChevronProps {
     color: Color;
 }
 
-// -----------------------------------------------------------------------------
-// FAQ DATA (Typed)
-// -----------------------------------------------------------------------------
 const FAQ_DATA: FAQItem[] = [
     {
         question: "What areas do you service for ice cream van hire in Australia?",
@@ -79,15 +72,9 @@ const FAQ_DATA: FAQItem[] = [
     },
 ];
 
-// -----------------------------------------------------------------------------
-// CHILD COMPONENTS (Typed and Fixed)
-// -----------------------------------------------------------------------------
-
-// TS7006 Fix: Explicitly typing isOpen and color
 const ChevronDown: FC<ChevronProps> = ({ isOpen, color }) => (
     <svg
-        // Template literal classnames fixed for Tailwind JIT compatibility
-        className={`w-6 h-6 text-${color}-500 transform transition-transform duration-300 ${
+        className={`w-6 h-6 text-${color === 'pink' ? 'pink' : 'cyan'}-500 transform transition-transform duration-300 ${
           isOpen ? 'rotate-180' : 'rotate-0'
         }`}
         fill="none"
@@ -98,7 +85,6 @@ const ChevronDown: FC<ChevronProps> = ({ isOpen, color }) => (
     </svg>
 );
 
-// TS2322 Fix: Casting transition object
 const IceCreamIcon: FC = () => (
     <motion.img
         src="/images/ice-cream-cone-About.png"
@@ -106,35 +92,25 @@ const IceCreamIcon: FC = () => (
         initial={{ opacity: 0, scale: 0.6 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        transition={{ type: 'spring', stiffness: 60, damping: 12 } as Transition} // Explicit Transition type
+        transition={{ type: 'spring', stiffness: 60, damping: 12 } as Transition}
         className="w-12 h-16 object-contain mx-3"
     />
 );
 
-// -----------------------------------------------------------------------------
-// MAIN FAQ SECTION (Typed and Fixed)
-// -----------------------------------------------------------------------------
 export default function FAQSection() {
-    // State Typing Fix: null | number
     const [openIndex, setOpenIndex] = useState<number | null>(null);
-    // Ref Typing Fix: HTMLImageElement
     const truckRef = useRef<HTMLImageElement>(null);
 
-    // TS7006 Fix: Explicitly typing 'i' as number
     const toggleItem = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
-    // Parallax effect
     useEffect(() => {
         const handleScroll = () => {
             if (truckRef.current) {
-                // Using clientRect for accurate element positioning relative to viewport
                 const rect = truckRef.current.getBoundingClientRect();
-                // Parallax is calculated based on how far the element is from the bottom of the viewport (window.innerHeight)
                 const scrollProgress = Math.min(
                     Math.max((window.innerHeight - rect.top) / 600, 0), 
                     1
                 );
-                // Apply a small translation for the parallax effect
                 truckRef.current.style.transform = `translateY(calc(-50% + ${scrollProgress * 40}px))`;
             }
         };
@@ -147,29 +123,32 @@ export default function FAQSection() {
         <section id="faq" className="relative bg-[#FFF7FA] py-20 lg:py-28 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-16">
 
-                {/* LEFT TRUCK — WITH REVISED PARALLAX AND STICKY POSITION */}
-                <div className="hidden lg:flex items-center justify-center min-h-[500px]">
-                    {/* The truck image is positioned sticky relative to its parent div, 
-                    and the parent div ensures enough vertical space. The -translate-y-1/2 
-                    is now applied *inside* the useEffect to allow for relative parallax movement. */}
-                    <img
-                        ref={truckRef as React.LegacyRef<HTMLImageElement>}
-                        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png"
-                        alt="Ice Cream Truck"
-                        // Initial sticky position, transform is handled by useEffect
-                        className="w-full max-w-sm sticky top-1/2 drop-shadow-xl" 
-                    />
+                <div className="hidden lg:flex flex-col items-center justify-center min-h-[500px] relative">
+                    <div className="sticky top-1/2 -translate-y-1/2 w-full flex flex-col items-center">
+                        <img
+                            ref={truckRef as React.LegacyRef<HTMLImageElement>}
+                            src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png"
+                            alt="Ice Cream Truck"
+                            className="w-full max-w-sm drop-shadow-2xl z-10" 
+                        />
+                        
+                        {/* PLATFORM - Tightened Spacing */}
+                        <div className="relative w-full flex justify-center">
+                             {/* Primary Ground Shadow */}
+                            <div className="absolute -top-4 w-[75%] h-[20px] bg-black/10 blur-lg rounded-[100%] scale-x-110" />
+                            
+                            {/* Visual Platform Glow */}
+                            <div className="w-[85%] h-[12px] bg-gradient-to-r from-transparent via-pink-300/40 to-transparent rounded-[100%] blur-sm" />
+                        </div>
+                    </div>
                 </div>
 
-                {/* RIGHT FAQ CONTENT */}
                 <div className="w-full flex flex-col justify-center">
-
-                    {/* HEADING */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.7, ease: "easeOut" } as Transition} // Explicit Transition type
+                        transition={{ duration: 0.7, ease: "easeOut" } as Transition}
                         className="flex flex-wrap justify-center items-center gap-3 mb-6"
                     >
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-fredoka font-bold text-pink-600">
@@ -185,22 +164,17 @@ export default function FAQSection() {
                         Everything you need to know before booking your sweet celebration.
                     </p>
 
-                    {/* FAQ LIST */}
                     <div className="space-y-5">
                         {FAQ_DATA.map((item, index) => {
                             const isOpen = openIndex === index;
-
                             return (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 15 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.4, delay: index * 0.1 } as Transition} // Explicit Transition type
-                                    // WARNING: Tailwind JIT doesn't support dynamic class names like border-${item.color}-400 
-                                    // unless they are fully present in the source code (e.g., border-pink-400, border-cyan-400).
-                                    // This warning remains but the fix is beyond simple type correction.
-                                    className={`bg-white rounded-2xl shadow-md border-t-4 border-${item.color}-400 overflow-hidden`}
+                                    transition={{ duration: 0.4, delay: index * 0.1 } as Transition}
+                                    className={`bg-white rounded-2xl shadow-md border-t-4 ${item.color === 'pink' ? 'border-pink-400' : 'border-cyan-400'} overflow-hidden`}
                                 >
                                     <button
                                         className="flex justify-between items-center w-full px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-pink-400/50 rounded-2xl"
@@ -212,13 +186,11 @@ export default function FAQSection() {
                                         <ChevronDown isOpen={isOpen} color={item.color} />
                                     </button>
 
-                                    {/* Using max-height for smooth height transition */}
                                     <div
                                         className="overflow-hidden transition-all duration-500 ease-in-out"
                                         style={{ maxHeight: isOpen ? '500px' : '0' }}
                                     >
-                                        {/* WARNING: Same Tailwind JIT warning applies here for bg-${item.color}-50 */}
-                                        <div className={`px-6 py-5 bg-${item.color}-50 text-gray-700`}>
+                                        <div className={`px-6 py-5 ${item.color === 'pink' ? 'bg-pink-50' : 'bg-cyan-50'} text-gray-700`}>
                                             {item.answer}
                                         </div>
                                     </div>

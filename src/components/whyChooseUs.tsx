@@ -78,7 +78,7 @@ const FEATURES: Feature[] = [
     },
     { 
         title: "Joyful, Professional Staff", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/staff.webp", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomer.jpg", 
         description: "Our dedicated, friendly team ensures every guest leaves smiling. Experience stress-free service that is always professional and delights children and adults alike." 
     },
     { 
@@ -174,7 +174,8 @@ const HighlightRow = ({ feature, index }: HighlightRowProps) => {
             <LazyImage
                 src={feature.imageUrl}
                 alt={feature.title}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+                /* FIX: Added 'object-top' to ensure heads/tops of vans aren't cut off */
+                className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-[1.03]"
                 fallback="https://placehold.co/800x600/d1d5db/374151?text=Visual+Placeholder"
             />
             <div className="absolute inset-0 bg-pink-500/10 mix-blend-multiply pointer-events-none rounded-3xl" />
@@ -197,7 +198,6 @@ const HighlightRow = ({ feature, index }: HighlightRowProps) => {
         </div>
     );
 };
-
 export default function App() {
     const [isDesktop, setIsDesktop] = useState(false);
 

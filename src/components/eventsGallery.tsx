@@ -5,7 +5,7 @@ const CONE_ICON_URL = "/images/ice-cream-cone-About.png";
 
 const GALLERY_IMAGES = [
     { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomers.jpg", alt: "Pinki's Ice Cream Van Event 1" },
-    { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/school1.webp", alt: "Pinki's Ice Cream Van Event 2" },
+    { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/add.webp", alt: "Pinki's Ice Cream Van Event 2" },
     { url: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sportVan.webp", alt: "Pinki's Ice Cream Van Event 3" },
     // Add more images here - they will automatically align in the grid
 ];

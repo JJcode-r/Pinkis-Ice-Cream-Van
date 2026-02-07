@@ -125,7 +125,7 @@ export default function EventsHero() {
                     />
 
                     <motion.img
-                        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo8.jpg"
+                        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_kids.jpg"
                         alt="Pinki's Ice Cream Van Catering a School Event"
                         className="relative z-10 w-[85%] sm:w-[80%] lg:w-[85%] max-w-md lg:max-w-lg rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl-strong border-[6px] sm:border-[10px] border-white object-cover aspect-[4/5] -rotate-2"
                         loading="eager"

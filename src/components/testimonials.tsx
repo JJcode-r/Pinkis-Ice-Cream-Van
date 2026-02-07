@@ -161,7 +161,7 @@ export default function Testimonials() {
                 transition={{ duration: 1.8, ease: "easeOut" } as Transition}
             >
                 <img 
-                    src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png" 
+                    src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png" 
                     alt="Pinki's Ice Cream Van"
                     className="w-full max-w-2xl lg:max-w-4xl h-auto object-contain"
                 />

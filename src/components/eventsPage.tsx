@@ -23,7 +23,7 @@ const EVENT_DATA = [
         title: "Workplace Staff Events",
         tagline: "Vetted & Professional",
         description: `Worried about staying within budget? At Pinki’s, we believe everyone should be able to add a special touch to their event. which is why we offer affordable, fully tailored ice cream van hire.\n\nWhether you’re organising a workplace gathering or a large community celebration, we provide flexible packages and transparent pricing to suit your needs.\n\nIf you’re wondering how much it costs to book a visiting treats van, simply view our corporate pricing schedule. You’ll receive clear, competitive quotes with no hidden fees.\n\nOur service covers everything from setup and serving to cleanup, so you can relax and enjoy your event.`,
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo9.jpg",
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/aboutUs4.jpg",
         theme: "#F3EEFF",
         showBadge: true
     },

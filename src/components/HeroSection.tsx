@@ -197,7 +197,7 @@ export default function App() {
       {/* Ice Cream Van Image */}
       <div className="absolute bottom-[-30px] md:bottom-[-40px] right-[-60px] md:right-[-90px] z-20 pointer-events-none">
         <motion.img
-          src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png"
+          src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png"
           alt="Ice Cream Van"
           initial={{ x: 600, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}

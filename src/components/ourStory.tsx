@@ -119,7 +119,7 @@ export default function OurStorySection() {
             number: 2,
             title: "The Pink Truck Transformation",
             description: "In 2015, we bought a beat-up old delivery van and gave it a vibrant coat of Pinki's signature color. This wasn't just a vehicle; it was our mobile kitchen and community hub, bringing joy right to your curbside.",
-            image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png",
+            image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/van1.webp",
             bgColor: "bg-orange-100",
         },
         {

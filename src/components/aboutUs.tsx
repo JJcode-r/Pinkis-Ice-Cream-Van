@@ -1,7 +1,6 @@
 // src/components/aboutUs.tsx
 
 import { useState, useEffect } from 'react';
-// Import necessary types from framer-motion for correct variant typing
 import { motion, type Variants, type Transition } from 'framer-motion'; 
 
 // --- STYLES AND CONFIG ---
@@ -33,14 +32,14 @@ const ImageCarouselPlaceholder = () => {
             {MOCK_IMAGES.map((img, index) => (
                 <motion.div
                     key={img.id}
-                    className={`absolute inset-0`}
+                    className="absolute inset-0"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: index === currentIndex ? 1 : 0 }}
                     transition={{ duration: 1 }}
                     style={{ zIndex: index === currentIndex ? 1 : 0 }}
                 >
                     <motion.div
-                        className={`w-full h-full relative overflow-hidden`}
+                        className="w-full h-full relative overflow-hidden"
                         initial={{ scale: 1 }}
                         whileHover={{ scale: 1.03 }}
                         transition={{ duration: 0.5 }}
@@ -48,21 +47,15 @@ const ImageCarouselPlaceholder = () => {
                         <img
                             src={img.url}
                             alt={img.text}
-                            className="w-full h-full object-cover"
-                            // FIX TS2339: Cast e.target to HTMLImageElement
+                            /* FIX: Added 'object-top' to prevent cutting off the top of images */
+                            className="w-full h-full object-cover object-top"
                             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => { 
                                 const target = e.target as HTMLImageElement;
-                                target.onerror = null; // Prevent infinite loop
+                                target.onerror = null; 
                                 target.src="https://placehold.co/800x600/d1d5db/374151?text=Visual+Placeholder"; 
                             }}
                         />
-                        <div className="absolute inset-0 bg-black/30 flex items-end justify-center p-6 md:p-8">
-                            <div className="text-center opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
-                                <p className="font-fredoka text-xl lg:text-2xl text-white drop-shadow-lg">
-                                    {img.text}
-                                </p>
-                            </div>
-                        </div>
+                        {/* THE TEXT OVERLAY DIV HAS BEEN REMOVED TO PREVENT TEXT SHOWING ON HOVER */}
                     </motion.div>
                 </motion.div>
             ))}
@@ -71,8 +64,10 @@ const ImageCarouselPlaceholder = () => {
 };
 
 // Animation variants
-// Add Variants type for consistency
-const bodyItemVariants: Variants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } as Transition } };
+const bodyItemVariants: Variants = { 
+    hidden: { opacity: 0, y: 20 }, 
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } as Transition } 
+};
 
 // Main Component
 function AboutSection() {
@@ -85,17 +80,26 @@ function AboutSection() {
         return () => window.removeEventListener('resize', checkDesktop);
     }, []);
 
-    // FIX TS7006: Explicitly type 'direction' as a string literal.
-    // FIX TS2322: Cast transition as Transition from framer-motion.
     const splitTextVariants: Variants = {
-        hidden: (direction: 'left' | 'right') => ({ opacity: 0, x: isDesktop ? (direction === 'left' ? 70 : -70) : 0 }),
-        visible: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 50, damping: 15 } as Transition }
+        hidden: (direction: 'left' | 'right') => ({ 
+            opacity: 0, 
+            x: isDesktop ? (direction === 'left' ? 70 : -70) : 0 
+        }),
+        visible: { 
+            opacity: 1, 
+            x: 0, 
+            transition: { type: 'spring', stiffness: 50, damping: 15 } as Transition 
+        }
     };
 
-    // FIX TS2322: Cast transition as Transition from framer-motion.
     const coneVariants: Variants = {
         hidden: { opacity: 0, scale: 0.5, rotateY: 0 },
-        visible: { opacity: 1, scale: 1, rotateY: 360, transition: { type: 'spring', stiffness: 50, damping: 10 } as Transition },
+        visible: { 
+            opacity: 1, 
+            scale: 1, 
+            rotateY: 360, 
+            transition: { type: 'spring', stiffness: 50, damping: 10 } as Transition 
+        },
     };
 
     const IceCreamConeImage = () => (
@@ -123,14 +127,12 @@ function AboutSection() {
                     transition={{ staggerChildren: 0.1 }}
                     className="flex items-center justify-center mb-6 md:mb-10 lg:mb-16 flex-wrap"
                 >
-                    {/* Variants are now correctly typed */}
                     <motion.h2 custom="left" variants={splitTextVariants} className="text-4xl md:text-5xl lg:text-6xl font-fredoka font-bold text-pink-600">
                         ABOUT
                     </motion.h2>
 
                     <IceCreamConeImage />
 
-                    {/* Variants are now correctly typed */}
                     <motion.h2 custom="right" variants={splitTextVariants} className="text-4xl md:text-5xl lg:text-6xl font-fredoka font-bold text-pink-600">
                         US
                     </motion.h2>
@@ -156,7 +158,6 @@ function AboutSection() {
                 >
                     {/* Left Text Content */}
                     <div className="order-1 lg:order-1 space-y-6 md:space-y-8">
-                        {/* Variants are correctly typed */}
                         <motion.div variants={bodyItemVariants}>
                             <p className="text-lg text-slate-700 leading-relaxed">
                                 Pinki’s has been operating for over 10 years and supported hundreds of events and community social gatherings. We take care of everything from staffing and hygiene to full health and safety compliance. Our vans are fully licensed, insured, and operated by qualified professionals. Whether you’re organising a school function or a corporate event, you can count on our team to deliver a smooth, reliable, and professional service.

@@ -277,7 +277,7 @@ const MoreQuestionsSection = () => {
                         <div className="relative h-96 lg:h-full overflow-hidden">
                             <img
                                 loading="lazy" 
-                                src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/truck_proto1.png"
+                                src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png"
                                 alt="Ice cream truck"
                                 className="w-full h-full object-cover lg:object-contain"
                             />

@@ -21,7 +21,7 @@ const CustomStyles: FC = () => (
     `}</style>
 );
 
-const IMAGE_URLS = ['https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/van.webp'];
+const IMAGE_URLS = ['https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/van1.webp'];
 
 const steps = [
     { id: 1, label: "Event Info", icon: Calendar },

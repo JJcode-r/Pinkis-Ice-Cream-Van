@@ -201,7 +201,7 @@ export default function Navbar() {
   const primaryTextColor = (mobileOpen || scrollEffect) ? "text-gray-800" : (activePath === "/" ? "text-white" : "text-gray-800");
 
   const renderLogo = (isCentered: boolean) => (
-    <a href="/" className={`flex flex-col transition-transform hover:scale-105 ${isCentered ? 'items-center text-center w-60 translate-y-3' : 'items-start pl-2 w-44 sm:w-52'}`}>
+    <a href="/" className={`flex flex-col transition-transform hover:scale-105 ${isCentered ? 'items-center text-center w-60 translate-y-3' : 'items-start pl-2 w-44 sm:w-52 pt-2'}`}>
       <img src="/images/logo1.webp" alt="Logo" className="w-12 h-14 bg-white ring-4 ring-pink-200 rounded-full object-cover p-1 shadow-xl" />
       <span className={`font-fredoka text-lg lg:text-2xl font-extrabold mt-0.5 whitespace-nowrap ${primaryTextColor}`}>Pinki's Ice Cream Van</span>
     </a>
@@ -218,7 +218,7 @@ export default function Navbar() {
       `}</style>
 
       <header className={`w-full fixed top-0 z-50 transition-all duration-500 ease-in-out ${mobileOpen || scrollEffect ? "bg-white/95 shadow-lg" : "bg-transparent"}`}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 h-20 flex items-center justify-between relative">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 h-24 lg:h-20 flex items-center justify-between relative">
           <div className="flex items-center space-x-8 flex-1">
             <div className="lg:hidden">{renderLogo(false)}</div>
             <div className="hidden lg:flex gap-4">
@@ -252,7 +252,7 @@ export default function Navbar() {
 
       <div className={`fixed inset-0 z-[60] transition-opacity duration-300 ${mobileOpen ? "opacity-100 bg-black/50 pointer-events-auto" : "opacity-0 pointer-events-none"}`} onClick={() => setMobileOpen(false)}>
         <div className={`fixed right-0 top-0 h-full w-[280px] bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out ${mobileOpen ? "translate-x-0" : "translate-x-full"}`} onClick={e => e.stopPropagation()}>
-          <div className="pt-24 flex-1 overflow-y-auto p-6">
+          <div className="pt-28 flex-1 overflow-y-auto p-6">
             <h3 className="font-fredoka text-2xl text-pink-600 font-extrabold mb-6 border-b pb-2">Navigation</h3>
             {navConfig.map((item) => (
               <div key={item.id} className="mb-4">
