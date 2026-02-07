@@ -58,7 +58,7 @@ interface NavItemData { id: string; label: string; path: string; anchors: Anchor
 
 const navConfig: NavItemData[] = [
   { id: "home", label: "Home", path: "/", anchors: [{ label: "The Pinki's Promise", href: "#promise" }, { label: "About Us", href: "#about-us-preview" }, { label: "Our Event Services", href: "#services" }, { label: "Our Gallery", href: "#gallery" }, { label: "Sweetest Feedback", href: "#testimonials" }] },
-  { id: "about", label: "About", path: "/about", anchors: [{ label: "Our Family Story", href: "#full-story" }, { label: "The Pinki's Menu Core", href: "#menu-core" }, { label: "Meet the Dream Cream Team", href: "#our-team" }, { label: "Community Photo Album", href: "#photo-album" }] },
+  { id: "about", label: "About", path: "/about", anchors: [{ label: "Our Family Story", href: "#full-story" }, { label: "The Pinki's Menu Core", href: "#menu-core" }, { label: "Community Photo Album", href: "#photo-album" }] },
   { id: "events", label: "Events", path: "/events", anchors: [{ label: "Workplace Staff Events", href: "#workplace" }, { label: "School Events", href: "#schools" },{label: "Sports Events", href: "#sports"}, { label: "Event Pricing", href: "#pricing" }] },
   { id: "menu", label: "Menu", path: "/menu", anchors: [{ label: "Our Full Menu", href: "#menu" }, { label: "Milkshakes & Sundaes", href: "#milkshake" }] },
 ];
