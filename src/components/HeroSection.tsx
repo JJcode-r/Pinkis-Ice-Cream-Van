@@ -137,9 +137,9 @@ export default function App() {
             variants={itemVariants}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight drop-shadow-2xl"
           >
-            Premium Ice Cream Van for
+            A Premium Ice Cream Van for
             <span className="block text-pink-300 mt-2 tracking-normal">
-              Workplaces, Schools & Sports Events
+               Every Occasion
             </span>
           </motion.h1>
 
@@ -147,8 +147,7 @@ export default function App() {
             variants={itemVariants}
             className="text-lg md:text-xl lg:text-2xl mt-6 mb-10 text-white max-w-2xl mx-auto drop-shadow-md font-medium px-4 leading-relaxed opacity-90"
           >
-            We serve staff events, school fundraisers, and sports clubs with reliable service, crowd-pleasing treats, and a seamless setup.
-          </motion.p>
+           Serving community spaces, school events, workplaces and school fundraisers with crowd-pleasing ice cream treats and a seamless set-up. </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
@@ -187,7 +186,7 @@ export default function App() {
               <div className="hidden md:block w-px h-5 bg-white/30" />
 
               <span className="text-sm md:text-base text-white font-semibold text-center">
-                by schools, companies & sports clubs across Australia
+                by community spaces & events across Australia
               </span>
             </div>
           </motion.div>

@@ -67,7 +67,7 @@ const SERVICES = [
         title: "Workplace Staff Events", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo9.jpg", 
         price: "Vetted Supplier",
-        description: "Boost morale with affordable, fully tailored hire. With transparent pricing and zero hidden fees, we handle everything from setup to cleanup so you can simply relax and enjoy your event with your team." 
+        description: "Boost team morale with affordable, fully tailored ice cream van hire. With clear communication and no hidden surprises, we handle everything!From setup to cleanup, so you can relax and enjoy the event with your team." 
     },
     { 
         id: "schools",
@@ -78,7 +78,7 @@ const SERVICES = [
     },
     { 
         id: "sports",
-        title: "Sports Events & Clubs", 
+        title: "Community events & sport events", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sportVan.webp", 
         price: "Custom Profit Plan",
         description: "Sports and ice cream are a winning combination! Whether it’s a match or a carnival, our truck adds excitement for players and spectators alike. We work with your club to generate revenue while treating your supporters." 

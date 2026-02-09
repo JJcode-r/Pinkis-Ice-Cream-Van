@@ -74,32 +74,32 @@ const FEATURES: Feature[] = [
     { 
         title: "Gourmet, Small-Batch Quality", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo1.jpg", 
-        description: "Every scoop uses locally sourced dairy and fresh ingredients, guaranteeing a richer, authentic taste—zero artificial flavor. That’s the Pinki's difference." 
+        description: "Every scoop is made with locally sourced dairy and fresh ingredients, delivering a richer, more authentic taste, with zero artificial flavours. That’s the Pinki’s difference." 
     },
     { 
         title: "Joyful, Professional Staff", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomer.jpg", 
-        description: "Our dedicated, friendly team ensures every guest leaves smiling. Experience stress-free service that is always professional and delights children and adults alike." 
+        description: "Our dedicated, friendly team ensures every guest leaves smiling. Enjoy a stress-free service that’s always professional and enjoyed by guests of all ages." 
     },
     { 
         title: "The Iconic Pinki Van Aesthetic", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/pinkisVan.webp", 
-        description: "Our beautifully restored, picture-perfect van creates an instant photo opportunity and floods your event with feel-good, classic nostalgia." 
+        description: "Our beautifully restored, picture-perfect van creates an instant photo opportunity and brings feel good, classic charm to your event." 
     },
     { 
-        title: "Zero Wait Time, Max Happiness", 
+        title: "Fast Service, Happy Crowds", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/1000373256.jpg", 
-        description: "High-capacity service designed for speed and efficiency. We can effortlessly serve 100+ guests per hour without the long lines or hassle." 
+        description: "High-capacity service designed for speed and efficiency. Our streamlined setup allows us to serve large crowds smoothly while keeping wait times to a minimum." 
     },
     { 
         title: "Backed by Genuine Family Care", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo4.jpg", 
-        description: "As a trusted family-run business, your event gets our personal commitment to excellence and genuine care that big franchises simply can't offer." 
+        description: "As a family-run business, we bring a personal level of care and attention to every event, something big franchises simply can’t match." 
     },
     { 
         title: "The Unforgettable Moment", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_kids.jpg", 
-        description: "We specialize in creating those perfect, unexpected moments of pure delight—the giggles and happy dances that your guests will talk about long after the party ends." 
+        description: "We pride ourselves in creating those perfect, unexpected moments of pure delight, the smiles, laughter and joy your guests will remember long after the event ends"
     },
 ];
 
@@ -274,10 +274,9 @@ export default function App() {
                     </p>
                     <div className="mt-6 text-lg text-gray-700 max-w-3xl mx-auto">
                         <p className="mb-6 font-medium text-xl text-gray-800">
-                            More than dessert, Pinki's delivers pure, unforgettable joy—the sound of the jingle, the taste of nostalgia, and a touch of professional polish.
-                        </p>
+                          More than dessert, Pinki’s brings unforgettable joy. The jingle everyone loves, nostalgic flavors and a polished, stress-free service.  </p>
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left p-0 mb-6 list-none">
-                            {['Full Health & Safety Compliance', 'Licensed, Insured, & Qualified Professionals', 'Transparent Pricing & Custom Packages', 'Smooth, Reliable, and Professional Service'].map((item, i) => (
+                            {['Full Health & Safety Compliance', 'Licensed, Insured & Qualified Professionals', 'Transparent Pricing &  Customised Packages', 'Smooth, Reliable and Professional Service'].map((item, i) => (
                                 <li key={i} className="flex items-center text-deep-indigo font-medium">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={RaspberryGlaze} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="mr-3 flex-shrink-0">
                                         <polyline points="20 6 9 17 4 12"></polyline>
@@ -287,7 +286,7 @@ export default function App() {
                             ))}
                         </ul>
                         <p className="mt-6 text-lg text-gray-700">
-                            From workplace celebrations to school fairs, we handle all the logistics so you and your guests can simply savor the moment.
+                           From community spaces and workplace celebrations to school functions, we take care of everything so you and your guests can simply savour the moment.
                         </p>
                     </div>
                 </div>

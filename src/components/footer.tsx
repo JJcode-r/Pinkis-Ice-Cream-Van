@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Transition, type TargetAndTransition } from 'framer-motion';
-import { Mail, Phone, Facebook, Instagram, Twitter, type LucideIcon } from 'lucide-react';
+import { Mail, Facebook, Instagram, Twitter, type LucideIcon } from 'lucide-react';
 import React from 'react';
 
 // -----------------------------------------------------------------------------
@@ -37,15 +37,12 @@ const socialLinks: SocialLink[] = [
     { icon: Twitter, href: "https://twitter.com/pinkisicecream" },
 ];
 
-// --- FRAMER MOTION VARIANTS ---
-
 const socialHover: TargetAndTransition = { 
     scale: 1.2, 
     rotate: 5, 
     transition: { type: 'spring', stiffness: 300, damping: 15 } as Transition 
 };
 const socialTap: TargetAndTransition = { scale: 0.9 };
-
 
 // -----------------------------------------------------------------------------
 // COMPONENT
@@ -123,23 +120,22 @@ const Footer: React.FC = () => {
                     </h4>
                     <ul className="space-y-4 text-base sm:text-lg">
                         <li className="flex items-center gap-4">
-                            <Mail className="w-6 h-6 text-pink-400" />
-                            <a href="mailto:hello@pinkisicecream.com" className="hover:text-pink-400 transition break-all">
-                                hello@pinkisicecream.com
-                            </a>
-                        </li>
-                        <li className="flex items-center gap-4">
-                            <Phone className="w-6 h-6 text-pink-400" />
-                            <a href="tel:+15551234567" className="hover:text-pink-400 transition">
-                                (555) 123-4567
-                            </a>
+                            <Mail className="w-6 h-6 text-pink-400 flex-shrink-0" />
+                            <div className="overflow-x-auto no-scrollbar">
+                                <a 
+                                    href="mailto:Pinkisicecream@outlook.com" 
+                                    className="hover:text-pink-400 transition whitespace-nowrap block"
+                                >
+                                    Pinkisicecream@outlook.com
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </motion.div>
 
             {/* Copyright Strip & Dev Credit */}
-            <div className="mt-16 pt-8 border-t border-pink-300/30 text-center">
+            <div className="mt-16 pt-8 border-t border-pink-300/30 text-center font-fredoka">
                 <p className="text-xs sm:text-sm text-pink-300/70">
                     &copy; {new Date().getFullYear()} Pinki's Ice Cream. All rights reserved.
                 </p>
@@ -161,6 +157,17 @@ const Footer: React.FC = () => {
                     </motion.a>
                 </div>
             </div>
+
+            {/* Corrected CSS injection for TypeScript/Next.js */}
+            <style dangerouslySetInnerHTML={{ __html: `
+                .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+                .no-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            `}} />
         </footer>
     );
 };

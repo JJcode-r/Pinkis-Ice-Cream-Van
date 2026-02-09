@@ -37,7 +37,7 @@ const EVENT_DATA = [
     },
     {
         id: "sports",
-        title: "Sports Events",
+        title: "SCommunity events & sport events",
         tagline: "A Winning Combination",
         description: `Sports and Ice Cream: A Winning Combination!\n\nSports and ice cream have one thing in common—they bring people together! When it comes to organizing a memorable sporting club event, an ice cream truck is the perfect addition. Whether it’s a weekend match, swimming carnival, a fundraising event, or an end-of-season celebration, an ice cream truck is sure to score big points with your attendees.\n\nNothing says celebration like a refreshing ice cream treat after an intense game or competition. Having an ice cream truck on-site adds an element of excitement and anticipation for players, athletes, and spectators alike. As the match heats up, everyone will look forward to the sweet reward waiting for them after the final whistle blows.\n\nPlanning a fundraising event for your club? An ice cream truck can be a creative and profitable addition. Pinki’s can work with your club to create a customised fundraising plan, allowing you to generate revenue while treating your supporters to something truly sweet.`,
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sportVan.webp",

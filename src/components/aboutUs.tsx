@@ -146,7 +146,7 @@ function AboutSection() {
                     transition={{ duration: 0.6 }}
                     className="text-center text-2xl md:text-3xl font-fredoka font-semibold text-gray-800 mb-12 lg:mb-20"
                 >
-                    Pinki's: Professional Promise & Reliability in Every Scoop
+                    Pinki's: Professional, Reliable & Community-Trusted
                 </motion.p>
 
                 <motion.div
@@ -160,7 +160,7 @@ function AboutSection() {
                     <div className="order-1 lg:order-1 space-y-6 md:space-y-8">
                         <motion.div variants={bodyItemVariants}>
                             <p className="text-lg text-slate-700 leading-relaxed">
-                                Pinki’s has been operating for over 10 years and supported hundreds of events and community social gatherings. We take care of everything from staffing and hygiene to full health and safety compliance. Our vans are fully licensed, insured, and operated by qualified professionals. Whether you’re organising a school function or a corporate event, you can count on our team to deliver a smooth, reliable, and professional service.
+                              With over 10 years of experience, Pinki’s has proudly supported hundreds of community events, school functions and corporate gatherings. Fully licensed, insured and operated by qualified professionals, we deliver smooth, reliable service every time.
                             </p>
                         </motion.div>
 

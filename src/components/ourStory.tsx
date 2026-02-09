@@ -111,21 +111,21 @@ export default function OurStorySection() {
         {
             number: 1,
             title: "The Hand-Written Start",
-            description: "It all began with Grandma Pinki’s recipe book, stained with vanilla and love. We took her classic churn method and committed to only using whole, natural ingredients, turning a family tradition into a community obsession.",
+            description: "It all began with a family love for bringing people together over ice cream. What started as a small, family-run venture has grown into a trusted, professional service for community events of all kinds.",
             image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/menu.png",
             bgColor: "bg-pink-100",
         },
         {
             number: 2,
-            title: "The Pink Truck Transformation",
-            description: "In 2015, we bought a beat-up old delivery van and gave it a vibrant coat of Pinki's signature color. This wasn't just a vehicle; it was our mobile kitchen and community hub, bringing joy right to your curbside.",
+            title: "Pinki’s two iconic ice cream vans",
+            description: "What began as a single, well-loved delivery van has grown into our two signature Pinki’s ice cream trucks. Each one reflects a chapter of our journey, allowing us to service multiple events, support larger crowds, and bring reliable, professional service to communities far and wide.",
             image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/van1.webp",
             bgColor: "bg-orange-100",
         },
         {
             number: 3,
-            title: "From Local Farms to Flavor",
-            description: "Our flavor philosophy centers on freshness. We established deep partnerships with local farmers for our dairy and seasonal fruits, drastically cutting transport time and ensuring the best possible taste in every pint.",
+            title: "Simple Flavours. Big Smiles.",
+            description: "We proudly serve classic vanilla soft serve — a timeless favourite loved by all ages. Simple, reliable, and crowd-pleasing, it allows us to focus on what matters most: smooth service, happy guests, and unforgettable moments at every event.",
             image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo11.jpg",
             bgColor: "bg-green-100",
         },
@@ -166,7 +166,7 @@ export default function OurStorySection() {
                         </motion.span>
                     </motion.h2>
                     <motion.p className="text-xl italic font-semibold text-pink-600 max-w-4xl mx-auto" variants={item}>
-                        From a single recipe to a trusted, professional partner for every event.
+                        From a family passion to a trusted, professional partner for every event.
                     </motion.p>
                 </motion.div>
 

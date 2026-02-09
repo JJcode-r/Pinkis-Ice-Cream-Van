@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, type Variants, type Transition } from 'framer-motion';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, type Variants, type Transition } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
 // -----------------------------------------------------------------------------
@@ -11,7 +11,7 @@ const MeltButton = ({ text = "Book Us", onClick }: { text: string; onClick: () =
   const buttonPulseTransition = {
     duration: 2,
     repeat: Infinity,
-    ease: "easeInOut" as const // Fix: cast as const for TS
+    ease: "easeInOut" as const
   };
 
   return (
@@ -48,9 +48,9 @@ const MeltButton = ({ text = "Book Us", onClick }: { text: string; onClick: () =
 const TESTIMONIALS = [
     {
         id: 1,
-        quote: "Our annual School Carnival has never been easier. Pinki's handled over 400 students with incredible speed, and the percentage donated back was fantastic!",
-        name: "Principal Mark S.",
-        title: "Primary School Fundraiser",
+        quote: "Pinki's is always a great attraction at out community events 'Jingle all the Bay' and the 'Bluewater Festival'. They're a crowd favourite and the team add a lot of extra fun and they a great quality product! Thanks Pinki's.",
+        name: " Chris Hare",
+        title: "Executive Officer, Sandgate Bayside Chamber of Commerce",
         color: "bg-pink-50/90",
         border: "border-pink-200"
     },
@@ -73,10 +73,20 @@ const TESTIMONIALS = [
 ];
 
 export default function Testimonials() {
+    const sectionRef = useRef(null); // Ref for the whole section
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
     const [isDesktop, setIsDesktop] = useState(false);
+
+    // --- PARALLAX SETUP ---
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"] // Starts moving when section enters bottom, ends when it leaves top
+    });
+
+    // When scroll progress is 0 (top), x is 150px. When progress is 1 (bottom), x is -150px.
+    const truckX = useTransform(scrollYProgress, [0, 1], [150, -150]);
 
     useEffect(() => {
         const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
@@ -141,7 +151,7 @@ export default function Testimonials() {
     };
 
     return (
-        <section id="testimonials" className="relative pt-16 lg:pt-32 pb-24 bg-white overflow-hidden flex flex-col items-center">
+        <section ref={sectionRef} id="testimonials" className="relative pt-16 lg:pt-32 pb-24 bg-white overflow-hidden flex flex-col items-center">
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
                 .font-fredoka { font-family: 'Fredoka', sans-serif; }
@@ -152,13 +162,10 @@ export default function Testimonials() {
                 }
             `}</style>
             
-            {/* BACKGROUND TRUCK ILLUSTRATION */}
+            {/* PARALLAX TRUCK ILLUSTRATION */}
             <motion.div
-                className="absolute bottom-16 -right-10 w-full lg:w-2/3 flex justify-center lg:justify-end items-end z-0 pointer-events-none opacity-25 lg:opacity-60 truck-mask"
-                initial={{ opacity: 0, x: 100, y: 50 }}
-                whileInView={{ opacity: 0.6, x: 0, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.8, ease: "easeOut" } as Transition}
+                style={{ x: truckX }} // This connects the horizontal position to scroll
+                className="absolute bottom-16 right-0 w-full lg:w-2/3 flex justify-center lg:justify-end items-end z-0 pointer-events-none opacity-25 lg:opacity-60 truck-mask"
             >
                 <img 
                     src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png" 
@@ -223,13 +230,7 @@ export default function Testimonials() {
                                 x: { type: "spring", stiffness: 200, damping: 25 },
                                 opacity: { duration: 0.2 }
                             }}
-                            drag="x"
-                            dragConstraints={{ left: 0, right: 0 }}
-                            onDragEnd={(_, info) => {
-                                if (info.offset.x > 80) prevSlide();
-                                else if (info.offset.x < -80) nextSlide();
-                            }}
-                            className={`absolute w-full max-w-3xl p-8 sm:p-12 rounded-[3rem] shadow-3xl border-4 backdrop-blur-md cursor-grab active:cursor-grabbing ${TESTIMONIALS[currentIndex].border} ${TESTIMONIALS[currentIndex].color} text-center font-fredoka`}
+                            className={`absolute w-full max-w-3xl p-8 sm:p-12 rounded-[3rem] shadow-3xl border-4 backdrop-blur-md ${TESTIMONIALS[currentIndex].border} ${TESTIMONIALS[currentIndex].color} text-center font-fredoka`}
                         >
                             <span className="text-6xl text-pink-300 opacity-40 font-serif leading-none block mb-4">“</span>
                             <p className="text-lg sm:text-xl md:text-2xl font-medium text-slate-800 italic leading-relaxed mb-8">
