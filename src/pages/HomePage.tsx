@@ -83,10 +83,7 @@ export default function HomePage() {
                 </Suspense>
             </main>
 
-            <Suspense fallback={null}>
-                {/* <InquiryFloatingWidget /> */}
-                {/* <Footer /> */}
-            </Suspense>
+         
         </>
     );
 }

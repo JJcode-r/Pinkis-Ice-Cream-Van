@@ -68,7 +68,7 @@ const GallerySection : FC = () => {
                         transition={{ delay: 0.4 }}
                         className="text-xl text-slate-600 font-medium max-w-2xl mx-auto"
                     >
-                        Spreading joy at school carnivals and corporate headquarters.
+                       spreading joy wherever we go
                     </motion.p>
                 </header>
 

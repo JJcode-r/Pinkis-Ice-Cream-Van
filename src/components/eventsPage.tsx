@@ -22,7 +22,7 @@ const EVENT_DATA = [
         id: "workplace",
         title: "Workplace Staff Events",
         tagline: "Vetted & Professional",
-        description: `Worried about staying within budget? At Pinki’s, we believe everyone should be able to add a special touch to their event. which is why we offer affordable, fully tailored ice cream van hire.\n\nWhether you’re organising a workplace gathering or a large community celebration, we provide flexible packages and transparent pricing to suit your needs.\n\nIf you’re wondering how much it costs to book a visiting treats van, simply view our corporate pricing schedule. You’ll receive clear, competitive quotes with no hidden fees.\n\nOur service covers everything from setup and serving to cleanup, so you can relax and enjoy your event.`,
+        description: `Looking to treat your team to something fun and memorable? Pinki’s Ice Cream Van is the perfect addition to workplace staff events of all sizes. Whether you’re hosting a team celebration, staff appreciation day, or company gathering, we offer fully tailored ice cream van hire to suit your event. We attend with our iconic vans serving classic vanilla soft serve with a range of fun topping options—simple, crowd-pleasing, and always a hit. With clear communication and a smooth, professional service, we take care of everything from setup and serving through to pack-down. Enjoyable experience that lets you focus on your team while we handle the treats`,
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/aboutUs4.jpg",
         theme: "#F3EEFF",
         showBadge: true
@@ -31,16 +31,36 @@ const EVENT_DATA = [
         id: "schools",
         title: "School Events",
         tagline: "Community & Growth",
-        description: `We support school P&C with fundraising opportunities by donating back a percentage of total sales without having to make a pre-payment to book our services!\n\nAt Pinki’s Ice Cream, we believe desserts can be both delicious and responsible. That’s why we offer balanced dessert choices — treats that kids love and parents feel confident serving. We use high-quality ingredients and carefully measured portions, so indulgence stays fun without overdoing it.\n\nWe care about the planet as much as the party — our commitment to sustainability means we use eco-friendly packaging and utensils, reducing waste and environmental impact every time we serve.\n\nPlanning a school event? Pinki’s team makes it easy. Our staff are trained to be friendly, efficient and professional, and we’re experienced at serving large, mixed-age crowds quickly so lines keep moving and the event keeps flowing. Whether it’s a school fete, sports day, fundraising event or end-of-term celebration, we aim to deliver not just ice cream, but memorable moments — happy children, relaxed parents and a smooth-running event.\n\nWe bring passion, care and a sweet smile to every swirl.`,
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/school1.webp",
+        description: `Pinki’s Ice Cream Van is a popular addition to school events, bringing classic vanilla soft serve with a range of fun topping options that kids love.
+
+We attend school fetes, sports days, end-of-term celebrations and community school events with a smooth, well-organised service designed to keep things running efficiently. Our experienced team is trained to serve large, mixed-age crowds quickly and professionally, helping lines move smoothly and events stay on schedule.
+
+At Pinki’s, we keep things simple and familiar. We serve classic vanilla soft serve only, paired with a variety of colourful and exciting toppings, making it an easy, crowd-pleasing treat for students and families, even the teachers! 
+
+We use high-quality ingredients and carefully measured portions to ensure an enjoyable experience, while remaining mindful of balance and suitability for school environments. Our commitment to sustainability means we also use eco-friendly packaging and utensils wherever possible.
+
+All school bookings are professionally managed, with clear communication throughout the planning process.
+
+Whether you’re organising a school fete, sports carnival or celebration day, Pinki’s Ice Cream Van delivers a fun, reliable treat experience that adds something special to your school event.
+Sorry yeah I am changing texts as I go with pictures to make it easy for you`,
+ imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/school1.webp",
         theme: "#FFEEF2"
     },
     {
         id: "sports",
         title: "SCommunity events & sport events",
         tagline: "A Winning Combination",
-        description: `Sports and Ice Cream: A Winning Combination!\n\nSports and ice cream have one thing in common—they bring people together! When it comes to organizing a memorable sporting club event, an ice cream truck is the perfect addition. Whether it’s a weekend match, swimming carnival, a fundraising event, or an end-of-season celebration, an ice cream truck is sure to score big points with your attendees.\n\nNothing says celebration like a refreshing ice cream treat after an intense game or competition. Having an ice cream truck on-site adds an element of excitement and anticipation for players, athletes, and spectators alike. As the match heats up, everyone will look forward to the sweet reward waiting for them after the final whistle blows.\n\nPlanning a fundraising event for your club? An ice cream truck can be a creative and profitable addition. Pinki’s can work with your club to create a customised fundraising plan, allowing you to generate revenue while treating your supporters to something truly sweet.`,
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sportVan.webp",
+        description: `Community, connection and ice cream, a perfect match! 
+At Pinki’s Ice Cream Van, community events are at the heart of what we do. From local parks and open spaces to neighbourhood celebrations and family-friendly gatherings, our iconic vans are all about creating relaxed, feel-good moments where people come together.
+
+You’ll often find us popping up at parks, community days and public events, serving classic vanilla soft serve with a range of fun topping options that both kids and adults love. It’s simple, familiar and perfectly suited to casual, outdoor environments where people are already enjoying the day.
+
+Alongside community events, we also attend sporting fixtures, club days and end-of-season celebrations. Whether it’s a local match, sports carnival or presentation day, our ice cream service adds a refreshing treat that players, families and spectators can enjoy together.
+
+With experienced staff and an efficient service flow, we’re well equipped to handle busy community settings and larger crowds. From arrival and setup through to serving and pack down, we help keep events running smoothly while adding something special to the atmosphere.
+
+Whether you’re organising a community gathering, park event, local celebration or sporting occasion, Pinki’s Ice Cream Van brings people together over a sweet, memorable experience.`,
+  imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sportVan.webp",
         theme: "#EBF3FF"
     },
 ];

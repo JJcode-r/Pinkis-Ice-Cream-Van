@@ -1,5 +1,6 @@
 import { useState, useEffect, type FC } from 'react';
 import { motion, type Variants, type Transition } from 'framer-motion';
+import { Send, CheckCircle2 } from 'lucide-react'; // Modern icons for 2026 feel
 
 const CONE_ICON_URL = "/images/ice-cream-cone-About.png"; 
 
@@ -13,7 +14,6 @@ const PricingSection: FC = () => {
         return () => window.removeEventListener('resize', checkDesktop);
     }, []);
 
-    // --- ANIMATION VARIANTS ---
     const splitTextVariants: Variants = {
         hidden: { opacity: 0, x: 0 },
         visible: (direction: 'left' | 'right') => ({ 
@@ -35,8 +35,8 @@ const PricingSection: FC = () => {
         <section id="pricing" className="py-24 bg-white relative overflow-hidden">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 
-                {/* --- HEADER: Animation triggers ONLY ONCE --- */}
-                <header className="relative mb-20 text-center">
+                {/* --- HEADER --- */}
+                <header className="relative mb-16 text-center">
                     <motion.h2 
                         initial="hidden" 
                         whileInView="visible" 
@@ -46,125 +46,110 @@ const PricingSection: FC = () => {
                         <motion.span variants={splitTextVariants} custom="left" className="text-4xl md:text-5xl lg:text-6xl uppercase">
                             PACKAGES &
                         </motion.span>
-                        
                         <motion.img 
                             src={CONE_ICON_URL} 
                             variants={coneVariants} 
                             className="w-16 h-20 md:w-20 md:h-24 lg:w-24 lg:h-28 object-contain mx-4" 
                         />
-                        
                         <motion.span variants={splitTextVariants} custom="right" className="text-4xl md:text-5xl lg:text-6xl uppercase">
                             PRICING
                         </motion.span>
                     </motion.h2>
-                    
-                    <motion.div 
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }} // Fixed: Now only animates once
-                        transition={{ delay: 0.4 }}
-                        className="max-w-3xl mx-auto"
-                    >
-                        <p className="text-2xl md:text-3xl text-pink-600 font-bold font-fredoka mb-4">
-                            🍦 Hire an Ice Cream Van with ZERO Booking Fees! 🍦
-                        </p>
-                        <p className="text-xl text-slate-600 leading-relaxed font-medium">
-                            With Pinki’s, your corporate or school event just got a whole lot sweeter! Book for free, make your organization's day special, and even earn money for your cause.
-                        </p>
-                    </motion.div>
                 </header>
 
-                {/* --- OPTIONS GRID --- */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-                    
-                    {/* Option 1: Upfront */}
-                    <motion.div 
-                        whileHover={isDesktop ? { y: -10 } : {}} // Technical Polish: Desktop only hover
-                        className="relative p-8 md:p-12 bg-[#F8FAFC] rounded-[3rem] border-2 border-transparent hover:border-pink-200 transition-all flex flex-col shadow-sm"
-                    >
-                        <div className="flex-grow">
-                            <div className="flex items-center gap-3 mb-6">
-                                <span className="text-3xl">🏢</span>
-                                <h3 className="text-3xl font-fredoka font-bold text-slate-900 uppercase leading-tight">Option 1: Upfront Payment</h3>
-                            </div>
-                            <p className="text-slate-700 text-lg leading-relaxed mb-6 font-medium">
-                                Pay a fixed cost based on the number of ice creams you want. Simply share your event details, and the van arrives ready to serve your team or clients.
-                            </p>
-                            <div className="p-6 bg-white/60 rounded-2xl border border-slate-100">
-                                <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mb-2">Service Focus:</p>
-                                <p className="text-slate-700 font-fredoka font-bold italic text-lg">Corporate Staff Days & Workplace Rewards</p>
-                            </div>
-                        </div>
-                        <div className="mt-10">
-                            <motion.a 
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                href="/booking"
-                                className="inline-block w-full text-center px-10 py-4 text-lg font-bold rounded-full text-white bg-pink-600 hover:bg-pink-700 transition-all shadow-lg shadow-pink-400/50 font-fredoka uppercase tracking-wider"
-                            >
-                                Get a Corporate Quote
-                            </motion.a>
-                        </div>
-                    </motion.div>
-
-                    {/* Option 2: Pay-As-You-Go */}
-                    <motion.div 
-                        whileHover={isDesktop ? { y: -10 } : {}} // Technical Polish: Desktop only hover
-                        className="relative p-8 md:p-12 bg-pink-50 rounded-[3rem] border-2 border-pink-200 transition-all flex flex-col shadow-sm"
-                    >
-                        <div className="flex-grow">
-                            <div className="flex items-center gap-3 mb-6">
-                                <span className="text-3xl">🏫</span>
-                                <h3 className="text-3xl font-fredoka font-bold text-slate-900 uppercase leading-tight">Option 2: Pay-As-You-Go</h3>
-                            </div>
-                            <p className="text-slate-700 text-lg leading-relaxed mb-6 font-medium">
-                                No upfront fees! The van sells directly to your guests. Perfect for fundraisers where Pinki's donates a percentage of sales back to your school or club.
-                            </p>
-                            <div className="p-6 bg-white/80 rounded-2xl border border-pink-100">
-                                <p className="text-sm text-pink-600 font-bold uppercase tracking-widest mb-2">Organization Benefit:</p>
-                                <p className="text-slate-700 font-fredoka font-bold italic text-lg">Earn money for your school or sports club!</p>
-                            </div>
-                        </div>
-                        <div className="mt-10">
-                            <motion.a 
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                href="/booking"
-                                className="inline-block w-full text-center px-10 py-4 text-lg font-bold rounded-full text-white bg-pink-600 hover:bg-pink-700 transition-all shadow-lg shadow-pink-400/50 font-fredoka uppercase tracking-wider"
-                            >
-                                Book Your Fundraiser
-                            </motion.a>
-                        </div>
-                    </motion.div>
-                </div>
-
-                {/* --- POLISHED SPECIALIZATION BLOCK --- */}
+                {/* --- CONSOLIDATED PRICING CARD --- */}
                 <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-20 text-center bg-slate-900 rounded-[3rem] p-10 md:p-16 text-white relative overflow-hidden"
+                    className="max-w-4xl mx-auto bg-[#F8FAFC] rounded-[3rem] p-8 md:p-16 border-2 border-pink-100 shadow-xl shadow-pink-100/20 relative"
                 >
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-pink-600/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
-                    <div className="relative z-10 max-w-4xl mx-auto">
-                        <p className="text-xl md:text-2xl font-medium leading-relaxed mb-8">
-                            Make your event memorable without spending a fortune on booking fees. With Pinki’s, it’s fun, easy, and absolutely hassle-free!
-                        </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         
-                        {/* Refined Disclaimer: Focuses on "Specialization" */}
-                        <div className="inline-block px-8 py-3 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 mb-8">
-                            <p className="text-sm md:text-base text-slate-300">
-                                <span className="text-pink-400 font-bold tracking-widest uppercase mr-3">Expertise:</span> 
-                                We specialize exclusively in <span className="text-white font-bold">Corporate, School, & Community</span> events. 
-                                <span className="block md:inline mt-1 md:mt-0 md:ml-2 italic text-slate-400 opacity-80">(We do not service private birthdays or weddings)</span>
+                        {/* Content Side */}
+                        <div>
+                            <h3 className="text-3xl md:text-4xl font-fredoka font-bold text-slate-900 mb-6">
+                                Tailored for Your Event
+                            </h3>
+                            <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                                We don't believe in "one size fits all" ice cream. Whether it's a corporate treat, a school fundraiser, or a community gala, we provide bespoke packages with **Zero Booking Fees.**
                             </p>
+                            
+                            <ul className="space-y-4 mb-8">
+                                {[
+                                    "Customizable Menu Options",
+                                    "Profit-sharing for Fundraisers",
+                                    "Full Liability Insurance",
+                                    "Professional Uniformed Staff"
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-center gap-3 text-slate-700 font-medium">
+                                        <CheckCircle2 className="text-pink-500 w-5 h-5" />
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
 
-                        <h3 className="text-2xl md:text-4xl font-fredoka font-bold text-pink-400 leading-tight">
-                            🎉 Book Pinki's today and turn your event into a sweet success! 🎉
-                        </h3>
+                        {/* CTA Side */}
+                        <div className="flex flex-col items-center justify-center p-8 bg-white rounded-[2rem] shadow-inner border border-slate-100">
+                            <div className="text-center mb-6">
+                                <span className="text-pink-600 font-fredoka font-bold text-5xl md:text-6xl">FREE</span>
+                                <p className="text-slate-500 uppercase tracking-widest font-bold text-sm mt-2">Booking Fees</p>
+                            </div>
+                            
+                            <motion.a 
+                                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgb(219 39 119 / 0.3)" }}
+                                whileTap={{ scale: 0.95 }}
+                                href="/booking#booking-form"
+                                className="flex items-center gap-3 w-full justify-center px-8 py-5 text-xl font-bold rounded-full text-white bg-pink-600 transition-all font-fredoka uppercase tracking-wider"
+                            >
+                                <Send className="w-5 h-5" />
+                                Get a Quote Now
+                            </motion.a>
+                            
+                            <p className="mt-6 text-slate-400 text-sm italic">
+                                Responses typically within 24 hours
+                            </p>
+                        </div>
                     </div>
                 </motion.div>
+
+               {/* --- SPECIALIZATION FOOTNOTE --- */}
+<motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.3, duration: 0.8 }}
+    className="mt-16 max-w-5xl mx-auto px-4"
+>
+    <div className="relative overflow-hidden rounded-[2.5rem] bg-pink-600 px-8 py-12 shadow-2xl shadow-pink-200">
+        {/* Subtle pattern overlay for texture */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none" 
+             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")` }} 
+        />
+        
+        <div className="relative z-10 flex flex-col items-center text-center">
+            {/* Top Line */}
+            <p className="font-fredoka text-xl md:text-2xl text-pink-50 font-medium mb-4 tracking-wide">
+                Make your event memorable with pinkies. It’s fun, easy!
+            </p>
+
+            {/* The "Unmissable" Line */}
+            <h3 className="font-fredoka text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+                🥳 Book pinky today and turn your event into a sweet success 🥂
+            </h3>
+        </div>
+
+        {/* Floating white sparkles for that "Celebration" feel */}
+        <motion.div 
+            animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.2, 1] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="absolute top-6 right-10 text-white/20"
+        >
+            {/* <Sparkles size={48} /> */}
+        </motion.div>
+    </div>
+</motion.div>
             </div>
         </section>
     );

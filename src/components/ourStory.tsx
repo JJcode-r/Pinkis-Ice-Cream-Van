@@ -126,7 +126,7 @@ export default function OurStorySection() {
             number: 3,
             title: "Simple Flavours. Big Smiles.",
             description: "We proudly serve classic vanilla soft serve — a timeless favourite loved by all ages. Simple, reliable, and crowd-pleasing, it allows us to focus on what matters most: smooth service, happy guests, and unforgettable moments at every event.",
-            image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo11.jpg",
+            image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo5.jpg",
             bgColor: "bg-green-100",
         },
     ];

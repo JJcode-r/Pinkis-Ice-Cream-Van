@@ -10,24 +10,26 @@ const GlobalStyles = `
 
 const WORKPLACE_LOGO_URL = "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/logo2.webp";
 
-// Added Interface to fix "implicitly has an 'any' type" error
+// Added className prop to handle consistent sizing
 interface MeltButtonProps {
   text?: string;
   href?: string;
+  className?: string;
 }
 
-const MeltButton = ({ text = "Book Your Date", href = "/booking" }: MeltButtonProps) => {
+const MeltButton = ({ text = "Book Your Date", href = "/booking#booking-form", className = "" }: MeltButtonProps) => {
   const buttonPulseTransition = {
     duration: 2,
     repeat: Infinity,
-    ease: "easeInOut" as const // Added 'as const' to fix Easing type error
+    ease: "easeInOut" as const 
   };
 
   return (
-    <div className="group relative flex flex-col items-center">
+    <div className={`group relative flex flex-col items-center ${className}`}>
       <motion.a
         href={href}
-        className="relative z-10 px-12 py-4 text-xl rounded-full bg-pink-600 text-white font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300 text-center"
+        // Added w-full so it fills the container width provided
+        className="relative z-10 w-full py-4 text-xl rounded-full bg-pink-600 text-white font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300 text-center"
         whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.96 }}
         animate={{
@@ -65,7 +67,7 @@ const SERVICES = [
     { 
         id: "workplace",
         title: "Workplace Staff Events", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo9.jpg", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/aboutUs4.jpg", 
         price: "Vetted Supplier",
         description: "Boost team morale with affordable, fully tailored ice cream van hire. With clear communication and no hidden surprises, we handle everything!From setup to cleanup, so you can relax and enjoy the event with your team." 
     },
@@ -192,15 +194,19 @@ export default function App() {
                     {SERVICES.map((s, i) => <PackageCard key={i} pkg={s} />)}
                 </motion.div>
                 
-                {/* UPDATED DUAL CTAs WITH MELT BUTTON EFFECT */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-12 lg:gap-24">
-                    <MeltButton text="Book Your Event Now! 🍦" href="/booking" />
+                {/* CTAs matched with a consistent width class (w-72 or w-80) */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-12 lg:gap-16">
+                    <MeltButton 
+                      text="Book Your Event Now! 🍦" 
+                      href="/booking#booking-form" 
+                      className="w-full sm:w-80" 
+                    />
                     
-                    <div className="group relative">
+                    <div className="group relative w-full sm:w-80">
                          <motion.a 
                             href="/events" 
                             whileHover={{ scale: 1.05 }} 
-                            className="w-full sm:w-auto bg-white text-[#E83E8C] border-2 border-[#E83E8C] font-fredoka font-bold py-4 px-12 rounded-full text-xl hover:bg-pink-50 transition-all text-center block relative z-10 shadow-lg"
+                            className="w-full bg-white text-[#E83E8C] border-2 border-[#E83E8C] font-fredoka font-bold py-4 rounded-full text-xl hover:bg-pink-50 transition-all text-center block relative z-10 shadow-lg shadow-pink-100/50"
                         >
                             View Events
                         </motion.a>

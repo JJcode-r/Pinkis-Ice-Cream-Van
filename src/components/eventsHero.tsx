@@ -46,7 +46,7 @@ export default function EventsHero() {
     };
 
     return (
-        <section className="relative w-full min-h-[95dvh] lg:min-h-[90dvh] flex items-center justify-center overflow-hidden px-4 sm:px-8 md:px-12 lg:px-20 bg-brand-cream">
+        <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-8 md:px-12 lg:px-20 bg-brand-cream">
             <CustomStyles />
 
             <motion.div
@@ -56,14 +56,14 @@ export default function EventsHero() {
                 transition={{ duration: 1.2 }}
             />
 
-            <div className="relative z-10 max-w-7xl w-full py-12 lg:py-20 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="relative z-10 max-w-7xl w-full pt-32 sm:pt-40 lg:pt-32 py-12 lg:py-20 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-                {/* LEFT BLOCK: BUSINESS COPY */}
+                {/* LEFT BLOCK: BUSINESS COPY (Now order-1 on all screens) */}
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }} 
                     animate={{ opacity: 1, y: 0 }} 
                     transition={{ duration: 0.8 }}
-                    className="text-center lg:text-left space-y-6 sm:space-y-8 order-2 lg:order-1"
+                    className="text-center lg:text-left space-y-6 sm:space-y-8 order-1"
                 >
                     <div className="flex items-center justify-center lg:justify-start">
                         <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/80 border border-brand-primary/20 backdrop-blur-sm text-brand-primary font-fredoka font-bold text-[10px] sm:text-xs tracking-[0.15em] uppercase shadow-sm">
@@ -90,7 +90,7 @@ export default function EventsHero() {
                     </h1>
 
                     <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed px-2 sm:px-0">
-                        Book the pink van that gives back! We provide <strong>hassle-free catering</strong> for corporate days and <strong>zero-cost fundraising</strong> for schools with generous donations returned to your community.
+                        Book the iconic pink ice cream van for your next event. From community gatherings to corporate days, school events and sports matches, we serve classic vanilla soft serve with fun toppings.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-2">
@@ -110,14 +110,13 @@ export default function EventsHero() {
                     </div>
                 </motion.div>
 
-                {/* RIGHT BLOCK: RESPONSIVE IMAGE CARD */}
+                {/* RIGHT BLOCK: IMAGE CARD (Now order-2 on all screens) */}
                 <motion.div 
-                    className="relative flex justify-center lg:justify-end min-h-[320px] sm:min-h-[450px] lg:h-[600px] items-center order-1 lg:order-2"
+                    className="relative flex justify-center lg:justify-end min-h-[320px] sm:min-h-[450px] lg:h-[600px] items-center order-2"
                     initial={{ opacity: 0, scale: 0.9 }} 
                     animate={{ opacity: 1, scale: 1 }} 
                     transition={{ duration: 0.9, delay: 0.2 }}
                 >
-                    {/* Decorative Background Card - Responsive Sizing */}
                     <motion.div 
                         className="absolute right-4 sm:right-0 top-6 w-[80%] h-[85%] rounded-[2.5rem] sm:rounded-[3rem] bg-brand-accent shadow-xl rotate-6" 
                         animate={{ rotate: [6, 4, 6] }}
@@ -131,7 +130,6 @@ export default function EventsHero() {
                         loading="eager"
                     />
 
-                    {/* Trust Badge - Hidden on very small screens to avoid clutter */}
                     <Suspense fallback={null}>
                         <motion.div 
                             className="absolute bottom-4 left-4 sm:bottom-10 sm:left-10 z-20 bg-white p-3 sm:p-5 rounded-xl sm:rounded-2xl shadow-xl border-2 sm:border-4 border-brand-primary hidden xs:block" 

@@ -50,14 +50,14 @@ const FinalCtaStrip = () => {
                     </div>
                 </div>
 
-                {/* Buttons */}
+                {/* Buttons - Fixed widths applied here */}
                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-end flex-shrink-0">
                     
                     <motion.a 
                         whileHover={{ scale: 1.05, rotate: 1 }}
                         whileTap={{ scale: 0.95 }}
                         href="/booking"
-                        className="inline-flex items-center px-8 py-4 text-lg font-extrabold rounded-full text-[#431C5D] bg-pink-400 hover:bg-pink-300 transition-all shadow-2xl shadow-pink-500/50 uppercase tracking-widest ring-4 ring-pink-200/50 min-w-[220px] justify-center"
+                        className="inline-flex items-center px-8 py-4 text-lg font-extrabold rounded-full text-[#431C5D] bg-pink-400 hover:bg-pink-300 transition-all shadow-2xl shadow-pink-500/50 uppercase tracking-widest ring-4 ring-pink-200/50 min-w-[280px] justify-center"
                     >
                         Book Your Date Now!
                     </motion.a>
@@ -66,7 +66,7 @@ const FinalCtaStrip = () => {
                         whileHover={{ scale: 1.05, rotate: -1, backgroundColor: '#EC4899', color: '#431C5D' }}
                         whileTap={{ scale: 0.95 }}
                         href="/menu"
-                        className="inline-flex items-center px-8 py-4 text-lg font-extrabold rounded-full bg-transparent text-pink-400 border-4 border-pink-400 transition-all shadow-md shadow-pink-500/10 uppercase tracking-widest min-w-[220px] justify-center"
+                        className="inline-flex items-center px-8 py-4 text-lg font-extrabold rounded-full bg-transparent text-pink-400 border-4 border-pink-400 transition-all shadow-md shadow-pink-500/10 uppercase tracking-widest min-w-[280px] justify-center"
                     >
                         <BookOpen className="w-5 h-5 mr-2" />
                         View Menu

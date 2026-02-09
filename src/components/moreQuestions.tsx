@@ -274,15 +274,19 @@ const MoreQuestionsSection = () => {
                         </div>
 
                         {/* Right Image Area */}
-                        <div className="relative h-96 lg:h-full overflow-hidden">
-                            <img
-                                loading="lazy" 
-                                src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png"
-                                alt="Ice cream truck"
-                                className="w-full h-full object-cover lg:object-contain"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-r from-pink-50/70 to-transparent lg:from-pink-50/70"></div>
-                        </div>
+                       {/* Right Image Area */}
+<div className="relative h-96 lg:h-full overflow-hidden">
+    <img
+        loading="lazy" 
+        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png"
+        alt="Ice cream truck"
+        /* - object-cover keeps it in the original place.
+           - object-right ensures the van is the anchor point so it doesn't get clipped from the right.
+        */
+        className="w-full h-full object-cover object-right"
+    />
+    <div className="absolute inset-0 bg-gradient-to-r from-pink-50/70 to-transparent lg:from-pink-50/70"></div>
+</div>
                     </div>
                 </div>
             </section>

@@ -37,10 +37,7 @@ function AppContent() {
       
 
       <AnimatePresence mode="wait">
-        {/* 1. The key={location.pathname} forces AnimatePresence to see a change.
-          2. Suspense handles the loading of the *new* lazy-loaded chunk.
-          3. The fallback is displayed until the chunk loads.
-        */}
+       
         <Suspense fallback={<PageLoader key="loader" />}>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<HomePage />} />

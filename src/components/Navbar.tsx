@@ -1,12 +1,14 @@
+"use client";
+
 import { useState, useEffect, useCallback, memo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // --- MELT BUTTON COMPONENT ---
 const MeltButton = () => {
   const buttonPulseTransition = {
     duration: 2,
     repeat: Infinity,
-    ease: "easeInOut" as const // Fixed: Added 'as const'
+    ease: "easeInOut" as const
   };
 
   return (
@@ -240,18 +242,34 @@ export default function Navbar() {
             </div>
             
             <div className="hidden sm:block ml-4">
-               <MeltButton />
+                <MeltButton />
             </div>
             
-            <button onClick={() => setMobileOpen(!mobileOpen)} className={`lg:hidden p-2 rounded-xl transition-colors ${primaryTextColor.includes("white") ? "bg-white/20 text-white" : "bg-pink-100 text-pink-600"}`}>
+            {/* Main Toggle Button with rotation effect */}
+            <button 
+                onClick={() => setMobileOpen(!mobileOpen)} 
+                className={`lg:hidden p-2 rounded-xl transition-all duration-300 ${primaryTextColor.includes("white") ? "bg-white/20 text-white" : "bg-pink-100 text-pink-600"} ${mobileOpen ? "rotate-90 scale-110" : "rotate-0"}`}
+            >
               {mobileOpen ? <XIcon /> : <MenuIcon />}
             </button>
           </div>
         </div>
       </header>
 
+      {/* Mobile Drawer Overlay */}
       <div className={`fixed inset-0 z-[60] transition-opacity duration-300 ${mobileOpen ? "opacity-100 bg-black/50 pointer-events-auto" : "opacity-0 pointer-events-none"}`} onClick={() => setMobileOpen(false)}>
         <div className={`fixed right-0 top-0 h-full w-[280px] bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out ${mobileOpen ? "translate-x-0" : "translate-x-full"}`} onClick={e => e.stopPropagation()}>
+          
+          {/* Internal Close Button for Mobile Drawer */}
+          <div className="absolute top-6 right-6">
+            <button 
+              onClick={() => setMobileOpen(false)} 
+              className="p-2 bg-pink-50 text-pink-600 rounded-full hover:bg-pink-100 transition-colors"
+            >
+              <XIcon className="w-6 h-6" />
+            </button>
+          </div>
+
           <div className="pt-28 flex-1 overflow-y-auto p-6">
             <h3 className="font-fredoka text-2xl text-pink-600 font-extrabold mb-6 border-b pb-2">Navigation</h3>
             {navConfig.map((item) => (

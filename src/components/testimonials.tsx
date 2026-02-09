@@ -5,9 +5,9 @@ import { motion, AnimatePresence, useScroll, useTransform, type Variants, type T
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
 // -----------------------------------------------------------------------------
-// SUB-COMPONENT: MELT BUTTON
+// SUB-COMPONENT: MELT BUTTON (Updated to use href)
 // -----------------------------------------------------------------------------
-const MeltButton = ({ text = "Book Us", onClick }: { text: string; onClick: () => void }) => {
+const MeltButton = ({ text = "Book Us", href }: { text: string; href: string }) => {
   const buttonPulseTransition = {
     duration: 2,
     repeat: Infinity,
@@ -16,9 +16,9 @@ const MeltButton = ({ text = "Book Us", onClick }: { text: string; onClick: () =
 
   return (
     <div className="group relative flex flex-col items-center">
-      <motion.button
-        onClick={onClick}
-        className="relative z-10 px-14 py-5 text-2xl rounded-full bg-pink-600 text-white font-fredoka font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300 text-center border-none outline-none cursor-pointer"
+      <motion.a
+        href={href}
+        className="relative z-10 px-14 py-5 text-2xl rounded-full bg-pink-600 text-white font-fredoka font-bold shadow-xl shadow-pink-500/40 hover:bg-pink-700 transition duration-300 text-center border-none outline-none cursor-pointer inline-block no-underline"
         whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.96 }}
         animate={{
@@ -27,7 +27,7 @@ const MeltButton = ({ text = "Book Us", onClick }: { text: string; onClick: () =
         }}
       >
         {text}
-      </motion.button>
+      </motion.a>
 
       <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] overflow-hidden pointer-events-none z-0">
         <div className="melt-panel w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
@@ -73,19 +73,17 @@ const TESTIMONIALS = [
 ];
 
 export default function Testimonials() {
-    const sectionRef = useRef(null); // Ref for the whole section
+    const sectionRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
     const [isDesktop, setIsDesktop] = useState(false);
 
-    // --- PARALLAX SETUP ---
     const { scrollYProgress } = useScroll({
         target: sectionRef,
-        offset: ["start end", "end start"] // Starts moving when section enters bottom, ends when it leaves top
+        offset: ["start end", "end start"]
     });
 
-    // When scroll progress is 0 (top), x is 150px. When progress is 1 (bottom), x is -150px.
     const truckX = useTransform(scrollYProgress, [0, 1], [150, -150]);
 
     useEffect(() => {
@@ -162,9 +160,8 @@ export default function Testimonials() {
                 }
             `}</style>
             
-            {/* PARALLAX TRUCK ILLUSTRATION */}
             <motion.div
-                style={{ x: truckX }} // This connects the horizontal position to scroll
+                style={{ x: truckX }}
                 className="absolute bottom-16 right-0 w-full lg:w-2/3 flex justify-center lg:justify-end items-end z-0 pointer-events-none opacity-25 lg:opacity-60 truck-mask"
             >
                 <img 
@@ -174,7 +171,6 @@ export default function Testimonials() {
                 />
             </motion.div>
 
-            {/* HEADER AREA */}
             <div className="mx-auto max-w-7xl px-4 relative z-10 w-full mb-8 text-center">
                 <motion.h2
                     initial="hidden"
@@ -183,33 +179,17 @@ export default function Testimonials() {
                     transition={{ staggerChildren: 0.2 } as Transition}
                     className="flex flex-wrap items-center justify-center font-fredoka font-extrabold text-pink-600 mb-4 gap-2 md:gap-0"
                 >
-                    <motion.span
-                        variants={splitTextVariants}
-                        custom="left"
-                        className="text-3xl sm:text-5xl lg:text-6xl uppercase leading-tight"
-                    >
+                    <motion.span variants={splitTextVariants} custom="left" className="text-3xl sm:text-5xl lg:text-6xl uppercase leading-tight">
                         Trusted By
                     </motion.span>
-
-                    <motion.img 
-                        variants={coneVariants}
-                        src="/images/ice-cream-cone-About.png" 
-                        className="w-10 h-14 sm:w-16 sm:h-20 md:w-24 md:h-28 object-contain mx-2" 
-                        alt="cone" 
-                    />
-
-                    <motion.span
-                        variants={splitTextVariants}
-                        custom="right"
-                        className="text-3xl sm:text-5xl lg:text-6xl uppercase leading-tight"
-                    >
+                    <motion.img variants={coneVariants} src="/images/ice-cream-cone-About.png" className="w-10 h-14 sm:w-16 sm:h-20 md:w-24 md:h-28 object-contain mx-2" alt="cone" />
+                    <motion.span variants={splitTextVariants} custom="right" className="text-3xl sm:text-5xl lg:text-6xl uppercase leading-tight">
                         Communities
                     </motion.span>
                 </motion.h2>
                 <p className="text-lg sm:text-xl text-gray-500 font-medium font-fredoka">Professional service for professional organizations.</p>
             </div>
 
-            {/* MAIN TESTIMONIAL CAROUSEL */}
             <div className="relative w-full max-w-5xl px-4 flex items-center group z-10">
                 <button onClick={prevSlide} className="hidden md:flex absolute -left-4 lg:-left-12 z-30 p-4 rounded-full border-2 border-pink-100 text-pink-600 bg-white/95 shadow-lg hover:bg-pink-600 hover:text-white transition-all cursor-pointer">
                     <ChevronLeft size={32} />
@@ -249,7 +229,6 @@ export default function Testimonials() {
                 </button>
             </div>
 
-            {/* CONTROLS */}
             <div className="flex items-center justify-center gap-6 mt-8 z-10">
                 <div className="flex gap-2">
                     {TESTIMONIALS.map((_, index) => (
@@ -265,13 +244,11 @@ export default function Testimonials() {
                 </button>
             </div>
 
+            {/* CALL TO ACTION BUTTON WITH NEW HREF */}
             <div className="mt-16 text-center relative z-20">
                 <MeltButton 
                   text="Book Your Date" 
-                  onClick={() => {
-                    const el = document.getElementById('booking-form');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }} 
+                  href="/booking#booking-form" 
                 />
             </div>
         </section>

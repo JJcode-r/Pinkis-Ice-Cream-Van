@@ -48,7 +48,6 @@ export default function BookingHero() {
     const scrollToForm = () => {
         const formSection = document.getElementById('booking-form');
         if (formSection) {
-            // Precise offset calculation for a professional landing
             const yOffset = -100; 
             const y = formSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
@@ -58,7 +57,8 @@ export default function BookingHero() {
     };
 
     return (
-        <section className="relative w-full min-h-[90dvh] flex items-center justify-center overflow-hidden px-6 md:px-12 lg:px-20 bg-brand-cream">
+        /* Changed min-h-[90dvh] to min-h-screen to ensure full coverage */
+        <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-12 lg:px-20 bg-brand-cream">
             <CustomStyles />
 
             <motion.div
@@ -76,7 +76,10 @@ export default function BookingHero() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             />
 
-            <div className="relative z-10 max-w-7xl w-full py-20 grid lg:grid-cols-2 gap-12 items-center">
+            {/* FIXED: Changed lg:pt-0 to lg:pt-32 to clear the navbar on desktop.
+                Maintained pt-24/sm:pt-32 for mobile/tablet.
+            */}
+            <div className="relative z-10 max-w-7xl w-full pt-32 sm:pt-40 lg:pt-32 pb-20 grid lg:grid-cols-2 gap-12 items-center">
 
                 {/* LEFT TEXT BLOCK */}
                 <motion.div className="text-center lg:text-left space-y-6" variants={containerVariants} initial="hidden" animate="visible">
@@ -102,7 +105,6 @@ export default function BookingHero() {
                     </motion.p>
 
                     <motion.div variants={itemVariants} className="pt-4">
-                        {/* CHANGED: Better Button Text & Action */}
                         <button 
                             onClick={scrollToForm} 
                             className="flex items-center justify-center mx-auto lg:mx-0 px-12 py-5 bg-brand-primary text-white font-fredoka font-bold text-2xl rounded-full shadow-xl submit-button-hover transition-all button-press-effect"
