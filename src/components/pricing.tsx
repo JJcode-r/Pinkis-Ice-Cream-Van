@@ -72,15 +72,15 @@ const PricingSection: FC = () => {
                                 Tailored for Your Event
                             </h3>
                             <p className="text-slate-600 text-lg leading-relaxed mb-8">
-                                We don't believe in "one size fits all" ice cream. Whether it's a corporate treat, a school fundraiser, or a community gala, we provide bespoke packages with **Zero Booking Fees.**
-                            </p>
+                              We keep things simple and stress-free. Whether you’re planning a workplace celebration, school event, sporting day or community gathering, Pinki’s Ice Cream Van delivers classic vanilla soft serve with fun topping options, freshly swirled and ready to enjoy. We offer clear pricing, easy booking, and a professional service from arrival to pack-down.   </p>
                             
                             <ul className="space-y-4 mb-8">
                                 {[
-                                    "Customizable Menu Options",
-                                    "Profit-sharing for Fundraisers",
-                                    "Full Liability Insurance",
-                                    "Professional Uniformed Staff"
+                                    "Classic Vanilla Soft Serve",
+                                    " Fun Topping Options",
+                                    "Full Public Liability Insurance",
+                                    "Friendly, Professional Staff",
+                                    "Reliable On-Time Service"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-center gap-3 text-slate-700 font-medium">
                                         <CheckCircle2 className="text-pink-500 w-5 h-5" />
@@ -114,42 +114,54 @@ const PricingSection: FC = () => {
                     </div>
                 </motion.div>
 
-               {/* --- SPECIALIZATION FOOTNOTE --- */}
-<motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: 0.3, duration: 0.8 }}
-    className="mt-16 max-w-5xl mx-auto px-4"
->
-    <div className="relative overflow-hidden rounded-[2.5rem] bg-pink-600 px-8 py-12 shadow-2xl shadow-pink-200">
-        {/* Subtle pattern overlay for texture */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none" 
-             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")` }} 
-        />
-        
-        <div className="relative z-10 flex flex-col items-center text-center">
-            {/* Top Line */}
-            <p className="font-fredoka text-xl md:text-2xl text-pink-50 font-medium mb-4 tracking-wide">
-                Make your event memorable with pinkies. It’s fun, easy!
-            </p>
+                {/* --- SPECIALIZATION FOOTNOTE --- */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                    className="mt-16 max-w-5xl mx-auto px-4"
+                >
+                    <div className="relative overflow-hidden rounded-[2.5rem] bg-pink-600 px-8 py-12 shadow-2xl shadow-pink-200">
+                        {/* Subtle pattern overlay for texture */}
+                        <div className="absolute inset-0 opacity-10 pointer-events-none" 
+                             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")` }} 
+                        />
+                        
+                        <div className="relative z-10 flex flex-col items-center text-center">
+                            {/* Top Line */}
+                            <p className="font-fredoka text-xl md:text-2xl text-pink-50 font-medium mb-4 tracking-wide">
+                                Make your event memorable with pinkies. It’s fun, easy!
+                            </p>
 
-            {/* The "Unmissable" Line */}
-            <h3 className="font-fredoka text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
-                🥳 Book pinky today and turn your event into a sweet success 🥂
-            </h3>
-        </div>
+                            {/* The "Unmissable" Line */}
+                            <h3 className="font-fredoka text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight flex items-center justify-center gap-4">
+                                <motion.span 
+                                    animate={{ y: [0, -10, 0], rotate: [0, -10, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                >
+                                    🍦
+                                </motion.span>
+                                Book pinky today and turn your event into a sweet success
+                                <motion.span 
+                                    animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                                >
+                                    🍦
+                                </motion.span>
+                            </h3>
+                        </div>
 
-        {/* Floating white sparkles for that "Celebration" feel */}
-        <motion.div 
-            animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.2, 1] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="absolute top-6 right-10 text-white/20"
-        >
-            {/* <Sparkles size={48} /> */}
-        </motion.div>
-    </div>
-</motion.div>
+                        {/* Floating white sparkles for that "Celebration" feel */}
+                        <motion.div 
+                            animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.2, 1] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                            className="absolute top-6 right-10 text-white/20"
+                        >
+                            {/* <Sparkles size={48} /> */}
+                        </motion.div>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

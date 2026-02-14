@@ -54,22 +54,22 @@ const TESTIMONIALS = [
         color: "bg-pink-50/90",
         border: "border-pink-200"
     },
-    {
-        id: 2,
-        quote: "We booked Pinki's for our Corporate Staff Appreciation Day. The truck was spotless, professional, and the 'Upfront' package made the accounting seamless.",
-        name: "Jennifer W.",
-        title: "HR Director, Global Logistics",
-        color: "bg-blue-50/90",
-        border: "border-blue-200"
-    },
-    {
-        id: 3,
-        quote: "Absolute lifesavers for our Sports Club Finals! Arrived exactly on time, required zero power setup, and kept the crowd happy through the heat.",
-        name: "Coach Dave",
-        title: "Junior Football League",
-        color: "bg-yellow-50/90",
-        border: "border-yellow-200"
-    },
+    // {
+    //     id: 2,
+    //     quote: "We booked Pinki's for our Corporate Staff Appreciation Day. The truck was spotless, professional, and the 'Upfront' package made the accounting seamless.",
+    //     name: "Jennifer W.",
+    //     title: "HR Director, Global Logistics",
+    //     color: "bg-blue-50/90",
+    //     border: "border-blue-200"
+    // },
+    // {
+    //     id: 3,
+    //     quote: "Absolute lifesavers for our Sports Club Finals! Arrived exactly on time, required zero power setup, and kept the crowd happy through the heat.",
+    //     name: "Coach Dave",
+    //     title: "Junior Football League",
+    //     color: "bg-yellow-50/90",
+    //     border: "border-yellow-200"
+    // },
 ];
 
 export default function Testimonials() {

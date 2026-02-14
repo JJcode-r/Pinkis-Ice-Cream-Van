@@ -3,8 +3,8 @@
 import { useState, useRef, type FC, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-    Calendar, Utensils, Send, CheckCircle, ChevronRight, ChevronLeft, 
-    Loader2,  Building2, AlertCircle, Sparkles, Receipt, Info
+    Calendar, Send, CheckCircle, ChevronRight, ChevronLeft, 
+    Loader2,  Building2, AlertCircle, Info, Users
 } from 'lucide-react';
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mykgkjjq";
@@ -25,8 +25,7 @@ const IMAGE_URLS = ['https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/van1.we
 
 const steps = [
     { id: 1, label: "Event Details", icon: Calendar },
-    { id: 2, label: "Service Plan", icon: Utensils },
-    { id: 3, label: "Get My Quote", icon: Send },
+    { id: 2, label: "Get My Quote", icon: Send },
 ];
 
 export default function BookingForm() {
@@ -81,7 +80,7 @@ export default function BookingForm() {
     const nextStep = () => { 
         if (validateStep(currentStep)) { 
             setCurrentStep(prev => prev + 1); 
-            setTimeout(handleScrollToForm, 50); // Slight delay for DOM update
+            setTimeout(handleScrollToForm, 50);
         } 
     };
     const prevStep = () => { 
@@ -92,7 +91,7 @@ export default function BookingForm() {
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!validateStep(3)) return;
+        if (!validateStep(2)) return;
         setIsSubmitted(true);
         setError(null);
         const formData = new FormData(e.currentTarget);
@@ -142,9 +141,9 @@ export default function BookingForm() {
                             <form ref={formRef} onSubmit={handleFormSubmit} className="space-y-8" noValidate>
                                 
                                 {/* PROGRESS BAR */}
-                                <div className="flex justify-between mb-10 border-b-2 border-pink-100 pb-6">
+                                <div className="flex justify-center mb-10 border-b-2 border-pink-100 pb-6">
                                     {steps.map((step) => (
-                                        <div key={step.id} className="relative flex flex-col items-center flex-1 mx-2">
+                                        <div key={step.id} className="relative flex flex-col items-center flex-1 max-w-[200px] mx-2">
                                             <div className={`p-3 rounded-full transition-all duration-300 ${currentStep === step.id ? 'bg-brand-primary text-white shadow-lg' : 'bg-pink-50 text-pink-300'}`}>
                                                 <step.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                                             </div>
@@ -153,7 +152,7 @@ export default function BookingForm() {
                                     ))}
                                 </div>
 
-                                {/* STEP 1: ORGANIZATION DETAILS */}
+                                {/* STEP 1: EVENT DETAILS */}
                                 <div className={currentStep === 1 ? "block space-y-6" : "hidden"} data-step-container="1">
                                     <h3 className="text-2xl font-bold text-gray-800 flex items-center"><Building2 className="w-6 h-6 mr-2 text-pink-500" /> Event Basics</h3>
                                     {error && <p className="text-red-500 text-sm font-bold bg-red-50 p-3 rounded-lg flex items-center gap-2"><AlertCircle className="w-4 h-4" /> {error}</p>}
@@ -170,45 +169,20 @@ export default function BookingForm() {
                                         <div className="sm:col-span-3"><label className="block text-sm font-bold text-gray-700 mb-1">Address *</label><input type="text" name="Address" className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:border-pink-500" required /></div>
                                         <div className="sm:col-span-1"><label className="block text-sm font-bold text-gray-700 mb-1">Postcode *</label><input type="text" name="Postcode" className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:border-pink-500" required /></div>
                                     </div>
-                                </div>
-
-                                {/* STEP 2: SERVICE PLAN */}
-                                <div className={currentStep === 2 ? "block space-y-6" : "hidden"} data-step-container="2">
-                                    <h3 className="text-2xl font-bold text-gray-800 flex items-center"><Utensils className="w-6 h-6 mr-2 text-pink-500" /> Pricing Plan Preference</h3>
-                                    <div className="grid gap-4">
-                                        <label className="relative flex flex-col md:flex-row items-start md:items-center p-6 bg-white border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-pink-200 transition-all has-[:checked]:border-pink-500 has-[:checked]:bg-pink-50 group">
-                                            <input type="radio" name="Pricing_Plan" value="Upfront" className="sr-only" defaultChecked />
-                                            <div className="p-3 rounded-xl bg-pink-100 text-pink-600 mr-4 mb-4 md:mb-0 group-has-[:checked]:bg-pink-500 group-has-[:checked]:text-white">
-                                                <Receipt className="w-6 h-6" />
-                                            </div>
-                                            <div className="flex-1">
-                                                <span className="font-bold text-gray-900 text-xl block mb-1">Option 1: Upfront Payment</span>
-                                                <p className="text-sm text-gray-500 leading-relaxed">Perfect for workplace rewards. You pay a fixed cost based on guest count.</p>
-                                            </div>
-                                        </label>
-
-                                        <label className="relative flex flex-col md:flex-row items-start md:items-center p-6 bg-white border-2 border-gray-200 rounded-2xl cursor-pointer hover:border-pink-200 transition-all has-[:checked]:border-pink-500 has-[:checked]:bg-pink-50 group">
-                                            <input type="radio" name="Pricing_Plan" value="PAYG" className="sr-only" />
-                                            <div className="p-3 rounded-xl bg-pink-100 text-pink-600 mr-4 mb-4 md:mb-0 group-has-[:checked]:bg-pink-500 group-has-[:checked]:text-white">
-                                                <Sparkles className="w-6 h-6" />
-                                            </div>
-                                            <div className="flex-1">
-                                                <div className="flex items-center gap-2 mb-1">
-                                                    <span className="font-bold text-gray-900 text-xl">Option 2: Pay-As-You-Go</span>
-                                                    <span className="bg-pink-200 text-pink-700 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full">Popular</span>
-                                                </div>
-                                                <p className="text-sm text-gray-500 leading-relaxed">Perfect for fundraisers. We sell directly to guests and donate a % back to you.</p>
-                                            </div>
-                                        </label>
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center gap-2"><Users className="w-4 h-4 text-pink-500" /> Approx. Expected Guests *</label>
+                                        <select name="Attendance" className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:border-pink-500" required>
+                                            <option value="">Select Range</option>
+                                            <option value="50-100">50-100 guests</option>
+                                            <option value="100-250">100-250 guests</option>
+                                            <option value="250+">250+ guests</option>
+                                        </select>
                                     </div>
-
-                                    <div><label className="block text-sm font-bold text-gray-700 mb-2">Approx. Expected Attendance *</label><select name="Attendance" className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:border-pink-500" required><option value="">Select Range</option><option value="50-100">50-100 guests</option><option value="100-250">100-250 guests</option><option value="250+">250+ guests</option></select></div>
-                                    <div><label className="block text-sm font-bold text-gray-700 mb-2">Dietary Notes / Special Requests</label><textarea name="Dietary" rows={2} className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:border-pink-500" placeholder="e.g. Gluten-free options needed..."></textarea></div>
                                 </div>
 
-                                {/* STEP 3: CONTACT INFO */}
-                                <div className={currentStep === 3 ? "block space-y-6" : "hidden"} data-step-container="3">
-                                    <h3 className="text-2xl font-bold text-gray-800 flex items-center"><Send className="w-6 h-6 mr-2 text-pink-500" /> Where should we send the quote?</h3>
+                                {/* STEP 2: CONTACT INFO & SUBMIT */}
+                                <div className={currentStep === 2 ? "block space-y-6" : "hidden"} data-step-container="2">
+                                    <h3 className="text-2xl font-bold text-gray-800 flex items-center"><Send className="w-6 h-6 mr-2 text-pink-500" /> Confirm your email for your custom quote</h3>
                                     <div className="p-4 bg-blue-50 border border-blue-100 rounded-2xl flex items-start gap-3">
                                         <Info className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                                         <p className="text-sm text-blue-700">Submit your details and our team will prepare a custom quote tailored to your event requirements.</p>
@@ -219,7 +193,10 @@ export default function BookingForm() {
                                     </div>
                                     <div><label className="block text-sm font-bold text-gray-700 mb-1">Email Address *</label><input type="email" name="Email" className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:border-pink-500 font-sans" required /></div>
                                     
-                                    <button type="submit" disabled={isSubmitted} className="w-full py-4 bg-brand-primary text-white font-bold text-xl rounded-full shadow-xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 mt-4 flex flex-col items-center">
+                                    <div><label className="block text-sm font-bold text-gray-700 mb-2">Dietary Notes / Special Requests</label><textarea name="Dietary" rows={2} className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:border-pink-500" placeholder="e.g. Gluten-free options needed..."></textarea></div>
+
+                                    {/* UPDATED SUBMIT BUTTON WITH PADDING */}
+                                    <button type="submit" disabled={isSubmitted} className="w-full px-6 py-4 bg-brand-primary text-white font-bold text-xl rounded-full shadow-xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 mt-4 flex flex-col items-center">
                                         {isSubmitted ? <Loader2 className="animate-spin h-6 w-6" /> : (
                                             <>
                                                 <span>Request My Custom Quote</span>
@@ -228,7 +205,6 @@ export default function BookingForm() {
                                         )}
                                     </button>
                                 </div>
-
                                 {/* NAVIGATION BUTTONS */}
                                 <div className="flex justify-between items-center pt-6 border-t border-gray-100">
                                     {currentStep > 1 && (
@@ -236,7 +212,7 @@ export default function BookingForm() {
                                             <ChevronLeft className="w-5 h-5" /> Back
                                         </button>
                                     )}
-                                    {currentStep < 3 && (
+                                    {currentStep < 2 && (
                                         <button type="button" onClick={nextStep} className="ml-auto px-10 py-3 bg-pink-600 text-white rounded-full font-bold shadow-lg hover:bg-pink-700 active:scale-95 transition-all">
                                             Next Step <ChevronRight className="inline w-5 h-5 ml-1" />
                                         </button>

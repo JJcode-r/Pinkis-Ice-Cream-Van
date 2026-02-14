@@ -16,6 +16,7 @@ interface LazyImageProps {
     alt: string;
     className: string;
     fallback: string;
+    priority?: boolean;
 }
 
 interface HighlightRowProps {
@@ -24,18 +25,17 @@ interface HighlightRowProps {
 }
 
 // -----------------------------------------------------------------------------
-// SUB-COMPONENT: MELT BUTTON (Same as Navbar)
+// SUB-COMPONENT: MELT BUTTON
 // -----------------------------------------------------------------------------
 const MeltButton = () => {
   const buttonPulseTransition = {
     duration: 2,
     repeat: Infinity,
-    ease: "easeInOut" as const // FIX: Added as const
+    ease: "easeInOut" as const
   };
 
   return (
     <div className="group relative flex flex-col items-center">
-      {/* CTA Button */}
       <motion.a
         href="/booking"
         role="button"
@@ -50,7 +50,6 @@ const MeltButton = () => {
         Book Your Date
       </motion.a>
 
-      {/* Melt Panel - Positioned to blend into the button base */}
       <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-[85%] h-[60px] overflow-hidden pointer-events-none z-0">
         <div className="melt-panel w-full h-0 bg-[#db2777] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-x-[0.9] group-hover:h-[45px] group-hover:scale-x-100" 
              style={{
@@ -72,9 +71,9 @@ const MeltButton = () => {
 // -----------------------------------------------------------------------------
 const FEATURES: Feature[] = [
     { 
-        title: "Gourmet, Small-Batch Quality", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo1.jpg", 
-        description: "Every scoop is made with locally sourced dairy and fresh ingredients, delivering a richer, more authentic taste, with zero artificial flavours. That’s the Pinki’s difference." 
+        title: "Classic Soft Serve, Done Right", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/1stImage.webp", 
+        description: "At Pinki’s, we keep things simple and delicious. We serve classic vanilla soft serve with a fun selection of favourite toppings! freshly swirled and ready to enjoy at every event. Classic, simple and always a crowd favorite." 
     },
     { 
         title: "Joyful, Professional Staff", 
@@ -99,16 +98,16 @@ const FEATURES: Feature[] = [
     { 
         title: "The Unforgettable Moment", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_kids.jpg", 
-        description: "We pride ourselves in creating those perfect, unexpected moments of pure delight, the smiles, laughter and joy your guests will remember long after the event ends"
+        description: "We pride ourselves in creating those perfect, unexpected moments of pure delight, the smiles, laughter and joy your guests will remember long after the event ends."
     },
 ];
 
-const LazyImage = ({ src, alt, className, fallback }: LazyImageProps) => {
-    const [isVisible, setIsVisible] = useState(false);
+const LazyImage = ({ src, alt, className, fallback, priority = false }: LazyImageProps) => {
+    const [isVisible, setIsVisible] = useState(priority);
     const imgRef = useRef<HTMLImageElement>(null); 
 
     useEffect(() => {
-        if (!imgRef.current) return;
+        if (isVisible || !imgRef.current) return;
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -116,11 +115,14 @@ const LazyImage = ({ src, alt, className, fallback }: LazyImageProps) => {
                     observer.disconnect();
                 }
             },
-            { threshold: 0.1 }
+            { 
+                rootMargin: '450px', // Loads images 450px before they enter the screen
+                threshold: 0.01 
+            }
         );
         observer.observe(imgRef.current);
         return () => { if (observer) observer.disconnect(); };
-    }, []);
+    }, [isVisible]);
 
     const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
         const target = e.target as HTMLImageElement;
@@ -133,6 +135,7 @@ const LazyImage = ({ src, alt, className, fallback }: LazyImageProps) => {
             ref={imgRef as RefObject<HTMLImageElement>}
             src={isVisible ? src : (fallback || "")}
             alt={alt}
+            loading={priority ? "eager" : "lazy"}
             className={className}
             onError={handleImageError}
         />
@@ -174,8 +177,10 @@ const HighlightRow = ({ feature, index }: HighlightRowProps) => {
             <LazyImage
                 src={feature.imageUrl}
                 alt={feature.title}
-                /* FIX: Added 'object-top' to ensure heads/tops of vans aren't cut off */
-                className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-[1.03]"
+                priority={index < 1} // The first row loads immediately
+                className={`w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03] ${
+                    index === 0 ? 'object-bottom' : 'object-top'
+                }`}
                 fallback="https://placehold.co/800x600/d1d5db/374151?text=Visual+Placeholder"
             />
             <div className="absolute inset-0 bg-pink-500/10 mix-blend-multiply pointer-events-none rounded-3xl" />
@@ -198,6 +203,7 @@ const HighlightRow = ({ feature, index }: HighlightRowProps) => {
         </div>
     );
 };
+
 export default function App() {
     const [isDesktop, setIsDesktop] = useState(false);
 
@@ -261,7 +267,13 @@ export default function App() {
                         </motion.span>
 
                         <motion.div variants={coneVariants} className="w-16 h-20 md:w-20 md:h-24 lg:w-24 lg:h-28 my-2 mx-auto md:my-0 md:mx-4">
-                            <LazyImage src="/images/ice-cream-cone-About.png" alt="Ice Cream Cone Icon" className="w-full h-full object-contain" fallback="https://placehold.co/96x112/E83E8C/FFFFFF?text=🍦" />
+                            <LazyImage 
+                                src="/images/ice-cream-cone-About.png" 
+                                alt="Ice Cream Cone Icon" 
+                                className="w-full h-full object-contain" 
+                                priority={true}
+                                fallback="https://placehold.co/96x112/E83E8C/FFFFFF?text=🍦" 
+                            />
                         </motion.div>
 
                         <motion.span variants={splitTextVariants} custom="right" className="text-4xl md:text-5xl lg:text-6xl text-center md:text-left">
@@ -300,7 +312,7 @@ export default function App() {
                     ))}
                 </div>
 
-                {/* CTA - NOW USING MELTBUTTON ATTRIBUTES AND TEXT */}
+                {/* CTA */}
                 <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ delay: 0.2, duration: 0.6 } as Transition} className="text-center my-16 lg:my-20">
                     <h3 className="text-2xl font-fredoka font-bold text-deep-indigo mb-8">
                         Ready to make your event unforgettable?
@@ -308,20 +320,63 @@ export default function App() {
                     <MeltButton />
                 </motion.div>
 
-                {/* Sweet Guarantee */}
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.6, type: "spring", stiffness: 50 } as Transition} className="bg-raspberry-glaze p-8 md:p-12 rounded-3xl shadow-2xl shadow-pink-500/50 text-white text-center border-4 border-pink-300 mt-10 lg:mt-20">
-                    <h3 className="text-3xl md:text-4xl font-fredoka font-extrabold mb-3 flex justify-center items-center flex-wrap gap-2">
-                        <span className="text-4xl md:text-5xl leading-none">🔥</span>
-                        OUR SWEET GUARANTEE
-                        <span className="text-4xl md:text-5xl leading-none">🔥</span>
-                    </h3>
-                    <p className="text-2xl md:text-3xl font-bold mb-4">
-                        Always On-Time or Your First Scoop Is Free.
-                    </p>
-                    <p className="text-lg italic text-pink-100">
-                        Because great service should feel just as good as great ice cream.
-                    </p>
-                </motion.div>
+               {/* Sweet Guarantee */}
+<motion.div 
+  initial={{ opacity: 0, y: 40 }} 
+  whileInView={{ opacity: 1, y: 0 }} 
+  viewport={{ once: true, amount: 0.5 }} 
+  transition={{ duration: 0.8, ease: "circOut" }} 
+  className="relative group mt-16 lg:mt-24"
+>
+  <div className="absolute -inset-1 bg-gradient-to-r from-pink-400 via-raspberry-glaze to-pink-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+
+  <div className="relative bg-raspberry-glaze p-10 md:p-16 rounded-[2.2rem] text-white text-center overflow-hidden border border-white/10 shadow-2xl">
+    
+    <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-pink-900/20 rounded-full blur-3xl pointer-events-none" />
+
+    <div className="relative z-10 max-w-3xl mx-auto">
+      
+      <h3 className="text-3xl md:text-5xl font-fredoka font-extrabold tracking-tight mb-6 uppercase flex justify-center items-center gap-4">
+        <motion.span 
+          animate={{ y: [0, -10, 0] }} 
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="text-4xl md:text-6xl"
+        >
+          🍦
+        </motion.span>
+        OUR SWEET GUARANTEE
+        <motion.span 
+          animate={{ y: [0, -10, 0] }} 
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="text-4xl md:text-6xl"
+        >
+          🍦
+        </motion.span>
+      </h3>
+      
+      <p className="text-2xl md:text-4xl font-fredoka font-bold mb-6 text-pink-50">
+        Service You Can Count On.
+      </p>
+
+      <div className="space-y-4">
+        <p className="text-lg md:text-xl text-pink-100 leading-relaxed font-medium">
+          From setup to the final swirl, we show up prepared, organised and ready to make your event run smoothly.
+        </p>
+        
+        <div className="py-2 flex justify-center opacity-30">
+            <svg width="40" height="2" viewBox="0 0 40 2" fill="none">
+                <line x1="0" y1="1" x2="40" y2="1" stroke="white" strokeWidth="2" strokeDasharray="4 4"/>
+            </svg>
+        </div>
+
+        <p className="text-xl md:text-2xl italic text-white font-fredoka font-medium">
+          Because great service should feel just as good as great ice cream.
+        </p>
+      </div>
+    </div>
+  </div>
+</motion.div>
             </div>
         </section>
     );

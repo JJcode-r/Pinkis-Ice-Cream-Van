@@ -48,7 +48,7 @@ Sorry yeah I am changing texts as I go with pictures to make it easy for you`,
     },
     {
         id: "sports",
-        title: "SCommunity events & sport events",
+        title: "Community events & sport events",
         tagline: "A Winning Combination",
         description: `Community, connection and ice cream, a perfect match! 
 At Pinki’s Ice Cream Van, community events are at the heart of what we do. From local parks and open spaces to neighbourhood celebrations and family-friendly gatherings, our iconic vans are all about creating relaxed, feel-good moments where people come together.
@@ -88,7 +88,7 @@ const EditorialRow: FC<{ section: typeof EVENT_DATA[0], index: number }> = ({ se
                             </div>
                             <div className="flex flex-col text-left">
                                 <span className="text-[10px] lg:text-sm font-black uppercase tracking-[0.2em] text-pink-500 mb-2">Official Supplier</span>
-                                <span className="text-lg lg:text-3xl 2xl:text-4xl font-bold text-slate-900 leading-none font-fredoka">Vetted & <br className="hidden lg:block" /> Compliant</span>
+                                <span className="text-lg lg:text-3xl 2xl:text-4xl font-bold text-slate-900 leading-none font-fredoka">Fully Licensed & <br className="hidden lg:block" /> Compliant</span>
                             </div>
                         </motion.div>
                     )}

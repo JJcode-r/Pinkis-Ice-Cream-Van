@@ -16,9 +16,9 @@ interface ChevronProps {
 
 const FAQ_DATA: FAQItem[] = [
     {
-        question: "What areas do you service for ice cream van hire in Australia?",
+        question: "What areas do you service for ice cream van hire?",
         answer:
-          "Pinki’s Ice Cream Van provides ice cream van hire across Australia, including events in Sydney, Melbourne, Brisbane, Perth and surrounding areas. For regional or longer-distance events, travel fees may apply — just let us know your location when booking.",
+          "Pinki’s Ice Cream Van proudly services Brisbane and surrounding areas. We specialise in local community events, school celebrations, corporate functions, private parties and park gatherings across South East Queensland. If your event is slightly outside the Brisbane area, feel free to get in touch, travel fees may apply depending on location.",
         color: 'pink',
     },
     {
@@ -29,12 +29,11 @@ const FAQ_DATA: FAQItem[] = [
                     We offer flexible payment options to suit different event types and budgets:
                 </p>
                 <p>
-                    <strong>Option 1: Upfront Payment</strong><br />
-                    Pay a fixed cost based on the number of ice creams you need. Once your event details are confirmed, our ice cream van arrives ready to serve your guests with no on-the-day selling.
-                </p>
+                    <strong>Option 1: Pre-Paid Package</strong><br />
+                   Perfect for private parties, corporate events and special celebrations. On the day, your guests simply enjoy, no money handling required.      </p>
                 <p>
-                    <strong>Option 2: Pay-As-You-Go</strong><br />
-                    No upfront booking fees. Our ice cream van sells directly to guests at your event, making this option ideal for school fundraisers, workplace events, and large gatherings. A minimum sales guarantee may apply.
+                    <strong>Option 2: Pay-As-You-Go (Guest Pays)</strong><br />
+                   Ideal for community events, school fun days and park gatherings. We attend your event and sell directly to guests, with no large upfront cost to the organiser.
                 </p>
             </div>
         ),
@@ -46,28 +45,17 @@ const FAQ_DATA: FAQItem[] = [
           "Yes! Our ice cream van is perfect for school events, fetes, carnivals and fundraising days. We work with schools to provide fast service, crowd-friendly options, and fundraising-friendly setups that keep students, parents and teachers happy.",
         color: 'cyan',
     },
-    {
-        question: "Do you cater for dietary requirements and food allergies?",
-        answer:
-          "Absolutely. Our ice cream van menu includes gluten-free, vegetarian, halal and kosher-friendly vanilla soft serve, along with dairy-free and vegan sorbet options. Nut-free packaged treats are also available, and we can prepare sealed servings for allergy-sensitive events upon request.",
-        color: 'pink',
-    },
-    {
-        question: "How much does it cost to hire an ice cream van for an event?",
-        answer:
-          "The cost to hire an ice cream van depends on your event size, duration, and location. A 25% non-refundable deposit secures your booking, with the remaining balance due 7 days before your event. Contact us for a fast, personalised quote.",
-        color: 'cyan',
-    },
-    {
-        question: "How long does the ice cream van stay at events like parties or workplace functions?",
-        answer:
-          "Our standard ice cream van hire includes 1 hour of service, which suits most private parties, workplace staff events and school functions. Additional time can be added in 30-minute increments to comfortably serve larger crowds.",
-        color: 'pink',
-    },
+   
+    // {
+    //     question: "How long does the ice cream van stay at events like parties or workplace functions?",
+    //     answer:
+    //       "Our standard ice cream van hire includes 1 hour of service, which suits most private parties, workplace staff events and school functions. Additional time can be added in 30-minute increments to comfortably serve larger crowds.",
+    //     color: 'pink',
+    // },
     {
         question: "How many guests can your ice cream van serve at sports or corporate events?",
         answer:
-          "Our ice cream vans are designed to serve hundreds of guests efficiently, making them ideal for sports events, club days and corporate functions. Let us know your expected guest numbers so we can ensure smooth, fast service with no long queues.",
+          "our ice cream van is designed to serve crowds quickly and efficiently. We regularly cater for school events, park gatherings, workplace celebrations and community festivals, whether it’s 30 guests or several hundred. Simply share your expected numbers and we’ll plan accordingly to keep the line moving and the smiles coming.",
         color: 'cyan',
     },
 ];

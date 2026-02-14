@@ -134,14 +134,14 @@ export default function MenuHero() {
                             drop-shadow-lg
                         "
                     >
-                        Explore Our <br className="hidden md:inline"/>Delicious Menu
+                        Explore Our  <br className="hidden md:inline"/>Classic Favourites
                     </motion.h1>
 
                     <motion.p
                         variants={fadeUp}
                         className="text-xl text-gray-700 max-w-xl mx-auto md:mx-0 pt-2"
                     >
-                        Discover freshly handcrafted soft-serve, specialty sundaes, and classic frozen treats — all made with Grandma Pinki’s secret recipes and served with a smile.
+                        From our signature creamy vanilla soft-serve to loaded sundaes and thick, old-school milkshakes, we serve the timeless treats everyone loves.
                     </motion.p>
                 </motion.div>
 

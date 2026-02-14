@@ -1,4 +1,5 @@
 import { motion, type Variants, type Transition } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 const FALLBACK_IMAGE_URL =
   "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/pinkisVan.webp";
@@ -94,21 +95,41 @@ const DripBottom = () => (
 );
 
 export default function App() {
+  const [showFallback, setShowFallback] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Timer to check if video has played after 30 seconds
+    const timer = setTimeout(() => {
+      if (videoRef.current && videoRef.current.paused) {
+        setShowFallback(true);
+      }
+    }, 30000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="relative w-full min-h-[100dvh] lg:min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0f172a]">
-      {/* Background Layer */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${FALLBACK_IMAGE_URL})` }}
-      />
+      {/* Background Layer (Fallback) - Only visible if showFallback is true */}
+      {showFallback && (
+        <div
+          className="absolute inset-0 bg-cover bg-center z-0"
+          style={{ backgroundImage: `url(${FALLBACK_IMAGE_URL})` }}
+        />
+      )}
       
       {/* Video Content */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        className="absolute w-full h-full object-cover transition-opacity duration-1000"
+        disablePictureInPicture
+        disableRemotePlayback
+        onPlay={() => setShowFallback(false)}
+        className="absolute w-full h-full object-cover transition-opacity duration-1000 pointer-events-none z-0"
       >
         <source
           src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/HeroVideo.mp4"
@@ -117,11 +138,11 @@ export default function App() {
       </video>
 
       {/* Cinematic Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/80 via-transparent to-[#0f172a]/40" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/60 via-transparent to-[#0f172a]/60" />
-      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/80 via-transparent to-[#0f172a]/40 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/60 via-transparent to-[#0f172a]/60 z-10" />
+      <div className="absolute inset-0 bg-black/20 z-10" />
 
-      {/* Hero Content - Adjusted pt-32 for mobile spacing */}
+      {/* Hero Content */}
       <motion.div
         className="relative z-30 w-full max-w-5xl px-6 pb-32 pt-32 md:pt-48 text-center"
         initial={{ opacity: 0, y: 50 }}
