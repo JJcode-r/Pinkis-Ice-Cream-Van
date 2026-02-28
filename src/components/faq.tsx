@@ -58,6 +58,12 @@ const FAQ_DATA: FAQItem[] = [
           "our ice cream van is designed to serve crowds quickly and efficiently. We regularly cater for school events, park gatherings, workplace celebrations and community festivals, whether it’s 30 guests or several hundred. Simply share your expected numbers and we’ll plan accordingly to keep the line moving and the smiles coming.",
         color: 'cyan',
     },
+    {
+        question: " Do you cater for different dietary requirements?",
+        answer:
+        "Yes we do, just let us know in the booking enquiry so we can cater for your needs",
+        color:'pink',
+    },
 ];
 
 const ChevronDown: FC<ChevronProps> = ({ isOpen, color }) => (

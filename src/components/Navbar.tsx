@@ -203,9 +203,9 @@ export default function Navbar() {
   const primaryTextColor = (mobileOpen || scrollEffect) ? "text-gray-800" : (activePath === "/" ? "text-white" : "text-gray-800");
 
   const renderLogo = (isCentered: boolean) => (
-    <a href="/" className={`flex flex-col transition-transform hover:scale-105 ${isCentered ? 'items-center text-center w-60 translate-y-3' : 'items-start pl-2 w-44 sm:w-52 pt-2'}`}>
+    <a href="/" className={`flex flex-col transition-all duration-500 hover:scale-105 ${isCentered ? 'items-center text-center w-64 translate-y-4' : 'items-start pl-2 w-44 sm:w-52 pt-2'}`}>
       <img src="/images/logo1.webp" alt="Logo" className="w-12 h-14 bg-white ring-4 ring-pink-200 rounded-full object-cover p-1 shadow-xl" />
-      <span className={`font-fredoka text-lg lg:text-2xl font-extrabold mt-0.5 whitespace-nowrap ${primaryTextColor}`}>Pinki's Ice Cream Van</span>
+      <span className={`font-fredoka text-lg lg:text-2xl font-extrabold mt-1 whitespace-nowrap transition-colors duration-500 ${primaryTextColor}`}>Pinki's Ice Cream Van</span>
     </a>
   );
 
@@ -219,8 +219,10 @@ export default function Navbar() {
         .animate-wave-in { animation: wave-in 0.3s ease-out forwards; opacity: 0; }
       `}</style>
 
-      <header className={`w-full fixed top-0 z-50 transition-all duration-500 ease-in-out ${mobileOpen || scrollEffect ? "bg-white/95 shadow-lg" : "bg-transparent"}`}>
+      {/* HEADER: Expands height on scroll to contain the dangling logo name */}
+      <header className={`w-full fixed top-0 z-50 transition-all duration-500 ease-in-out ${mobileOpen || scrollEffect ? "bg-white/95 shadow-lg h-32 lg:h-28" : "bg-transparent h-24 lg:h-20"}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 h-24 lg:h-20 flex items-center justify-between relative">
+          
           <div className="flex items-center space-x-8 flex-1">
             <div className="lg:hidden">{renderLogo(false)}</div>
             <div className="hidden lg:flex gap-4">
@@ -245,7 +247,6 @@ export default function Navbar() {
                 <MeltButton />
             </div>
             
-            {/* Main Toggle Button with rotation effect */}
             <button 
                 onClick={() => setMobileOpen(!mobileOpen)} 
                 className={`lg:hidden p-2 rounded-xl transition-all duration-300 ${primaryTextColor.includes("white") ? "bg-white/20 text-white" : "bg-pink-100 text-pink-600"} ${mobileOpen ? "rotate-90 scale-110" : "rotate-0"}`}
@@ -260,7 +261,6 @@ export default function Navbar() {
       <div className={`fixed inset-0 z-[60] transition-opacity duration-300 ${mobileOpen ? "opacity-100 bg-black/50 pointer-events-auto" : "opacity-0 pointer-events-none"}`} onClick={() => setMobileOpen(false)}>
         <div className={`fixed right-0 top-0 h-full w-[280px] bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out ${mobileOpen ? "translate-x-0" : "translate-x-full"}`} onClick={e => e.stopPropagation()}>
           
-          {/* Internal Close Button for Mobile Drawer */}
           <div className="absolute top-6 right-6">
             <button 
               onClick={() => setMobileOpen(false)} 

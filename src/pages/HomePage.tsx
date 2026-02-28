@@ -1,17 +1,17 @@
-import { lazy, Suspense, useEffect } from "react"; // <-- Import useEffect
+import { lazy, Suspense, useEffect } from "react"; 
 import { useSEO } from "../hooks/useSEO";
 
 import HeroSection from "../components/HeroSection";
+import ClientTicker from "../components/ClientTicker";
 import WhyChooseUsSection from "../components/whyChooseUs";
 import ServicesPreview from "../components/services";
 import AboutSection from "../components/aboutUs";
 import FAQSection from "../components/moreQuestions";
 
-// const InquiryFloatingWidget = lazy(() => import("../components/inquiry"));
+
 const GallerySection = lazy(() => import("../components/gallery"));
 const TestimonialsSection = lazy(() => import("../components/testimonials"));
 const FinalCtaStrip = lazy(() => import("../components/HomeCTA"));
-// const Footer = lazy(() => import("../components/footer"));
 
 export default function HomePage() {
    useSEO({
@@ -71,6 +71,7 @@ export default function HomePage() {
         <>
             <main id="main-content">
                 <HeroSection />
+                <ClientTicker />
                 <WhyChooseUsSection />
                 <ServicesPreview />
                 <AboutSection />

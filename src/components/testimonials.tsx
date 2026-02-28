@@ -48,7 +48,7 @@ const MeltButton = ({ text = "Book Us", href }: { text: string; href: string }) 
 const TESTIMONIALS = [
     {
         id: 1,
-        quote: "Pinki's is always a great attraction at out community events 'Jingle all the Bay' and the 'Bluewater Festival'. They're a crowd favourite and the team add a lot of extra fun and they a great quality product! Thanks Pinki's.",
+        quote: "Pinki's is always a great attraction at our community events 'Jingle all the Bay' and the 'Bluewater Festival'. They're a crowd favourite and the team add a lot of extra fun and they have a great quality product! Thanks Pinki's.",
         name: " Chris Hare",
         title: "Executive Officer, Sandgate Bayside Chamber of Commerce",
         color: "bg-pink-50/90",

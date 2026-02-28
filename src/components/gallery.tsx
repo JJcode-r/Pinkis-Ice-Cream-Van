@@ -16,14 +16,16 @@ interface GalleryItemProps {
 
 const GALLERY_IMAGES: GalleryImage[] = [
   { id: 1, title: "Wedding Bliss", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/1000373256.jpg", tags: "Events, Pinki's Truck" },
-  { id: 2, title: "Mint Chip Madness", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomers.jpg", tags: "Flavors, Close-Up" },
-  { id: 3, title: "Happy Customers", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomer2.jpg", tags: "Customers, Joy" },
+  { id: 2, title: "Mint Chip Madness", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/news.webp", tags: "Flavors, Close-Up" },
+  { id: 3, title: "Happy Customers", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/New1.webp", tags: "Customers, Joy" },
   { id: 4, title: "Truck Vibe", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_kids.jpg", tags: "Truck, Branding" },
   { id: 5, title: "Sundaes", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomer.jpg", tags: "Flavors, Specials" },
   { id: 6, title: "Corporate Event", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/galleryNew.webp", tags: "Events, Professional" },
   { id: 7, title: "Kid's Party", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/ice-cream.webp", tags: "Events, Family" },
   { id: 8, title: "Cone Stack", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/couple_ice5.jpg", tags: "Flavors, Detail" },
   { id: 9, title: "Menu Board", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_1.jpg", tags: "Details, Truck" },
+  {id: 10, title: "Community Event", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/New2.webp", tags: "Events, Community" },
+   {id: 10, title: "Community Event", src: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/addingNew.jpg", tags: "Events, Community" },
 ];
 
 // --- HELPERS ---

@@ -67,21 +67,21 @@ const SERVICES = [
     { 
         id: "workplace",
         title: "Workplace Staff Events", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/aboutUs4.jpg", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/workspace5.webp", 
         price: "Vetted Supplier",
-        description: "Boost team morale with affordable, fully tailored ice cream van hire. With clear communication and no hidden surprises, we handle everything!From setup to cleanup, so you can relax and enjoy the event with your team." 
+        description: "Boost team morale with affordable, fully tailored ice cream van hire. With clear communication and no hidden surprises, we handle everything! From setup to cleanup, you can relax and enjoy the event with your team." 
     },
     { 
         id: "schools",
         title: "School Events & Fundraising", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/school1.webp", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/blurred2.png", 
         price: "Fundraising Program",
         description: "We support school P&C with fundraising by donating back a percentage of sales—no pre-payment required! We offer balanced choices that kids love and parents feel confident serving, using eco-friendly packaging to care for the planet." 
     },
     { 
         id: "sports",
         title: "Community events & sport events", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sportVan.webp", 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/sports.webp", 
         price: "Custom Profit Plan",
         description: "Sports and ice cream are a winning combination! Whether it’s a match or a carnival, our truck adds excitement for players and spectators alike. We work with your club to generate revenue while treating your supporters." 
     }

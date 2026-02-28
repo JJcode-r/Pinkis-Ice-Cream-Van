@@ -131,7 +131,7 @@ const PricingSection: FC = () => {
                         <div className="relative z-10 flex flex-col items-center text-center">
                             {/* Top Line */}
                             <p className="font-fredoka text-xl md:text-2xl text-pink-50 font-medium mb-4 tracking-wide">
-                                Make your event memorable with pinkies. It’s fun, easy!
+                                Make your event memorable with Pinki's. It’s fun, easy!
                             </p>
 
                             {/* The "Unmissable" Line */}
@@ -142,7 +142,7 @@ const PricingSection: FC = () => {
                                 >
                                     🍦
                                 </motion.span>
-                                Book pinky today and turn your event into a sweet success
+                                Book Pinki's today and turn your event into a sweet success
                                 <motion.span 
                                     animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
                                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}

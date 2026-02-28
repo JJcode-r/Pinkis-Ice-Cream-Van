@@ -46,7 +46,7 @@ export default function AboutHero() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.4, duration: 0.8 }}
                     >
-                        We're not just serving ice cream; we're serving nostalgia, crafted with Grandma Pinki's secret recipes.
+                        We're not just serving ice cream; we're serving nostalgia.
                     </motion.p>
                 </motion.div>
 

@@ -17,6 +17,8 @@ interface LazyImageProps {
     className: string;
     fallback: string;
     priority?: boolean;
+    // --- CORRECTION: Added style prop to interface ---
+    style?: React.CSSProperties; 
 }
 
 interface HighlightRowProps {
@@ -72,8 +74,8 @@ const MeltButton = () => {
 const FEATURES: Feature[] = [
     { 
         title: "Classic Soft Serve, Done Right", 
-        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/1stImage.webp", 
-        description: "At Pinki’s, we keep things simple and delicious. We serve classic vanilla soft serve with a fun selection of favourite toppings! freshly swirled and ready to enjoy at every event. Classic, simple and always a crowd favorite." 
+        imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newFirstimage.png", 
+        description: "At Pinki’s, we keep things simple and delicious. We serve classic vanilla soft serve with a fun selection of favourite toppings! Freshly swirled and ready to enjoy at every event. Classic, simple and always a crowd favorite." 
     },
     { 
         title: "Joyful, Professional Staff", 
@@ -81,7 +83,7 @@ const FEATURES: Feature[] = [
         description: "Our dedicated, friendly team ensures every guest leaves smiling. Enjoy a stress-free service that’s always professional and enjoyed by guests of all ages." 
     },
     { 
-        title: "The Iconic Pinki Van Aesthetic", 
+        title: "The Iconic Pinki's Van Aesthetic", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/pinkisVan.webp", 
         description: "Our beautifully restored, picture-perfect van creates an instant photo opportunity and brings feel good, classic charm to your event." 
     },
@@ -93,16 +95,17 @@ const FEATURES: Feature[] = [
     { 
         title: "Backed by Genuine Family Care", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo4.jpg", 
-        description: "As a family-run business, we bring a personal level of care and attention to every event, something big franchises simply can’t match." 
+        description: "As a family-run business, we bring a personal level of care and attention to every event." 
     },
     { 
         title: "The Unforgettable Moment", 
         imageUrl: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/Van_kids.jpg", 
-        description: "We pride ourselves in creating those perfect, unexpected moments of pure delight, the smiles, laughter and joy your guests will remember long after the event ends."
+        description: "We pride ourselves in creating those perfect, unexpected moments of pure delight. The smiles, laughter and joy your guests will remember long after the event ends."
     },
 ];
 
-const LazyImage = ({ src, alt, className, fallback, priority = false }: LazyImageProps) => {
+// --- CORRECTION: Destructured style and applied it to img ---
+const LazyImage = ({ src, alt, className, fallback, style, priority = false }: LazyImageProps) => {
     const [isVisible, setIsVisible] = useState(priority);
     const imgRef = useRef<HTMLImageElement>(null); 
 
@@ -137,6 +140,7 @@ const LazyImage = ({ src, alt, className, fallback, priority = false }: LazyImag
             alt={alt}
             loading={priority ? "eager" : "lazy"}
             className={className}
+            style={style} // Applied here
             onError={handleImageError}
         />
     );
@@ -169,7 +173,7 @@ const HighlightRow = ({ feature, index }: HighlightRowProps) => {
         </motion.div>
     );
 
-    const image = (
+ const image = (
         <motion.div 
             className="relative h-64 md:h-80 lg:h-96 rounded-3xl overflow-hidden shadow-2xl"
             variants={itemVariants}
@@ -177,10 +181,11 @@ const HighlightRow = ({ feature, index }: HighlightRowProps) => {
             <LazyImage
                 src={feature.imageUrl}
                 alt={feature.title}
-                priority={index < 1} // The first row loads immediately
+                priority={index < 1} 
                 className={`w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03] ${
-                    index === 0 ? 'object-bottom' : 'object-top'
+                    index === 0 ? '' : 'object-top' 
                 }`}
+                style={index === 0 ? { objectPosition: '50% 18%' } : {}}
                 fallback="https://placehold.co/800x600/d1d5db/374151?text=Visual+Placeholder"
             />
             <div className="absolute inset-0 bg-pink-500/10 mix-blend-multiply pointer-events-none rounded-3xl" />
@@ -358,20 +363,20 @@ export default function App() {
       <p className="text-2xl md:text-4xl font-fredoka font-bold mb-6 text-pink-50">
         Service You Can Count On.
       </p>
-
-      <div className="space-y-4">
-        <p className="text-lg md:text-xl text-pink-100 leading-relaxed font-medium">
-          From setup to the final swirl, we show up prepared, organised and ready to make your event run smoothly.
+      
+       <p className="text-xl md:text-2xl italic text-white font-fredoka font-medium">
+          Because great service should feel just as good as great ice cream.
         </p>
-        
-        <div className="py-2 flex justify-center opacity-30">
+
+         <div className="py-2 flex justify-center opacity-30">
             <svg width="40" height="2" viewBox="0 0 40 2" fill="none">
                 <line x1="0" y1="1" x2="40" y2="1" stroke="white" strokeWidth="2" strokeDasharray="4 4"/>
             </svg>
         </div>
 
-        <p className="text-xl md:text-2xl italic text-white font-fredoka font-medium">
-          Because great service should feel just as good as great ice cream.
+      <div className="space-y-4">
+        <p className="text-lg md:text-xl text-pink-100 leading-relaxed font-medium">
+          From setup to the final swirl, we show up prepared, organised and ready to make your event run smoothly.
         </p>
       </div>
     </div>

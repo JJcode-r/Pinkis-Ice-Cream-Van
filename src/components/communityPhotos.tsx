@@ -22,7 +22,7 @@ const photoAlbum: PhotoItem[] = [
     { location: "Town Square Park", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomer5.jpg" },
     { location: "Central High Field", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/elderly_ice_cream1.jpg" },
     { location: "Tech Startup HQ", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/KidCustomer3.jpg" },
-    { location: "Local Farmer's Market", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/aboutUs4.jpg" },
+    { location: "Local Farmer's Market", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/workspace5.webp" },
     { location: "Oakwood Neighborhood Block Party", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/couple_ice3.webp" },
     { location: "Blue Heron Lakefront", image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/photo5.jpg" },
 ];

@@ -175,7 +175,9 @@ export default function BookingForm() {
                                             <option value="">Select Range</option>
                                             <option value="50-100">50-100 guests</option>
                                             <option value="100-250">100-250 guests</option>
-                                            <option value="250+">250+ guests</option>
+                                            <option value="250+">250 - 1000 guests</option>
+                                            <option value="1000-5000"> 1000 - 5000 guests</option>
+                                            <option value="5000+">5000+ guests</option>
                                         </select>
                                     </div>
                                 </div>

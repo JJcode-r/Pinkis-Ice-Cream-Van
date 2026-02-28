@@ -118,8 +118,8 @@ export default function OurStorySection() {
         {
             number: 2,
             title: "Pinki’s two iconic ice cream vans",
-            description: "What began as a single, well-loved delivery van has grown into our two signature Pinki’s ice cream trucks. Each one reflects a chapter of our journey, allowing us to service multiple events, support larger crowds, and bring reliable, professional service to communities far and wide.",
-            image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/van1.webp",
+            description: "What began as a single, well-loved Ice Cream van has grown into our two signature Pinki’s ice cream trucks. Each one reflects a chapter of our journey, allowing us to service multiple events, support larger crowds, and bring reliable, professional service to communities far and wide.",
+            image: "https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/doubleVan.webp",
             bgColor: "bg-orange-100",
         },
         {
@@ -224,79 +224,73 @@ export default function OurStorySection() {
                     })}
                 </div>
                 
-                {/* 3. MENU CORE SECTION */}
-                <div className="mt-28 md:mt-36">
-                    {/* MENU CORE ANIMATED HEADING */}
-                    <motion.h2
-                        variants={item} // Typed Variant
-                        className="flex flex-col lg:flex-row items-center justify-center font-fredoka font-extrabold text-pink-600 mb-12" 
-                        initial="hidden"
-                        whileInView="show"
-                        id= "#menu-core"
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ staggerChildren: 0.1 } as Transition} // Added Transition cast for completeness
-                    >
-                        {/* Text Part 1 - Uses custom prop */}
-                        <motion.span variants={splitTextVariants} custom="left" className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-center lg:text-right w-full lg:w-auto min-w-0">
-                            The Pinki's
-                        </motion.span>
+               {/* 3. MENU CORE SECTION */}
+            <div className="mt-28 md:mt-36">
+                {/* MENU CORE ANIMATED HEADING */}
+                <motion.h2
+                    variants={item}
+                    className="flex flex-col lg:flex-row items-center justify-center font-fredoka font-extrabold text-pink-600 mb-12"
+                    initial="hidden"
+                    whileInView="show"
+                    id="#menu-core"
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ staggerChildren: 0.1 } as Transition}
+                >
+                    <motion.span variants={splitTextVariants} custom="left" className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-center lg:text-right w-full lg:w-auto min-w-0">
+                        The Pinki's
+                    </motion.span>
 
-                        {/* Icon Container */}
-                        <div className="my-2 lg:my-0 flex justify-center w-full lg:w-auto">
-                            <IceCreamConeHeaderImage variants={coneVariants} /> {/* Passed typed props */}
-                        </div>
+                    <div className="my-2 lg:my-0 flex justify-center w-full lg:w-auto">
+                        <IceCreamConeHeaderImage variants={coneVariants} />
+                    </div>
 
-                        {/* Text Part 2 - Uses custom prop */}
-                        <motion.span variants={splitTextVariants} custom="right" className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-center lg:text-left w-full lg:w-auto min-w-0">
-                            Menu Core
-                        </motion.span>
-                    </motion.h2>
+                    <motion.span variants={splitTextVariants} custom="right" className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-center lg:text-left w-full lg:w-auto min-w-0">
+                        Menu Core
+                    </motion.span>
+                </motion.h2>
 
-                    {/* MENU / PRODUCT DETAILS BLOCK */}
-                    <motion.div 
-                        className="bg-orange-50 p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-b-8 border-pink-600"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.7 } as Transition} // Explicitly cast transition
-                    >
-                        <p className="text-xl font-semibold text-pink-600 text-center mb-6 max-w-2xl mx-auto">
-                            It all starts with our delicious creamy, traditional vanilla soft serve ice cream.
-                        </p>
-                        
-                        <div className="max-w-3xl mx-auto">
-                            <h4 className="text-2xl font-fredoka font-bold text-brand-purple mb-3 text-center border-b-2 pb-2 border-brand-purple/20">
-                                Perfect Toppings Selection
-                            </h4>
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xl text-gray-700 list-none mt-4">
-                                <li className="flex items-center font-bold"><span className="text-brand-purple text-3xl mr-2 leading-none">🍨</span> Rich Chocolate Coating</li>
-                                <li className="flex items-center font-bold"><span className="text-brand-purple text-3xl mr-2 leading-none">🥜</span> Australian Crushed Peanuts</li>
-                                <li className="flex items-center font-bold"><span className="text-brand-purple text-3xl mr-2 leading-none">🌈</span> Rainbow Sprinkles (100’s & 1000’s)</li>
-                                <li className="flex items-center font-bold"><span className="text-brand-purple text-3xl mr-2 leading-none">🍋</span> Traditional Tasting Sherbet Coating</li>
-                            </ul>
-                        </div>
-                        
-                        {/* DUAL CTA BUTTONS - Unchanged */}
-                        <div className="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                            {/* Primary Button: Booking */}
-                            <a
-                                href="/booking"
-                                className="inline-flex items-center justify-center px-8 py-4 text-xl rounded-full bg-pink-600 text-white font-extrabold shadow-2xl hover:bg-pink-700 transition duration-300 transform hover:scale-[1.05] ring-4 ring-pink-300"
-                            >
-                                <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                BOOK Us for Your Event NOW!
-                            </a>
+                {/* MENU / PRODUCT DETAILS BLOCK */}
+                <motion.div
+                    className="bg-orange-50 p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-b-8 border-pink-600"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7 } as Transition}
+                >
+                    <p className="text-xl font-semibold text-pink-600 text-center mb-6 max-w-2xl mx-auto">
+                        It all starts with our delicious creamy, traditional vanilla soft serve ice cream.
+                    </p>
 
-                            {/* Secondary Button: Full Menu */}
-                            <a
-                                href="/menu"
-                                className="inline-flex items-center justify-center px-8 py-4 text-lg rounded-full border-2 border-brand-purple text-brand-purple font-bold bg-transparent hover:bg-brand-purple hover:text-white transition duration-300 transform hover:scale-[1.02]"
-                            >
-                                View Our Full Menu <span className="ml-2">→</span>
-                            </a>
-                        </div>
-                    </motion.div>
-                </div>
+                    {/* MENU IMAGE DISPLAY */}
+                    <div className="max-w-4xl mx-auto overflow-hidden rounded-3xl shadow-lg border-4 border-white">
+                        <img
+                            src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/menu.png"
+                            alt="Pinki's Ice Cream Menu"
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
+
+                    {/* DUAL CTA BUTTONS */}
+                    <div className="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <a
+                            href="/booking"
+                            className="inline-flex items-center justify-center px-8 py-4 text-xl rounded-full bg-pink-600 text-white font-extrabold shadow-2xl hover:bg-pink-700 transition duration-300 transform hover:scale-[1.05] ring-4 ring-pink-300"
+                        >
+                            <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            BOOK Us for Your Event NOW!
+                        </a>
+
+                        <a
+                            href="/menu"
+                            className="inline-flex items-center justify-center px-8 py-4 text-lg rounded-full border-2 border-brand-purple text-brand-purple font-bold bg-transparent hover:bg-brand-purple hover:text-white transition duration-300 transform hover:scale-[1.02]"
+                        >
+                            View Our Full Menu <span className="ml-2">→</span>
+                        </a>
+                    </div>
+                </motion.div>
+            </div>
             </div>
         </section>
     );
