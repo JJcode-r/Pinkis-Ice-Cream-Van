@@ -261,32 +261,29 @@ const MoreQuestionsSection = () => {
                                         Read Our FAQs
                                     </motion.a>
 
-                                    <motion.button 
+                                    {/* UPDATED: LINK TO EMAIL INSTEAD OF MODAL */}
+                                    <motion.a 
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
-                                        onClick={() => setIsModalOpen(true)}
+                                        href="mailto:contact@pinkisicecream.com?subject=Inquiry for the Pinki's Team&body=Hello Team,"
                                         className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white bg-pink-600 hover:bg-pink-700 transition-all shadow-xl shadow-pink-300/50 ring-4 ring-pink-300/50 uppercase tracking-wide w-full sm:w-1/2"
                                     >
                                         Make An Inquiry
-                                    </motion.button>
+                                    </motion.a>
                                 </div>
                             </div>
                         </div>
 
                         {/* Right Image Area */}
-                       {/* Right Image Area */}
-<div className="relative h-96 lg:h-full overflow-hidden">
-    <img
-        loading="lazy" 
-        src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png"
-        alt="Ice cream truck"
-        /* - object-cover keeps it in the original place.
-           - object-right ensures the van is the anchor point so it doesn't get clipped from the right.
-        */
-        className="w-full h-full object-cover object-right"
-    />
-    <div className="absolute inset-0 bg-gradient-to-r from-pink-50/70 to-transparent lg:from-pink-50/70"></div>
-</div>
+                        <div className="relative h-96 lg:h-full overflow-hidden">
+                            <img
+                                loading="lazy" 
+                                src="https://pub-50495ccf59c94ae4aaaa6dc2651bb7a7.r2.dev/newVan.png"
+                                alt="Ice cream truck"
+                                className="w-full h-full object-cover object-right"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-r from-pink-50/70 to-transparent lg:from-pink-50/70"></div>
+                        </div>
                     </div>
                 </div>
             </section>
