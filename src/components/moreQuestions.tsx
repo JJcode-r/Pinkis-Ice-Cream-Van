@@ -265,7 +265,7 @@ const MoreQuestionsSection = () => {
                                     <motion.a 
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
-                                        href="mailto:contact@pinkisicecream.com?subject=Inquiry for the Pinki's Team&body=Hello Team,"
+                                        href="mailto:Pinkisicecream@outlook.com?subject=Inquiry for the Pinki's Team&body=Hello Team,"
                                         className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white bg-pink-600 hover:bg-pink-700 transition-all shadow-xl shadow-pink-300/50 ring-4 ring-pink-300/50 uppercase tracking-wide w-full sm:w-1/2"
                                     >
                                         Make An Inquiry
